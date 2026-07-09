@@ -2,10 +2,13 @@
  * Shell de la aplicación.
  * Fase 1 del roadmap: Home → grilla del álbum → stats → trade.
  */
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { AlbumDefinition, Collection, CollectionStats } from '@core/types';
 import { computeStats } from '@core/stats';
+import { parseFiguritas } from '@core/importers/figuritas';
 import { getCollection, setStickerCount } from '@data/db';
+import { createBackup, downloadBackup, parseBackup, restoreBackup } from '@data/backup';
+import { db } from '@data/db';
 import albumData from '../albums/mundial-2026.json';
 
 const album = albumData as AlbumDefinition;
@@ -13,13 +16,45 @@ const album = albumData as AlbumDefinition;
 export default function App() {
   const [collection, setCollection] = useState<Collection | null>(null);
   const [stats, setStats] = useState<CollectionStats | null>(null);
+  const fileInput = useRef<HTMLInputElement>(null);
+
+  const refresh = async () => {
+    const c = await getCollection(album.id);
+    setCollection(c);
+    setStats(computeStats(album, c));
+  };
 
   useEffect(() => {
-    void getCollection(album.id).then((c) => {
-      setCollection(c);
-      setStats(computeStats(album, c));
-    });
+    void refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleExport = async () => {
+    downloadBackup(await createBackup());
+  };
+
+  const handleImportFile = async (file: File) => {
+    const text = await file.text();
+    try {
+      if (file.name.endsWith('.txt') || text.trimStart().startsWith('Figuritas')) {
+        // Export de figuritas.app
+        const { collection: imported, unmatched } = parseFiguritas(text, album);
+        if (!window.confirm('Esto reemplazará la colección actual con la importada. ¿Continuar?')) return;
+        await db.collections.put(imported);
+        if (unmatched.length > 0) {
+          window.alert(`Importado con ${unmatched.length} códigos no reconocidos: ${unmatched.slice(0, 10).join(', ')}${unmatched.length > 10 ? '…' : ''}`);
+        }
+      } else {
+        // Respaldo JSON de Mi Álbum
+        const backup = parseBackup(text);
+        if (!window.confirm('Esto restaurará el respaldo y sobrescribirá la colección actual. ¿Continuar?')) return;
+        await restoreBackup(backup);
+      }
+      await refresh();
+    } catch (error) {
+      window.alert(`No se pudo importar: ${error instanceof Error ? error.message : 'formato desconocido'}`);
+    }
+  };
 
   const cycleSticker = async (index: number) => {
     if (!collection) return;
@@ -43,6 +78,31 @@ export default function App() {
           {stats.duplicates} repetidas · faltan aprox. {stats.packsEstimate.min}–
           {stats.packsEstimate.max} sobres
         </p>
+        <div className="mt-3 flex gap-2">
+          <button
+            onClick={() => void handleExport()}
+            className="rounded-lg border px-3 py-1.5 text-xs font-medium"
+          >
+            ⬇️ Guardar respaldo
+          </button>
+          <button
+            onClick={() => fileInput.current?.click()}
+            className="rounded-lg border px-3 py-1.5 text-xs font-medium"
+          >
+            ⬆️ Importar (respaldo o figuritas.app)
+          </button>
+          <input
+            ref={fileInput}
+            type="file"
+            accept=".json,.txt"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) void handleImportFile(file);
+              e.target.value = '';
+            }}
+          />
+        </div>
       </header>
 
       {album.sections.map((section) => (

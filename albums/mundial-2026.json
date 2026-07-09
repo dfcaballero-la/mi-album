@@ -1,41 +1,4320 @@
 {
   "id": "mundial-2026",
-  "name": "Mundial 2026",
+  "name": "USA México Canadá 26",
   "year": 2026,
   "packSize": 5,
-  "version": "0.1.0",
-  "totalStickers": 12,
+  "version": "1.0.0",
+  "totalStickers": 980,
   "sections": [
     {
-      "id": "intro",
-      "name": "Introducción",
+      "id": "fwc",
+      "name": "FIFA World Cup 26",
       "stickers": [
-        { "code": "FWC-1", "index": 0, "name": "Trofeo", "special": true },
-        { "code": "FWC-2", "index": 1, "name": "Mascota oficial" },
-        { "code": "FWC-3", "index": 2, "name": "Balón oficial" }
+        {
+          "code": "FWC-00",
+          "index": 0,
+          "special": true
+        },
+        {
+          "code": "FWC-1",
+          "index": 1
+        },
+        {
+          "code": "FWC-2",
+          "index": 2
+        },
+        {
+          "code": "FWC-3",
+          "index": 3
+        },
+        {
+          "code": "FWC-4",
+          "index": 4
+        },
+        {
+          "code": "FWC-5",
+          "index": 5
+        },
+        {
+          "code": "FWC-6",
+          "index": 6
+        },
+        {
+          "code": "FWC-7",
+          "index": 7
+        },
+        {
+          "code": "FWC-8",
+          "index": 8
+        },
+        {
+          "code": "FWC-9",
+          "index": 9
+        },
+        {
+          "code": "FWC-10",
+          "index": 10
+        },
+        {
+          "code": "FWC-11",
+          "index": 11
+        },
+        {
+          "code": "FWC-12",
+          "index": 12
+        },
+        {
+          "code": "FWC-13",
+          "index": 13
+        },
+        {
+          "code": "FWC-14",
+          "index": 14
+        },
+        {
+          "code": "FWC-15",
+          "index": 15
+        },
+        {
+          "code": "FWC-16",
+          "index": 16
+        },
+        {
+          "code": "FWC-17",
+          "index": 17
+        },
+        {
+          "code": "FWC-18",
+          "index": 18
+        },
+        {
+          "code": "FWC-19",
+          "index": 19
+        }
+      ]
+    },
+    {
+      "id": "mex",
+      "name": "México",
+      "group": "Grupo A",
+      "stickers": [
+        {
+          "code": "MEX-1",
+          "index": 20,
+          "special": true
+        },
+        {
+          "code": "MEX-2",
+          "index": 21
+        },
+        {
+          "code": "MEX-3",
+          "index": 22
+        },
+        {
+          "code": "MEX-4",
+          "index": 23
+        },
+        {
+          "code": "MEX-5",
+          "index": 24
+        },
+        {
+          "code": "MEX-6",
+          "index": 25
+        },
+        {
+          "code": "MEX-7",
+          "index": 26
+        },
+        {
+          "code": "MEX-8",
+          "index": 27
+        },
+        {
+          "code": "MEX-9",
+          "index": 28
+        },
+        {
+          "code": "MEX-10",
+          "index": 29
+        },
+        {
+          "code": "MEX-11",
+          "index": 30
+        },
+        {
+          "code": "MEX-12",
+          "index": 31
+        },
+        {
+          "code": "MEX-13",
+          "index": 32
+        },
+        {
+          "code": "MEX-14",
+          "index": 33
+        },
+        {
+          "code": "MEX-15",
+          "index": 34
+        },
+        {
+          "code": "MEX-16",
+          "index": 35
+        },
+        {
+          "code": "MEX-17",
+          "index": 36
+        },
+        {
+          "code": "MEX-18",
+          "index": 37
+        },
+        {
+          "code": "MEX-19",
+          "index": 38
+        },
+        {
+          "code": "MEX-20",
+          "index": 39
+        }
+      ]
+    },
+    {
+      "id": "rsa",
+      "name": "Sudáfrica",
+      "group": "Grupo A",
+      "stickers": [
+        {
+          "code": "RSA-1",
+          "index": 40,
+          "special": true
+        },
+        {
+          "code": "RSA-2",
+          "index": 41
+        },
+        {
+          "code": "RSA-3",
+          "index": 42
+        },
+        {
+          "code": "RSA-4",
+          "index": 43
+        },
+        {
+          "code": "RSA-5",
+          "index": 44
+        },
+        {
+          "code": "RSA-6",
+          "index": 45
+        },
+        {
+          "code": "RSA-7",
+          "index": 46
+        },
+        {
+          "code": "RSA-8",
+          "index": 47
+        },
+        {
+          "code": "RSA-9",
+          "index": 48
+        },
+        {
+          "code": "RSA-10",
+          "index": 49
+        },
+        {
+          "code": "RSA-11",
+          "index": 50
+        },
+        {
+          "code": "RSA-12",
+          "index": 51
+        },
+        {
+          "code": "RSA-13",
+          "index": 52
+        },
+        {
+          "code": "RSA-14",
+          "index": 53
+        },
+        {
+          "code": "RSA-15",
+          "index": 54
+        },
+        {
+          "code": "RSA-16",
+          "index": 55
+        },
+        {
+          "code": "RSA-17",
+          "index": 56
+        },
+        {
+          "code": "RSA-18",
+          "index": 57
+        },
+        {
+          "code": "RSA-19",
+          "index": 58
+        },
+        {
+          "code": "RSA-20",
+          "index": 59
+        }
+      ]
+    },
+    {
+      "id": "kor",
+      "name": "Corea del Sur",
+      "group": "Grupo A",
+      "stickers": [
+        {
+          "code": "KOR-1",
+          "index": 60,
+          "special": true
+        },
+        {
+          "code": "KOR-2",
+          "index": 61
+        },
+        {
+          "code": "KOR-3",
+          "index": 62
+        },
+        {
+          "code": "KOR-4",
+          "index": 63
+        },
+        {
+          "code": "KOR-5",
+          "index": 64
+        },
+        {
+          "code": "KOR-6",
+          "index": 65
+        },
+        {
+          "code": "KOR-7",
+          "index": 66
+        },
+        {
+          "code": "KOR-8",
+          "index": 67
+        },
+        {
+          "code": "KOR-9",
+          "index": 68
+        },
+        {
+          "code": "KOR-10",
+          "index": 69
+        },
+        {
+          "code": "KOR-11",
+          "index": 70
+        },
+        {
+          "code": "KOR-12",
+          "index": 71
+        },
+        {
+          "code": "KOR-13",
+          "index": 72
+        },
+        {
+          "code": "KOR-14",
+          "index": 73
+        },
+        {
+          "code": "KOR-15",
+          "index": 74
+        },
+        {
+          "code": "KOR-16",
+          "index": 75
+        },
+        {
+          "code": "KOR-17",
+          "index": 76
+        },
+        {
+          "code": "KOR-18",
+          "index": 77
+        },
+        {
+          "code": "KOR-19",
+          "index": 78
+        },
+        {
+          "code": "KOR-20",
+          "index": 79
+        }
+      ]
+    },
+    {
+      "id": "cze",
+      "name": "Chequia",
+      "group": "Grupo A",
+      "stickers": [
+        {
+          "code": "CZE-1",
+          "index": 80,
+          "special": true
+        },
+        {
+          "code": "CZE-2",
+          "index": 81
+        },
+        {
+          "code": "CZE-3",
+          "index": 82
+        },
+        {
+          "code": "CZE-4",
+          "index": 83
+        },
+        {
+          "code": "CZE-5",
+          "index": 84
+        },
+        {
+          "code": "CZE-6",
+          "index": 85
+        },
+        {
+          "code": "CZE-7",
+          "index": 86
+        },
+        {
+          "code": "CZE-8",
+          "index": 87
+        },
+        {
+          "code": "CZE-9",
+          "index": 88
+        },
+        {
+          "code": "CZE-10",
+          "index": 89
+        },
+        {
+          "code": "CZE-11",
+          "index": 90
+        },
+        {
+          "code": "CZE-12",
+          "index": 91
+        },
+        {
+          "code": "CZE-13",
+          "index": 92
+        },
+        {
+          "code": "CZE-14",
+          "index": 93
+        },
+        {
+          "code": "CZE-15",
+          "index": 94
+        },
+        {
+          "code": "CZE-16",
+          "index": 95
+        },
+        {
+          "code": "CZE-17",
+          "index": 96
+        },
+        {
+          "code": "CZE-18",
+          "index": 97
+        },
+        {
+          "code": "CZE-19",
+          "index": 98
+        },
+        {
+          "code": "CZE-20",
+          "index": 99
+        }
+      ]
+    },
+    {
+      "id": "can",
+      "name": "Canadá",
+      "group": "Grupo B",
+      "stickers": [
+        {
+          "code": "CAN-1",
+          "index": 100,
+          "special": true
+        },
+        {
+          "code": "CAN-2",
+          "index": 101
+        },
+        {
+          "code": "CAN-3",
+          "index": 102
+        },
+        {
+          "code": "CAN-4",
+          "index": 103
+        },
+        {
+          "code": "CAN-5",
+          "index": 104
+        },
+        {
+          "code": "CAN-6",
+          "index": 105
+        },
+        {
+          "code": "CAN-7",
+          "index": 106
+        },
+        {
+          "code": "CAN-8",
+          "index": 107
+        },
+        {
+          "code": "CAN-9",
+          "index": 108
+        },
+        {
+          "code": "CAN-10",
+          "index": 109
+        },
+        {
+          "code": "CAN-11",
+          "index": 110
+        },
+        {
+          "code": "CAN-12",
+          "index": 111
+        },
+        {
+          "code": "CAN-13",
+          "index": 112
+        },
+        {
+          "code": "CAN-14",
+          "index": 113
+        },
+        {
+          "code": "CAN-15",
+          "index": 114
+        },
+        {
+          "code": "CAN-16",
+          "index": 115
+        },
+        {
+          "code": "CAN-17",
+          "index": 116
+        },
+        {
+          "code": "CAN-18",
+          "index": 117
+        },
+        {
+          "code": "CAN-19",
+          "index": 118
+        },
+        {
+          "code": "CAN-20",
+          "index": 119
+        }
+      ]
+    },
+    {
+      "id": "bih",
+      "name": "Bosnia y Herzegovina",
+      "group": "Grupo B",
+      "stickers": [
+        {
+          "code": "BIH-1",
+          "index": 120,
+          "special": true
+        },
+        {
+          "code": "BIH-2",
+          "index": 121
+        },
+        {
+          "code": "BIH-3",
+          "index": 122
+        },
+        {
+          "code": "BIH-4",
+          "index": 123
+        },
+        {
+          "code": "BIH-5",
+          "index": 124
+        },
+        {
+          "code": "BIH-6",
+          "index": 125
+        },
+        {
+          "code": "BIH-7",
+          "index": 126
+        },
+        {
+          "code": "BIH-8",
+          "index": 127
+        },
+        {
+          "code": "BIH-9",
+          "index": 128
+        },
+        {
+          "code": "BIH-10",
+          "index": 129
+        },
+        {
+          "code": "BIH-11",
+          "index": 130
+        },
+        {
+          "code": "BIH-12",
+          "index": 131
+        },
+        {
+          "code": "BIH-13",
+          "index": 132
+        },
+        {
+          "code": "BIH-14",
+          "index": 133
+        },
+        {
+          "code": "BIH-15",
+          "index": 134
+        },
+        {
+          "code": "BIH-16",
+          "index": 135
+        },
+        {
+          "code": "BIH-17",
+          "index": 136
+        },
+        {
+          "code": "BIH-18",
+          "index": 137
+        },
+        {
+          "code": "BIH-19",
+          "index": 138
+        },
+        {
+          "code": "BIH-20",
+          "index": 139
+        }
+      ]
+    },
+    {
+      "id": "qat",
+      "name": "Catar",
+      "group": "Grupo B",
+      "stickers": [
+        {
+          "code": "QAT-1",
+          "index": 140,
+          "special": true
+        },
+        {
+          "code": "QAT-2",
+          "index": 141
+        },
+        {
+          "code": "QAT-3",
+          "index": 142
+        },
+        {
+          "code": "QAT-4",
+          "index": 143
+        },
+        {
+          "code": "QAT-5",
+          "index": 144
+        },
+        {
+          "code": "QAT-6",
+          "index": 145
+        },
+        {
+          "code": "QAT-7",
+          "index": 146
+        },
+        {
+          "code": "QAT-8",
+          "index": 147
+        },
+        {
+          "code": "QAT-9",
+          "index": 148
+        },
+        {
+          "code": "QAT-10",
+          "index": 149
+        },
+        {
+          "code": "QAT-11",
+          "index": 150
+        },
+        {
+          "code": "QAT-12",
+          "index": 151
+        },
+        {
+          "code": "QAT-13",
+          "index": 152
+        },
+        {
+          "code": "QAT-14",
+          "index": 153
+        },
+        {
+          "code": "QAT-15",
+          "index": 154
+        },
+        {
+          "code": "QAT-16",
+          "index": 155
+        },
+        {
+          "code": "QAT-17",
+          "index": 156
+        },
+        {
+          "code": "QAT-18",
+          "index": 157
+        },
+        {
+          "code": "QAT-19",
+          "index": 158
+        },
+        {
+          "code": "QAT-20",
+          "index": 159
+        }
+      ]
+    },
+    {
+      "id": "sui",
+      "name": "Suiza",
+      "group": "Grupo B",
+      "stickers": [
+        {
+          "code": "SUI-1",
+          "index": 160,
+          "special": true
+        },
+        {
+          "code": "SUI-2",
+          "index": 161
+        },
+        {
+          "code": "SUI-3",
+          "index": 162
+        },
+        {
+          "code": "SUI-4",
+          "index": 163
+        },
+        {
+          "code": "SUI-5",
+          "index": 164
+        },
+        {
+          "code": "SUI-6",
+          "index": 165
+        },
+        {
+          "code": "SUI-7",
+          "index": 166
+        },
+        {
+          "code": "SUI-8",
+          "index": 167
+        },
+        {
+          "code": "SUI-9",
+          "index": 168
+        },
+        {
+          "code": "SUI-10",
+          "index": 169
+        },
+        {
+          "code": "SUI-11",
+          "index": 170
+        },
+        {
+          "code": "SUI-12",
+          "index": 171
+        },
+        {
+          "code": "SUI-13",
+          "index": 172
+        },
+        {
+          "code": "SUI-14",
+          "index": 173
+        },
+        {
+          "code": "SUI-15",
+          "index": 174
+        },
+        {
+          "code": "SUI-16",
+          "index": 175
+        },
+        {
+          "code": "SUI-17",
+          "index": 176
+        },
+        {
+          "code": "SUI-18",
+          "index": 177
+        },
+        {
+          "code": "SUI-19",
+          "index": 178
+        },
+        {
+          "code": "SUI-20",
+          "index": 179
+        }
+      ]
+    },
+    {
+      "id": "bra",
+      "name": "Brasil",
+      "group": "Grupo C",
+      "stickers": [
+        {
+          "code": "BRA-1",
+          "index": 180,
+          "special": true
+        },
+        {
+          "code": "BRA-2",
+          "index": 181
+        },
+        {
+          "code": "BRA-3",
+          "index": 182
+        },
+        {
+          "code": "BRA-4",
+          "index": 183
+        },
+        {
+          "code": "BRA-5",
+          "index": 184
+        },
+        {
+          "code": "BRA-6",
+          "index": 185
+        },
+        {
+          "code": "BRA-7",
+          "index": 186
+        },
+        {
+          "code": "BRA-8",
+          "index": 187
+        },
+        {
+          "code": "BRA-9",
+          "index": 188
+        },
+        {
+          "code": "BRA-10",
+          "index": 189
+        },
+        {
+          "code": "BRA-11",
+          "index": 190
+        },
+        {
+          "code": "BRA-12",
+          "index": 191
+        },
+        {
+          "code": "BRA-13",
+          "index": 192
+        },
+        {
+          "code": "BRA-14",
+          "index": 193
+        },
+        {
+          "code": "BRA-15",
+          "index": 194
+        },
+        {
+          "code": "BRA-16",
+          "index": 195
+        },
+        {
+          "code": "BRA-17",
+          "index": 196
+        },
+        {
+          "code": "BRA-18",
+          "index": 197
+        },
+        {
+          "code": "BRA-19",
+          "index": 198
+        },
+        {
+          "code": "BRA-20",
+          "index": 199
+        }
+      ]
+    },
+    {
+      "id": "mar",
+      "name": "Marruecos",
+      "group": "Grupo C",
+      "stickers": [
+        {
+          "code": "MAR-1",
+          "index": 200,
+          "special": true
+        },
+        {
+          "code": "MAR-2",
+          "index": 201
+        },
+        {
+          "code": "MAR-3",
+          "index": 202
+        },
+        {
+          "code": "MAR-4",
+          "index": 203
+        },
+        {
+          "code": "MAR-5",
+          "index": 204
+        },
+        {
+          "code": "MAR-6",
+          "index": 205
+        },
+        {
+          "code": "MAR-7",
+          "index": 206
+        },
+        {
+          "code": "MAR-8",
+          "index": 207
+        },
+        {
+          "code": "MAR-9",
+          "index": 208
+        },
+        {
+          "code": "MAR-10",
+          "index": 209
+        },
+        {
+          "code": "MAR-11",
+          "index": 210
+        },
+        {
+          "code": "MAR-12",
+          "index": 211
+        },
+        {
+          "code": "MAR-13",
+          "index": 212
+        },
+        {
+          "code": "MAR-14",
+          "index": 213
+        },
+        {
+          "code": "MAR-15",
+          "index": 214
+        },
+        {
+          "code": "MAR-16",
+          "index": 215
+        },
+        {
+          "code": "MAR-17",
+          "index": 216
+        },
+        {
+          "code": "MAR-18",
+          "index": 217
+        },
+        {
+          "code": "MAR-19",
+          "index": 218
+        },
+        {
+          "code": "MAR-20",
+          "index": 219
+        }
+      ]
+    },
+    {
+      "id": "hai",
+      "name": "Haití",
+      "group": "Grupo C",
+      "stickers": [
+        {
+          "code": "HAI-1",
+          "index": 220,
+          "special": true
+        },
+        {
+          "code": "HAI-2",
+          "index": 221
+        },
+        {
+          "code": "HAI-3",
+          "index": 222
+        },
+        {
+          "code": "HAI-4",
+          "index": 223
+        },
+        {
+          "code": "HAI-5",
+          "index": 224
+        },
+        {
+          "code": "HAI-6",
+          "index": 225
+        },
+        {
+          "code": "HAI-7",
+          "index": 226
+        },
+        {
+          "code": "HAI-8",
+          "index": 227
+        },
+        {
+          "code": "HAI-9",
+          "index": 228
+        },
+        {
+          "code": "HAI-10",
+          "index": 229
+        },
+        {
+          "code": "HAI-11",
+          "index": 230
+        },
+        {
+          "code": "HAI-12",
+          "index": 231
+        },
+        {
+          "code": "HAI-13",
+          "index": 232
+        },
+        {
+          "code": "HAI-14",
+          "index": 233
+        },
+        {
+          "code": "HAI-15",
+          "index": 234
+        },
+        {
+          "code": "HAI-16",
+          "index": 235
+        },
+        {
+          "code": "HAI-17",
+          "index": 236
+        },
+        {
+          "code": "HAI-18",
+          "index": 237
+        },
+        {
+          "code": "HAI-19",
+          "index": 238
+        },
+        {
+          "code": "HAI-20",
+          "index": 239
+        }
+      ]
+    },
+    {
+      "id": "sco",
+      "name": "Escocia",
+      "group": "Grupo C",
+      "stickers": [
+        {
+          "code": "SCO-1",
+          "index": 240,
+          "special": true
+        },
+        {
+          "code": "SCO-2",
+          "index": 241
+        },
+        {
+          "code": "SCO-3",
+          "index": 242
+        },
+        {
+          "code": "SCO-4",
+          "index": 243
+        },
+        {
+          "code": "SCO-5",
+          "index": 244
+        },
+        {
+          "code": "SCO-6",
+          "index": 245
+        },
+        {
+          "code": "SCO-7",
+          "index": 246
+        },
+        {
+          "code": "SCO-8",
+          "index": 247
+        },
+        {
+          "code": "SCO-9",
+          "index": 248
+        },
+        {
+          "code": "SCO-10",
+          "index": 249
+        },
+        {
+          "code": "SCO-11",
+          "index": 250
+        },
+        {
+          "code": "SCO-12",
+          "index": 251
+        },
+        {
+          "code": "SCO-13",
+          "index": 252
+        },
+        {
+          "code": "SCO-14",
+          "index": 253
+        },
+        {
+          "code": "SCO-15",
+          "index": 254
+        },
+        {
+          "code": "SCO-16",
+          "index": 255
+        },
+        {
+          "code": "SCO-17",
+          "index": 256
+        },
+        {
+          "code": "SCO-18",
+          "index": 257
+        },
+        {
+          "code": "SCO-19",
+          "index": 258
+        },
+        {
+          "code": "SCO-20",
+          "index": 259
+        }
+      ]
+    },
+    {
+      "id": "usa",
+      "name": "Estados Unidos",
+      "group": "Grupo D",
+      "stickers": [
+        {
+          "code": "USA-1",
+          "index": 260,
+          "special": true
+        },
+        {
+          "code": "USA-2",
+          "index": 261
+        },
+        {
+          "code": "USA-3",
+          "index": 262
+        },
+        {
+          "code": "USA-4",
+          "index": 263
+        },
+        {
+          "code": "USA-5",
+          "index": 264
+        },
+        {
+          "code": "USA-6",
+          "index": 265
+        },
+        {
+          "code": "USA-7",
+          "index": 266
+        },
+        {
+          "code": "USA-8",
+          "index": 267
+        },
+        {
+          "code": "USA-9",
+          "index": 268
+        },
+        {
+          "code": "USA-10",
+          "index": 269
+        },
+        {
+          "code": "USA-11",
+          "index": 270
+        },
+        {
+          "code": "USA-12",
+          "index": 271
+        },
+        {
+          "code": "USA-13",
+          "index": 272
+        },
+        {
+          "code": "USA-14",
+          "index": 273
+        },
+        {
+          "code": "USA-15",
+          "index": 274
+        },
+        {
+          "code": "USA-16",
+          "index": 275
+        },
+        {
+          "code": "USA-17",
+          "index": 276
+        },
+        {
+          "code": "USA-18",
+          "index": 277
+        },
+        {
+          "code": "USA-19",
+          "index": 278
+        },
+        {
+          "code": "USA-20",
+          "index": 279
+        }
+      ]
+    },
+    {
+      "id": "par",
+      "name": "Paraguay",
+      "group": "Grupo D",
+      "stickers": [
+        {
+          "code": "PAR-1",
+          "index": 280,
+          "special": true
+        },
+        {
+          "code": "PAR-2",
+          "index": 281
+        },
+        {
+          "code": "PAR-3",
+          "index": 282
+        },
+        {
+          "code": "PAR-4",
+          "index": 283
+        },
+        {
+          "code": "PAR-5",
+          "index": 284
+        },
+        {
+          "code": "PAR-6",
+          "index": 285
+        },
+        {
+          "code": "PAR-7",
+          "index": 286
+        },
+        {
+          "code": "PAR-8",
+          "index": 287
+        },
+        {
+          "code": "PAR-9",
+          "index": 288
+        },
+        {
+          "code": "PAR-10",
+          "index": 289
+        },
+        {
+          "code": "PAR-11",
+          "index": 290
+        },
+        {
+          "code": "PAR-12",
+          "index": 291
+        },
+        {
+          "code": "PAR-13",
+          "index": 292
+        },
+        {
+          "code": "PAR-14",
+          "index": 293
+        },
+        {
+          "code": "PAR-15",
+          "index": 294
+        },
+        {
+          "code": "PAR-16",
+          "index": 295
+        },
+        {
+          "code": "PAR-17",
+          "index": 296
+        },
+        {
+          "code": "PAR-18",
+          "index": 297
+        },
+        {
+          "code": "PAR-19",
+          "index": 298
+        },
+        {
+          "code": "PAR-20",
+          "index": 299
+        }
+      ]
+    },
+    {
+      "id": "aus",
+      "name": "Australia",
+      "group": "Grupo D",
+      "stickers": [
+        {
+          "code": "AUS-1",
+          "index": 300,
+          "special": true
+        },
+        {
+          "code": "AUS-2",
+          "index": 301
+        },
+        {
+          "code": "AUS-3",
+          "index": 302
+        },
+        {
+          "code": "AUS-4",
+          "index": 303
+        },
+        {
+          "code": "AUS-5",
+          "index": 304
+        },
+        {
+          "code": "AUS-6",
+          "index": 305
+        },
+        {
+          "code": "AUS-7",
+          "index": 306
+        },
+        {
+          "code": "AUS-8",
+          "index": 307
+        },
+        {
+          "code": "AUS-9",
+          "index": 308
+        },
+        {
+          "code": "AUS-10",
+          "index": 309
+        },
+        {
+          "code": "AUS-11",
+          "index": 310
+        },
+        {
+          "code": "AUS-12",
+          "index": 311
+        },
+        {
+          "code": "AUS-13",
+          "index": 312
+        },
+        {
+          "code": "AUS-14",
+          "index": 313
+        },
+        {
+          "code": "AUS-15",
+          "index": 314
+        },
+        {
+          "code": "AUS-16",
+          "index": 315
+        },
+        {
+          "code": "AUS-17",
+          "index": 316
+        },
+        {
+          "code": "AUS-18",
+          "index": 317
+        },
+        {
+          "code": "AUS-19",
+          "index": 318
+        },
+        {
+          "code": "AUS-20",
+          "index": 319
+        }
+      ]
+    },
+    {
+      "id": "tur",
+      "name": "Turquía",
+      "group": "Grupo D",
+      "stickers": [
+        {
+          "code": "TUR-1",
+          "index": 320,
+          "special": true
+        },
+        {
+          "code": "TUR-2",
+          "index": 321
+        },
+        {
+          "code": "TUR-3",
+          "index": 322
+        },
+        {
+          "code": "TUR-4",
+          "index": 323
+        },
+        {
+          "code": "TUR-5",
+          "index": 324
+        },
+        {
+          "code": "TUR-6",
+          "index": 325
+        },
+        {
+          "code": "TUR-7",
+          "index": 326
+        },
+        {
+          "code": "TUR-8",
+          "index": 327
+        },
+        {
+          "code": "TUR-9",
+          "index": 328
+        },
+        {
+          "code": "TUR-10",
+          "index": 329
+        },
+        {
+          "code": "TUR-11",
+          "index": 330
+        },
+        {
+          "code": "TUR-12",
+          "index": 331
+        },
+        {
+          "code": "TUR-13",
+          "index": 332
+        },
+        {
+          "code": "TUR-14",
+          "index": 333
+        },
+        {
+          "code": "TUR-15",
+          "index": 334
+        },
+        {
+          "code": "TUR-16",
+          "index": 335
+        },
+        {
+          "code": "TUR-17",
+          "index": 336
+        },
+        {
+          "code": "TUR-18",
+          "index": 337
+        },
+        {
+          "code": "TUR-19",
+          "index": 338
+        },
+        {
+          "code": "TUR-20",
+          "index": 339
+        }
+      ]
+    },
+    {
+      "id": "ger",
+      "name": "Alemania",
+      "group": "Grupo E",
+      "stickers": [
+        {
+          "code": "GER-1",
+          "index": 340,
+          "special": true
+        },
+        {
+          "code": "GER-2",
+          "index": 341
+        },
+        {
+          "code": "GER-3",
+          "index": 342
+        },
+        {
+          "code": "GER-4",
+          "index": 343
+        },
+        {
+          "code": "GER-5",
+          "index": 344
+        },
+        {
+          "code": "GER-6",
+          "index": 345
+        },
+        {
+          "code": "GER-7",
+          "index": 346
+        },
+        {
+          "code": "GER-8",
+          "index": 347
+        },
+        {
+          "code": "GER-9",
+          "index": 348
+        },
+        {
+          "code": "GER-10",
+          "index": 349
+        },
+        {
+          "code": "GER-11",
+          "index": 350
+        },
+        {
+          "code": "GER-12",
+          "index": 351
+        },
+        {
+          "code": "GER-13",
+          "index": 352
+        },
+        {
+          "code": "GER-14",
+          "index": 353
+        },
+        {
+          "code": "GER-15",
+          "index": 354
+        },
+        {
+          "code": "GER-16",
+          "index": 355
+        },
+        {
+          "code": "GER-17",
+          "index": 356
+        },
+        {
+          "code": "GER-18",
+          "index": 357
+        },
+        {
+          "code": "GER-19",
+          "index": 358
+        },
+        {
+          "code": "GER-20",
+          "index": 359
+        }
+      ]
+    },
+    {
+      "id": "cuw",
+      "name": "Curazao",
+      "group": "Grupo E",
+      "stickers": [
+        {
+          "code": "CUW-1",
+          "index": 360,
+          "special": true
+        },
+        {
+          "code": "CUW-2",
+          "index": 361
+        },
+        {
+          "code": "CUW-3",
+          "index": 362
+        },
+        {
+          "code": "CUW-4",
+          "index": 363
+        },
+        {
+          "code": "CUW-5",
+          "index": 364
+        },
+        {
+          "code": "CUW-6",
+          "index": 365
+        },
+        {
+          "code": "CUW-7",
+          "index": 366
+        },
+        {
+          "code": "CUW-8",
+          "index": 367
+        },
+        {
+          "code": "CUW-9",
+          "index": 368
+        },
+        {
+          "code": "CUW-10",
+          "index": 369
+        },
+        {
+          "code": "CUW-11",
+          "index": 370
+        },
+        {
+          "code": "CUW-12",
+          "index": 371
+        },
+        {
+          "code": "CUW-13",
+          "index": 372
+        },
+        {
+          "code": "CUW-14",
+          "index": 373
+        },
+        {
+          "code": "CUW-15",
+          "index": 374
+        },
+        {
+          "code": "CUW-16",
+          "index": 375
+        },
+        {
+          "code": "CUW-17",
+          "index": 376
+        },
+        {
+          "code": "CUW-18",
+          "index": 377
+        },
+        {
+          "code": "CUW-19",
+          "index": 378
+        },
+        {
+          "code": "CUW-20",
+          "index": 379
+        }
+      ]
+    },
+    {
+      "id": "civ",
+      "name": "Costa de Marfil",
+      "group": "Grupo E",
+      "stickers": [
+        {
+          "code": "CIV-1",
+          "index": 380,
+          "special": true
+        },
+        {
+          "code": "CIV-2",
+          "index": 381
+        },
+        {
+          "code": "CIV-3",
+          "index": 382
+        },
+        {
+          "code": "CIV-4",
+          "index": 383
+        },
+        {
+          "code": "CIV-5",
+          "index": 384
+        },
+        {
+          "code": "CIV-6",
+          "index": 385
+        },
+        {
+          "code": "CIV-7",
+          "index": 386
+        },
+        {
+          "code": "CIV-8",
+          "index": 387
+        },
+        {
+          "code": "CIV-9",
+          "index": 388
+        },
+        {
+          "code": "CIV-10",
+          "index": 389
+        },
+        {
+          "code": "CIV-11",
+          "index": 390
+        },
+        {
+          "code": "CIV-12",
+          "index": 391
+        },
+        {
+          "code": "CIV-13",
+          "index": 392
+        },
+        {
+          "code": "CIV-14",
+          "index": 393
+        },
+        {
+          "code": "CIV-15",
+          "index": 394
+        },
+        {
+          "code": "CIV-16",
+          "index": 395
+        },
+        {
+          "code": "CIV-17",
+          "index": 396
+        },
+        {
+          "code": "CIV-18",
+          "index": 397
+        },
+        {
+          "code": "CIV-19",
+          "index": 398
+        },
+        {
+          "code": "CIV-20",
+          "index": 399
+        }
+      ]
+    },
+    {
+      "id": "ecu",
+      "name": "Ecuador",
+      "group": "Grupo E",
+      "stickers": [
+        {
+          "code": "ECU-1",
+          "index": 400,
+          "special": true
+        },
+        {
+          "code": "ECU-2",
+          "index": 401
+        },
+        {
+          "code": "ECU-3",
+          "index": 402
+        },
+        {
+          "code": "ECU-4",
+          "index": 403
+        },
+        {
+          "code": "ECU-5",
+          "index": 404
+        },
+        {
+          "code": "ECU-6",
+          "index": 405
+        },
+        {
+          "code": "ECU-7",
+          "index": 406
+        },
+        {
+          "code": "ECU-8",
+          "index": 407
+        },
+        {
+          "code": "ECU-9",
+          "index": 408
+        },
+        {
+          "code": "ECU-10",
+          "index": 409
+        },
+        {
+          "code": "ECU-11",
+          "index": 410
+        },
+        {
+          "code": "ECU-12",
+          "index": 411
+        },
+        {
+          "code": "ECU-13",
+          "index": 412
+        },
+        {
+          "code": "ECU-14",
+          "index": 413
+        },
+        {
+          "code": "ECU-15",
+          "index": 414
+        },
+        {
+          "code": "ECU-16",
+          "index": 415
+        },
+        {
+          "code": "ECU-17",
+          "index": 416
+        },
+        {
+          "code": "ECU-18",
+          "index": 417
+        },
+        {
+          "code": "ECU-19",
+          "index": 418
+        },
+        {
+          "code": "ECU-20",
+          "index": 419
+        }
+      ]
+    },
+    {
+      "id": "ned",
+      "name": "Países Bajos",
+      "group": "Grupo F",
+      "stickers": [
+        {
+          "code": "NED-1",
+          "index": 420,
+          "special": true
+        },
+        {
+          "code": "NED-2",
+          "index": 421
+        },
+        {
+          "code": "NED-3",
+          "index": 422
+        },
+        {
+          "code": "NED-4",
+          "index": 423
+        },
+        {
+          "code": "NED-5",
+          "index": 424
+        },
+        {
+          "code": "NED-6",
+          "index": 425
+        },
+        {
+          "code": "NED-7",
+          "index": 426
+        },
+        {
+          "code": "NED-8",
+          "index": 427
+        },
+        {
+          "code": "NED-9",
+          "index": 428
+        },
+        {
+          "code": "NED-10",
+          "index": 429
+        },
+        {
+          "code": "NED-11",
+          "index": 430
+        },
+        {
+          "code": "NED-12",
+          "index": 431
+        },
+        {
+          "code": "NED-13",
+          "index": 432
+        },
+        {
+          "code": "NED-14",
+          "index": 433
+        },
+        {
+          "code": "NED-15",
+          "index": 434
+        },
+        {
+          "code": "NED-16",
+          "index": 435
+        },
+        {
+          "code": "NED-17",
+          "index": 436
+        },
+        {
+          "code": "NED-18",
+          "index": 437
+        },
+        {
+          "code": "NED-19",
+          "index": 438
+        },
+        {
+          "code": "NED-20",
+          "index": 439
+        }
+      ]
+    },
+    {
+      "id": "jpn",
+      "name": "Japón",
+      "group": "Grupo F",
+      "stickers": [
+        {
+          "code": "JPN-1",
+          "index": 440,
+          "special": true
+        },
+        {
+          "code": "JPN-2",
+          "index": 441
+        },
+        {
+          "code": "JPN-3",
+          "index": 442
+        },
+        {
+          "code": "JPN-4",
+          "index": 443
+        },
+        {
+          "code": "JPN-5",
+          "index": 444
+        },
+        {
+          "code": "JPN-6",
+          "index": 445
+        },
+        {
+          "code": "JPN-7",
+          "index": 446
+        },
+        {
+          "code": "JPN-8",
+          "index": 447
+        },
+        {
+          "code": "JPN-9",
+          "index": 448
+        },
+        {
+          "code": "JPN-10",
+          "index": 449
+        },
+        {
+          "code": "JPN-11",
+          "index": 450
+        },
+        {
+          "code": "JPN-12",
+          "index": 451
+        },
+        {
+          "code": "JPN-13",
+          "index": 452
+        },
+        {
+          "code": "JPN-14",
+          "index": 453
+        },
+        {
+          "code": "JPN-15",
+          "index": 454
+        },
+        {
+          "code": "JPN-16",
+          "index": 455
+        },
+        {
+          "code": "JPN-17",
+          "index": 456
+        },
+        {
+          "code": "JPN-18",
+          "index": 457
+        },
+        {
+          "code": "JPN-19",
+          "index": 458
+        },
+        {
+          "code": "JPN-20",
+          "index": 459
+        }
+      ]
+    },
+    {
+      "id": "swe",
+      "name": "Suecia",
+      "group": "Grupo F",
+      "stickers": [
+        {
+          "code": "SWE-1",
+          "index": 460,
+          "special": true
+        },
+        {
+          "code": "SWE-2",
+          "index": 461
+        },
+        {
+          "code": "SWE-3",
+          "index": 462
+        },
+        {
+          "code": "SWE-4",
+          "index": 463
+        },
+        {
+          "code": "SWE-5",
+          "index": 464
+        },
+        {
+          "code": "SWE-6",
+          "index": 465
+        },
+        {
+          "code": "SWE-7",
+          "index": 466
+        },
+        {
+          "code": "SWE-8",
+          "index": 467
+        },
+        {
+          "code": "SWE-9",
+          "index": 468
+        },
+        {
+          "code": "SWE-10",
+          "index": 469
+        },
+        {
+          "code": "SWE-11",
+          "index": 470
+        },
+        {
+          "code": "SWE-12",
+          "index": 471
+        },
+        {
+          "code": "SWE-13",
+          "index": 472
+        },
+        {
+          "code": "SWE-14",
+          "index": 473
+        },
+        {
+          "code": "SWE-15",
+          "index": 474
+        },
+        {
+          "code": "SWE-16",
+          "index": 475
+        },
+        {
+          "code": "SWE-17",
+          "index": 476
+        },
+        {
+          "code": "SWE-18",
+          "index": 477
+        },
+        {
+          "code": "SWE-19",
+          "index": 478
+        },
+        {
+          "code": "SWE-20",
+          "index": 479
+        }
+      ]
+    },
+    {
+      "id": "tun",
+      "name": "Túnez",
+      "group": "Grupo F",
+      "stickers": [
+        {
+          "code": "TUN-1",
+          "index": 480,
+          "special": true
+        },
+        {
+          "code": "TUN-2",
+          "index": 481
+        },
+        {
+          "code": "TUN-3",
+          "index": 482
+        },
+        {
+          "code": "TUN-4",
+          "index": 483
+        },
+        {
+          "code": "TUN-5",
+          "index": 484
+        },
+        {
+          "code": "TUN-6",
+          "index": 485
+        },
+        {
+          "code": "TUN-7",
+          "index": 486
+        },
+        {
+          "code": "TUN-8",
+          "index": 487
+        },
+        {
+          "code": "TUN-9",
+          "index": 488
+        },
+        {
+          "code": "TUN-10",
+          "index": 489
+        },
+        {
+          "code": "TUN-11",
+          "index": 490
+        },
+        {
+          "code": "TUN-12",
+          "index": 491
+        },
+        {
+          "code": "TUN-13",
+          "index": 492
+        },
+        {
+          "code": "TUN-14",
+          "index": 493
+        },
+        {
+          "code": "TUN-15",
+          "index": 494
+        },
+        {
+          "code": "TUN-16",
+          "index": 495
+        },
+        {
+          "code": "TUN-17",
+          "index": 496
+        },
+        {
+          "code": "TUN-18",
+          "index": 497
+        },
+        {
+          "code": "TUN-19",
+          "index": 498
+        },
+        {
+          "code": "TUN-20",
+          "index": 499
+        }
+      ]
+    },
+    {
+      "id": "bel",
+      "name": "Bélgica",
+      "group": "Grupo G",
+      "stickers": [
+        {
+          "code": "BEL-1",
+          "index": 500,
+          "special": true
+        },
+        {
+          "code": "BEL-2",
+          "index": 501
+        },
+        {
+          "code": "BEL-3",
+          "index": 502
+        },
+        {
+          "code": "BEL-4",
+          "index": 503
+        },
+        {
+          "code": "BEL-5",
+          "index": 504
+        },
+        {
+          "code": "BEL-6",
+          "index": 505
+        },
+        {
+          "code": "BEL-7",
+          "index": 506
+        },
+        {
+          "code": "BEL-8",
+          "index": 507
+        },
+        {
+          "code": "BEL-9",
+          "index": 508
+        },
+        {
+          "code": "BEL-10",
+          "index": 509
+        },
+        {
+          "code": "BEL-11",
+          "index": 510
+        },
+        {
+          "code": "BEL-12",
+          "index": 511
+        },
+        {
+          "code": "BEL-13",
+          "index": 512
+        },
+        {
+          "code": "BEL-14",
+          "index": 513
+        },
+        {
+          "code": "BEL-15",
+          "index": 514
+        },
+        {
+          "code": "BEL-16",
+          "index": 515
+        },
+        {
+          "code": "BEL-17",
+          "index": 516
+        },
+        {
+          "code": "BEL-18",
+          "index": 517
+        },
+        {
+          "code": "BEL-19",
+          "index": 518
+        },
+        {
+          "code": "BEL-20",
+          "index": 519
+        }
+      ]
+    },
+    {
+      "id": "egy",
+      "name": "Egipto",
+      "group": "Grupo G",
+      "stickers": [
+        {
+          "code": "EGY-1",
+          "index": 520,
+          "special": true
+        },
+        {
+          "code": "EGY-2",
+          "index": 521
+        },
+        {
+          "code": "EGY-3",
+          "index": 522
+        },
+        {
+          "code": "EGY-4",
+          "index": 523
+        },
+        {
+          "code": "EGY-5",
+          "index": 524
+        },
+        {
+          "code": "EGY-6",
+          "index": 525
+        },
+        {
+          "code": "EGY-7",
+          "index": 526
+        },
+        {
+          "code": "EGY-8",
+          "index": 527
+        },
+        {
+          "code": "EGY-9",
+          "index": 528
+        },
+        {
+          "code": "EGY-10",
+          "index": 529
+        },
+        {
+          "code": "EGY-11",
+          "index": 530
+        },
+        {
+          "code": "EGY-12",
+          "index": 531
+        },
+        {
+          "code": "EGY-13",
+          "index": 532
+        },
+        {
+          "code": "EGY-14",
+          "index": 533
+        },
+        {
+          "code": "EGY-15",
+          "index": 534
+        },
+        {
+          "code": "EGY-16",
+          "index": 535
+        },
+        {
+          "code": "EGY-17",
+          "index": 536
+        },
+        {
+          "code": "EGY-18",
+          "index": 537
+        },
+        {
+          "code": "EGY-19",
+          "index": 538
+        },
+        {
+          "code": "EGY-20",
+          "index": 539
+        }
+      ]
+    },
+    {
+      "id": "irn",
+      "name": "Irán",
+      "group": "Grupo G",
+      "stickers": [
+        {
+          "code": "IRN-1",
+          "index": 540,
+          "special": true
+        },
+        {
+          "code": "IRN-2",
+          "index": 541
+        },
+        {
+          "code": "IRN-3",
+          "index": 542
+        },
+        {
+          "code": "IRN-4",
+          "index": 543
+        },
+        {
+          "code": "IRN-5",
+          "index": 544
+        },
+        {
+          "code": "IRN-6",
+          "index": 545
+        },
+        {
+          "code": "IRN-7",
+          "index": 546
+        },
+        {
+          "code": "IRN-8",
+          "index": 547
+        },
+        {
+          "code": "IRN-9",
+          "index": 548
+        },
+        {
+          "code": "IRN-10",
+          "index": 549
+        },
+        {
+          "code": "IRN-11",
+          "index": 550
+        },
+        {
+          "code": "IRN-12",
+          "index": 551
+        },
+        {
+          "code": "IRN-13",
+          "index": 552
+        },
+        {
+          "code": "IRN-14",
+          "index": 553
+        },
+        {
+          "code": "IRN-15",
+          "index": 554
+        },
+        {
+          "code": "IRN-16",
+          "index": 555
+        },
+        {
+          "code": "IRN-17",
+          "index": 556
+        },
+        {
+          "code": "IRN-18",
+          "index": 557
+        },
+        {
+          "code": "IRN-19",
+          "index": 558
+        },
+        {
+          "code": "IRN-20",
+          "index": 559
+        }
+      ]
+    },
+    {
+      "id": "nzl",
+      "name": "Nueva Zelanda",
+      "group": "Grupo G",
+      "stickers": [
+        {
+          "code": "NZL-1",
+          "index": 560,
+          "special": true
+        },
+        {
+          "code": "NZL-2",
+          "index": 561
+        },
+        {
+          "code": "NZL-3",
+          "index": 562
+        },
+        {
+          "code": "NZL-4",
+          "index": 563
+        },
+        {
+          "code": "NZL-5",
+          "index": 564
+        },
+        {
+          "code": "NZL-6",
+          "index": 565
+        },
+        {
+          "code": "NZL-7",
+          "index": 566
+        },
+        {
+          "code": "NZL-8",
+          "index": 567
+        },
+        {
+          "code": "NZL-9",
+          "index": 568
+        },
+        {
+          "code": "NZL-10",
+          "index": 569
+        },
+        {
+          "code": "NZL-11",
+          "index": 570
+        },
+        {
+          "code": "NZL-12",
+          "index": 571
+        },
+        {
+          "code": "NZL-13",
+          "index": 572
+        },
+        {
+          "code": "NZL-14",
+          "index": 573
+        },
+        {
+          "code": "NZL-15",
+          "index": 574
+        },
+        {
+          "code": "NZL-16",
+          "index": 575
+        },
+        {
+          "code": "NZL-17",
+          "index": 576
+        },
+        {
+          "code": "NZL-18",
+          "index": 577
+        },
+        {
+          "code": "NZL-19",
+          "index": 578
+        },
+        {
+          "code": "NZL-20",
+          "index": 579
+        }
+      ]
+    },
+    {
+      "id": "esp",
+      "name": "España",
+      "group": "Grupo H",
+      "stickers": [
+        {
+          "code": "ESP-1",
+          "index": 580,
+          "special": true
+        },
+        {
+          "code": "ESP-2",
+          "index": 581
+        },
+        {
+          "code": "ESP-3",
+          "index": 582
+        },
+        {
+          "code": "ESP-4",
+          "index": 583
+        },
+        {
+          "code": "ESP-5",
+          "index": 584
+        },
+        {
+          "code": "ESP-6",
+          "index": 585
+        },
+        {
+          "code": "ESP-7",
+          "index": 586
+        },
+        {
+          "code": "ESP-8",
+          "index": 587
+        },
+        {
+          "code": "ESP-9",
+          "index": 588
+        },
+        {
+          "code": "ESP-10",
+          "index": 589
+        },
+        {
+          "code": "ESP-11",
+          "index": 590
+        },
+        {
+          "code": "ESP-12",
+          "index": 591
+        },
+        {
+          "code": "ESP-13",
+          "index": 592
+        },
+        {
+          "code": "ESP-14",
+          "index": 593
+        },
+        {
+          "code": "ESP-15",
+          "index": 594
+        },
+        {
+          "code": "ESP-16",
+          "index": 595
+        },
+        {
+          "code": "ESP-17",
+          "index": 596
+        },
+        {
+          "code": "ESP-18",
+          "index": 597
+        },
+        {
+          "code": "ESP-19",
+          "index": 598
+        },
+        {
+          "code": "ESP-20",
+          "index": 599
+        }
+      ]
+    },
+    {
+      "id": "cpv",
+      "name": "Cabo Verde",
+      "group": "Grupo H",
+      "stickers": [
+        {
+          "code": "CPV-1",
+          "index": 600,
+          "special": true
+        },
+        {
+          "code": "CPV-2",
+          "index": 601
+        },
+        {
+          "code": "CPV-3",
+          "index": 602
+        },
+        {
+          "code": "CPV-4",
+          "index": 603
+        },
+        {
+          "code": "CPV-5",
+          "index": 604
+        },
+        {
+          "code": "CPV-6",
+          "index": 605
+        },
+        {
+          "code": "CPV-7",
+          "index": 606
+        },
+        {
+          "code": "CPV-8",
+          "index": 607
+        },
+        {
+          "code": "CPV-9",
+          "index": 608
+        },
+        {
+          "code": "CPV-10",
+          "index": 609
+        },
+        {
+          "code": "CPV-11",
+          "index": 610
+        },
+        {
+          "code": "CPV-12",
+          "index": 611
+        },
+        {
+          "code": "CPV-13",
+          "index": 612
+        },
+        {
+          "code": "CPV-14",
+          "index": 613
+        },
+        {
+          "code": "CPV-15",
+          "index": 614
+        },
+        {
+          "code": "CPV-16",
+          "index": 615
+        },
+        {
+          "code": "CPV-17",
+          "index": 616
+        },
+        {
+          "code": "CPV-18",
+          "index": 617
+        },
+        {
+          "code": "CPV-19",
+          "index": 618
+        },
+        {
+          "code": "CPV-20",
+          "index": 619
+        }
+      ]
+    },
+    {
+      "id": "ksa",
+      "name": "Arabia Saudita",
+      "group": "Grupo H",
+      "stickers": [
+        {
+          "code": "KSA-1",
+          "index": 620,
+          "special": true
+        },
+        {
+          "code": "KSA-2",
+          "index": 621
+        },
+        {
+          "code": "KSA-3",
+          "index": 622
+        },
+        {
+          "code": "KSA-4",
+          "index": 623
+        },
+        {
+          "code": "KSA-5",
+          "index": 624
+        },
+        {
+          "code": "KSA-6",
+          "index": 625
+        },
+        {
+          "code": "KSA-7",
+          "index": 626
+        },
+        {
+          "code": "KSA-8",
+          "index": 627
+        },
+        {
+          "code": "KSA-9",
+          "index": 628
+        },
+        {
+          "code": "KSA-10",
+          "index": 629
+        },
+        {
+          "code": "KSA-11",
+          "index": 630
+        },
+        {
+          "code": "KSA-12",
+          "index": 631
+        },
+        {
+          "code": "KSA-13",
+          "index": 632
+        },
+        {
+          "code": "KSA-14",
+          "index": 633
+        },
+        {
+          "code": "KSA-15",
+          "index": 634
+        },
+        {
+          "code": "KSA-16",
+          "index": 635
+        },
+        {
+          "code": "KSA-17",
+          "index": 636
+        },
+        {
+          "code": "KSA-18",
+          "index": 637
+        },
+        {
+          "code": "KSA-19",
+          "index": 638
+        },
+        {
+          "code": "KSA-20",
+          "index": 639
+        }
+      ]
+    },
+    {
+      "id": "uru",
+      "name": "Uruguay",
+      "group": "Grupo H",
+      "stickers": [
+        {
+          "code": "URU-1",
+          "index": 640,
+          "special": true
+        },
+        {
+          "code": "URU-2",
+          "index": 641
+        },
+        {
+          "code": "URU-3",
+          "index": 642
+        },
+        {
+          "code": "URU-4",
+          "index": 643
+        },
+        {
+          "code": "URU-5",
+          "index": 644
+        },
+        {
+          "code": "URU-6",
+          "index": 645
+        },
+        {
+          "code": "URU-7",
+          "index": 646
+        },
+        {
+          "code": "URU-8",
+          "index": 647
+        },
+        {
+          "code": "URU-9",
+          "index": 648
+        },
+        {
+          "code": "URU-10",
+          "index": 649
+        },
+        {
+          "code": "URU-11",
+          "index": 650
+        },
+        {
+          "code": "URU-12",
+          "index": 651
+        },
+        {
+          "code": "URU-13",
+          "index": 652
+        },
+        {
+          "code": "URU-14",
+          "index": 653
+        },
+        {
+          "code": "URU-15",
+          "index": 654
+        },
+        {
+          "code": "URU-16",
+          "index": 655
+        },
+        {
+          "code": "URU-17",
+          "index": 656
+        },
+        {
+          "code": "URU-18",
+          "index": 657
+        },
+        {
+          "code": "URU-19",
+          "index": 658
+        },
+        {
+          "code": "URU-20",
+          "index": 659
+        }
+      ]
+    },
+    {
+      "id": "fra",
+      "name": "Francia",
+      "group": "Grupo I",
+      "stickers": [
+        {
+          "code": "FRA-1",
+          "index": 660,
+          "special": true
+        },
+        {
+          "code": "FRA-2",
+          "index": 661
+        },
+        {
+          "code": "FRA-3",
+          "index": 662
+        },
+        {
+          "code": "FRA-4",
+          "index": 663
+        },
+        {
+          "code": "FRA-5",
+          "index": 664
+        },
+        {
+          "code": "FRA-6",
+          "index": 665
+        },
+        {
+          "code": "FRA-7",
+          "index": 666
+        },
+        {
+          "code": "FRA-8",
+          "index": 667
+        },
+        {
+          "code": "FRA-9",
+          "index": 668
+        },
+        {
+          "code": "FRA-10",
+          "index": 669
+        },
+        {
+          "code": "FRA-11",
+          "index": 670
+        },
+        {
+          "code": "FRA-12",
+          "index": 671
+        },
+        {
+          "code": "FRA-13",
+          "index": 672
+        },
+        {
+          "code": "FRA-14",
+          "index": 673
+        },
+        {
+          "code": "FRA-15",
+          "index": 674
+        },
+        {
+          "code": "FRA-16",
+          "index": 675
+        },
+        {
+          "code": "FRA-17",
+          "index": 676
+        },
+        {
+          "code": "FRA-18",
+          "index": 677
+        },
+        {
+          "code": "FRA-19",
+          "index": 678
+        },
+        {
+          "code": "FRA-20",
+          "index": 679
+        }
+      ]
+    },
+    {
+      "id": "sen",
+      "name": "Senegal",
+      "group": "Grupo I",
+      "stickers": [
+        {
+          "code": "SEN-1",
+          "index": 680,
+          "special": true
+        },
+        {
+          "code": "SEN-2",
+          "index": 681
+        },
+        {
+          "code": "SEN-3",
+          "index": 682
+        },
+        {
+          "code": "SEN-4",
+          "index": 683
+        },
+        {
+          "code": "SEN-5",
+          "index": 684
+        },
+        {
+          "code": "SEN-6",
+          "index": 685
+        },
+        {
+          "code": "SEN-7",
+          "index": 686
+        },
+        {
+          "code": "SEN-8",
+          "index": 687
+        },
+        {
+          "code": "SEN-9",
+          "index": 688
+        },
+        {
+          "code": "SEN-10",
+          "index": 689
+        },
+        {
+          "code": "SEN-11",
+          "index": 690
+        },
+        {
+          "code": "SEN-12",
+          "index": 691
+        },
+        {
+          "code": "SEN-13",
+          "index": 692
+        },
+        {
+          "code": "SEN-14",
+          "index": 693
+        },
+        {
+          "code": "SEN-15",
+          "index": 694
+        },
+        {
+          "code": "SEN-16",
+          "index": 695
+        },
+        {
+          "code": "SEN-17",
+          "index": 696
+        },
+        {
+          "code": "SEN-18",
+          "index": 697
+        },
+        {
+          "code": "SEN-19",
+          "index": 698
+        },
+        {
+          "code": "SEN-20",
+          "index": 699
+        }
+      ]
+    },
+    {
+      "id": "irq",
+      "name": "Irak",
+      "group": "Grupo I",
+      "stickers": [
+        {
+          "code": "IRQ-1",
+          "index": 700,
+          "special": true
+        },
+        {
+          "code": "IRQ-2",
+          "index": 701
+        },
+        {
+          "code": "IRQ-3",
+          "index": 702
+        },
+        {
+          "code": "IRQ-4",
+          "index": 703
+        },
+        {
+          "code": "IRQ-5",
+          "index": 704
+        },
+        {
+          "code": "IRQ-6",
+          "index": 705
+        },
+        {
+          "code": "IRQ-7",
+          "index": 706
+        },
+        {
+          "code": "IRQ-8",
+          "index": 707
+        },
+        {
+          "code": "IRQ-9",
+          "index": 708
+        },
+        {
+          "code": "IRQ-10",
+          "index": 709
+        },
+        {
+          "code": "IRQ-11",
+          "index": 710
+        },
+        {
+          "code": "IRQ-12",
+          "index": 711
+        },
+        {
+          "code": "IRQ-13",
+          "index": 712
+        },
+        {
+          "code": "IRQ-14",
+          "index": 713
+        },
+        {
+          "code": "IRQ-15",
+          "index": 714
+        },
+        {
+          "code": "IRQ-16",
+          "index": 715
+        },
+        {
+          "code": "IRQ-17",
+          "index": 716
+        },
+        {
+          "code": "IRQ-18",
+          "index": 717
+        },
+        {
+          "code": "IRQ-19",
+          "index": 718
+        },
+        {
+          "code": "IRQ-20",
+          "index": 719
+        }
+      ]
+    },
+    {
+      "id": "nor",
+      "name": "Noruega",
+      "group": "Grupo I",
+      "stickers": [
+        {
+          "code": "NOR-1",
+          "index": 720,
+          "special": true
+        },
+        {
+          "code": "NOR-2",
+          "index": 721
+        },
+        {
+          "code": "NOR-3",
+          "index": 722
+        },
+        {
+          "code": "NOR-4",
+          "index": 723
+        },
+        {
+          "code": "NOR-5",
+          "index": 724
+        },
+        {
+          "code": "NOR-6",
+          "index": 725
+        },
+        {
+          "code": "NOR-7",
+          "index": 726
+        },
+        {
+          "code": "NOR-8",
+          "index": 727
+        },
+        {
+          "code": "NOR-9",
+          "index": 728
+        },
+        {
+          "code": "NOR-10",
+          "index": 729
+        },
+        {
+          "code": "NOR-11",
+          "index": 730
+        },
+        {
+          "code": "NOR-12",
+          "index": 731
+        },
+        {
+          "code": "NOR-13",
+          "index": 732
+        },
+        {
+          "code": "NOR-14",
+          "index": 733
+        },
+        {
+          "code": "NOR-15",
+          "index": 734
+        },
+        {
+          "code": "NOR-16",
+          "index": 735
+        },
+        {
+          "code": "NOR-17",
+          "index": 736
+        },
+        {
+          "code": "NOR-18",
+          "index": 737
+        },
+        {
+          "code": "NOR-19",
+          "index": 738
+        },
+        {
+          "code": "NOR-20",
+          "index": 739
+        }
       ]
     },
     {
       "id": "arg",
       "name": "Argentina",
-      "group": "Grupo A",
+      "group": "Grupo J",
       "stickers": [
-        { "code": "ARG-1", "index": 3, "name": "Escudo", "special": true },
-        { "code": "ARG-2", "index": 4 },
-        { "code": "ARG-3", "index": 5 },
-        { "code": "ARG-4", "index": 6 },
-        { "code": "ARG-5", "index": 7 }
+        {
+          "code": "ARG-1",
+          "index": 740,
+          "special": true
+        },
+        {
+          "code": "ARG-2",
+          "index": 741
+        },
+        {
+          "code": "ARG-3",
+          "index": 742
+        },
+        {
+          "code": "ARG-4",
+          "index": 743
+        },
+        {
+          "code": "ARG-5",
+          "index": 744
+        },
+        {
+          "code": "ARG-6",
+          "index": 745
+        },
+        {
+          "code": "ARG-7",
+          "index": 746
+        },
+        {
+          "code": "ARG-8",
+          "index": 747
+        },
+        {
+          "code": "ARG-9",
+          "index": 748
+        },
+        {
+          "code": "ARG-10",
+          "index": 749
+        },
+        {
+          "code": "ARG-11",
+          "index": 750
+        },
+        {
+          "code": "ARG-12",
+          "index": 751
+        },
+        {
+          "code": "ARG-13",
+          "index": 752
+        },
+        {
+          "code": "ARG-14",
+          "index": 753
+        },
+        {
+          "code": "ARG-15",
+          "index": 754
+        },
+        {
+          "code": "ARG-16",
+          "index": 755
+        },
+        {
+          "code": "ARG-17",
+          "index": 756
+        },
+        {
+          "code": "ARG-18",
+          "index": 757
+        },
+        {
+          "code": "ARG-19",
+          "index": 758
+        },
+        {
+          "code": "ARG-20",
+          "index": 759
+        }
       ]
     },
     {
-      "id": "chi",
-      "name": "Chile",
-      "group": "Grupo B",
+      "id": "alg",
+      "name": "Argelia",
+      "group": "Grupo J",
       "stickers": [
-        { "code": "CHI-1", "index": 8, "name": "Escudo", "special": true },
-        { "code": "CHI-2", "index": 9 },
-        { "code": "CHI-3", "index": 10 },
-        { "code": "CHI-4", "index": 11 }
+        {
+          "code": "ALG-1",
+          "index": 760,
+          "special": true
+        },
+        {
+          "code": "ALG-2",
+          "index": 761
+        },
+        {
+          "code": "ALG-3",
+          "index": 762
+        },
+        {
+          "code": "ALG-4",
+          "index": 763
+        },
+        {
+          "code": "ALG-5",
+          "index": 764
+        },
+        {
+          "code": "ALG-6",
+          "index": 765
+        },
+        {
+          "code": "ALG-7",
+          "index": 766
+        },
+        {
+          "code": "ALG-8",
+          "index": 767
+        },
+        {
+          "code": "ALG-9",
+          "index": 768
+        },
+        {
+          "code": "ALG-10",
+          "index": 769
+        },
+        {
+          "code": "ALG-11",
+          "index": 770
+        },
+        {
+          "code": "ALG-12",
+          "index": 771
+        },
+        {
+          "code": "ALG-13",
+          "index": 772
+        },
+        {
+          "code": "ALG-14",
+          "index": 773
+        },
+        {
+          "code": "ALG-15",
+          "index": 774
+        },
+        {
+          "code": "ALG-16",
+          "index": 775
+        },
+        {
+          "code": "ALG-17",
+          "index": 776
+        },
+        {
+          "code": "ALG-18",
+          "index": 777
+        },
+        {
+          "code": "ALG-19",
+          "index": 778
+        },
+        {
+          "code": "ALG-20",
+          "index": 779
+        }
+      ]
+    },
+    {
+      "id": "aut",
+      "name": "Austria",
+      "group": "Grupo J",
+      "stickers": [
+        {
+          "code": "AUT-1",
+          "index": 780,
+          "special": true
+        },
+        {
+          "code": "AUT-2",
+          "index": 781
+        },
+        {
+          "code": "AUT-3",
+          "index": 782
+        },
+        {
+          "code": "AUT-4",
+          "index": 783
+        },
+        {
+          "code": "AUT-5",
+          "index": 784
+        },
+        {
+          "code": "AUT-6",
+          "index": 785
+        },
+        {
+          "code": "AUT-7",
+          "index": 786
+        },
+        {
+          "code": "AUT-8",
+          "index": 787
+        },
+        {
+          "code": "AUT-9",
+          "index": 788
+        },
+        {
+          "code": "AUT-10",
+          "index": 789
+        },
+        {
+          "code": "AUT-11",
+          "index": 790
+        },
+        {
+          "code": "AUT-12",
+          "index": 791
+        },
+        {
+          "code": "AUT-13",
+          "index": 792
+        },
+        {
+          "code": "AUT-14",
+          "index": 793
+        },
+        {
+          "code": "AUT-15",
+          "index": 794
+        },
+        {
+          "code": "AUT-16",
+          "index": 795
+        },
+        {
+          "code": "AUT-17",
+          "index": 796
+        },
+        {
+          "code": "AUT-18",
+          "index": 797
+        },
+        {
+          "code": "AUT-19",
+          "index": 798
+        },
+        {
+          "code": "AUT-20",
+          "index": 799
+        }
+      ]
+    },
+    {
+      "id": "jor",
+      "name": "Jordania",
+      "group": "Grupo J",
+      "stickers": [
+        {
+          "code": "JOR-1",
+          "index": 800,
+          "special": true
+        },
+        {
+          "code": "JOR-2",
+          "index": 801
+        },
+        {
+          "code": "JOR-3",
+          "index": 802
+        },
+        {
+          "code": "JOR-4",
+          "index": 803
+        },
+        {
+          "code": "JOR-5",
+          "index": 804
+        },
+        {
+          "code": "JOR-6",
+          "index": 805
+        },
+        {
+          "code": "JOR-7",
+          "index": 806
+        },
+        {
+          "code": "JOR-8",
+          "index": 807
+        },
+        {
+          "code": "JOR-9",
+          "index": 808
+        },
+        {
+          "code": "JOR-10",
+          "index": 809
+        },
+        {
+          "code": "JOR-11",
+          "index": 810
+        },
+        {
+          "code": "JOR-12",
+          "index": 811
+        },
+        {
+          "code": "JOR-13",
+          "index": 812
+        },
+        {
+          "code": "JOR-14",
+          "index": 813
+        },
+        {
+          "code": "JOR-15",
+          "index": 814
+        },
+        {
+          "code": "JOR-16",
+          "index": 815
+        },
+        {
+          "code": "JOR-17",
+          "index": 816
+        },
+        {
+          "code": "JOR-18",
+          "index": 817
+        },
+        {
+          "code": "JOR-19",
+          "index": 818
+        },
+        {
+          "code": "JOR-20",
+          "index": 819
+        }
+      ]
+    },
+    {
+      "id": "por",
+      "name": "Portugal",
+      "group": "Grupo K",
+      "stickers": [
+        {
+          "code": "POR-1",
+          "index": 820,
+          "special": true
+        },
+        {
+          "code": "POR-2",
+          "index": 821
+        },
+        {
+          "code": "POR-3",
+          "index": 822
+        },
+        {
+          "code": "POR-4",
+          "index": 823
+        },
+        {
+          "code": "POR-5",
+          "index": 824
+        },
+        {
+          "code": "POR-6",
+          "index": 825
+        },
+        {
+          "code": "POR-7",
+          "index": 826
+        },
+        {
+          "code": "POR-8",
+          "index": 827
+        },
+        {
+          "code": "POR-9",
+          "index": 828
+        },
+        {
+          "code": "POR-10",
+          "index": 829
+        },
+        {
+          "code": "POR-11",
+          "index": 830
+        },
+        {
+          "code": "POR-12",
+          "index": 831
+        },
+        {
+          "code": "POR-13",
+          "index": 832
+        },
+        {
+          "code": "POR-14",
+          "index": 833
+        },
+        {
+          "code": "POR-15",
+          "index": 834
+        },
+        {
+          "code": "POR-16",
+          "index": 835
+        },
+        {
+          "code": "POR-17",
+          "index": 836
+        },
+        {
+          "code": "POR-18",
+          "index": 837
+        },
+        {
+          "code": "POR-19",
+          "index": 838
+        },
+        {
+          "code": "POR-20",
+          "index": 839
+        }
+      ]
+    },
+    {
+      "id": "cod",
+      "name": "RD del Congo",
+      "group": "Grupo K",
+      "stickers": [
+        {
+          "code": "COD-1",
+          "index": 840,
+          "special": true
+        },
+        {
+          "code": "COD-2",
+          "index": 841
+        },
+        {
+          "code": "COD-3",
+          "index": 842
+        },
+        {
+          "code": "COD-4",
+          "index": 843
+        },
+        {
+          "code": "COD-5",
+          "index": 844
+        },
+        {
+          "code": "COD-6",
+          "index": 845
+        },
+        {
+          "code": "COD-7",
+          "index": 846
+        },
+        {
+          "code": "COD-8",
+          "index": 847
+        },
+        {
+          "code": "COD-9",
+          "index": 848
+        },
+        {
+          "code": "COD-10",
+          "index": 849
+        },
+        {
+          "code": "COD-11",
+          "index": 850
+        },
+        {
+          "code": "COD-12",
+          "index": 851
+        },
+        {
+          "code": "COD-13",
+          "index": 852
+        },
+        {
+          "code": "COD-14",
+          "index": 853
+        },
+        {
+          "code": "COD-15",
+          "index": 854
+        },
+        {
+          "code": "COD-16",
+          "index": 855
+        },
+        {
+          "code": "COD-17",
+          "index": 856
+        },
+        {
+          "code": "COD-18",
+          "index": 857
+        },
+        {
+          "code": "COD-19",
+          "index": 858
+        },
+        {
+          "code": "COD-20",
+          "index": 859
+        }
+      ]
+    },
+    {
+      "id": "uzb",
+      "name": "Uzbekistán",
+      "group": "Grupo K",
+      "stickers": [
+        {
+          "code": "UZB-1",
+          "index": 860,
+          "special": true
+        },
+        {
+          "code": "UZB-2",
+          "index": 861
+        },
+        {
+          "code": "UZB-3",
+          "index": 862
+        },
+        {
+          "code": "UZB-4",
+          "index": 863
+        },
+        {
+          "code": "UZB-5",
+          "index": 864
+        },
+        {
+          "code": "UZB-6",
+          "index": 865
+        },
+        {
+          "code": "UZB-7",
+          "index": 866
+        },
+        {
+          "code": "UZB-8",
+          "index": 867
+        },
+        {
+          "code": "UZB-9",
+          "index": 868
+        },
+        {
+          "code": "UZB-10",
+          "index": 869
+        },
+        {
+          "code": "UZB-11",
+          "index": 870
+        },
+        {
+          "code": "UZB-12",
+          "index": 871
+        },
+        {
+          "code": "UZB-13",
+          "index": 872
+        },
+        {
+          "code": "UZB-14",
+          "index": 873
+        },
+        {
+          "code": "UZB-15",
+          "index": 874
+        },
+        {
+          "code": "UZB-16",
+          "index": 875
+        },
+        {
+          "code": "UZB-17",
+          "index": 876
+        },
+        {
+          "code": "UZB-18",
+          "index": 877
+        },
+        {
+          "code": "UZB-19",
+          "index": 878
+        },
+        {
+          "code": "UZB-20",
+          "index": 879
+        }
+      ]
+    },
+    {
+      "id": "col",
+      "name": "Colombia",
+      "group": "Grupo K",
+      "stickers": [
+        {
+          "code": "COL-1",
+          "index": 880,
+          "special": true
+        },
+        {
+          "code": "COL-2",
+          "index": 881
+        },
+        {
+          "code": "COL-3",
+          "index": 882
+        },
+        {
+          "code": "COL-4",
+          "index": 883
+        },
+        {
+          "code": "COL-5",
+          "index": 884
+        },
+        {
+          "code": "COL-6",
+          "index": 885
+        },
+        {
+          "code": "COL-7",
+          "index": 886
+        },
+        {
+          "code": "COL-8",
+          "index": 887
+        },
+        {
+          "code": "COL-9",
+          "index": 888
+        },
+        {
+          "code": "COL-10",
+          "index": 889
+        },
+        {
+          "code": "COL-11",
+          "index": 890
+        },
+        {
+          "code": "COL-12",
+          "index": 891
+        },
+        {
+          "code": "COL-13",
+          "index": 892
+        },
+        {
+          "code": "COL-14",
+          "index": 893
+        },
+        {
+          "code": "COL-15",
+          "index": 894
+        },
+        {
+          "code": "COL-16",
+          "index": 895
+        },
+        {
+          "code": "COL-17",
+          "index": 896
+        },
+        {
+          "code": "COL-18",
+          "index": 897
+        },
+        {
+          "code": "COL-19",
+          "index": 898
+        },
+        {
+          "code": "COL-20",
+          "index": 899
+        }
+      ]
+    },
+    {
+      "id": "eng",
+      "name": "Inglaterra",
+      "group": "Grupo L",
+      "stickers": [
+        {
+          "code": "ENG-1",
+          "index": 900,
+          "special": true
+        },
+        {
+          "code": "ENG-2",
+          "index": 901
+        },
+        {
+          "code": "ENG-3",
+          "index": 902
+        },
+        {
+          "code": "ENG-4",
+          "index": 903
+        },
+        {
+          "code": "ENG-5",
+          "index": 904
+        },
+        {
+          "code": "ENG-6",
+          "index": 905
+        },
+        {
+          "code": "ENG-7",
+          "index": 906
+        },
+        {
+          "code": "ENG-8",
+          "index": 907
+        },
+        {
+          "code": "ENG-9",
+          "index": 908
+        },
+        {
+          "code": "ENG-10",
+          "index": 909
+        },
+        {
+          "code": "ENG-11",
+          "index": 910
+        },
+        {
+          "code": "ENG-12",
+          "index": 911
+        },
+        {
+          "code": "ENG-13",
+          "index": 912
+        },
+        {
+          "code": "ENG-14",
+          "index": 913
+        },
+        {
+          "code": "ENG-15",
+          "index": 914
+        },
+        {
+          "code": "ENG-16",
+          "index": 915
+        },
+        {
+          "code": "ENG-17",
+          "index": 916
+        },
+        {
+          "code": "ENG-18",
+          "index": 917
+        },
+        {
+          "code": "ENG-19",
+          "index": 918
+        },
+        {
+          "code": "ENG-20",
+          "index": 919
+        }
+      ]
+    },
+    {
+      "id": "cro",
+      "name": "Croacia",
+      "group": "Grupo L",
+      "stickers": [
+        {
+          "code": "CRO-1",
+          "index": 920,
+          "special": true
+        },
+        {
+          "code": "CRO-2",
+          "index": 921
+        },
+        {
+          "code": "CRO-3",
+          "index": 922
+        },
+        {
+          "code": "CRO-4",
+          "index": 923
+        },
+        {
+          "code": "CRO-5",
+          "index": 924
+        },
+        {
+          "code": "CRO-6",
+          "index": 925
+        },
+        {
+          "code": "CRO-7",
+          "index": 926
+        },
+        {
+          "code": "CRO-8",
+          "index": 927
+        },
+        {
+          "code": "CRO-9",
+          "index": 928
+        },
+        {
+          "code": "CRO-10",
+          "index": 929
+        },
+        {
+          "code": "CRO-11",
+          "index": 930
+        },
+        {
+          "code": "CRO-12",
+          "index": 931
+        },
+        {
+          "code": "CRO-13",
+          "index": 932
+        },
+        {
+          "code": "CRO-14",
+          "index": 933
+        },
+        {
+          "code": "CRO-15",
+          "index": 934
+        },
+        {
+          "code": "CRO-16",
+          "index": 935
+        },
+        {
+          "code": "CRO-17",
+          "index": 936
+        },
+        {
+          "code": "CRO-18",
+          "index": 937
+        },
+        {
+          "code": "CRO-19",
+          "index": 938
+        },
+        {
+          "code": "CRO-20",
+          "index": 939
+        }
+      ]
+    },
+    {
+      "id": "gha",
+      "name": "Ghana",
+      "group": "Grupo L",
+      "stickers": [
+        {
+          "code": "GHA-1",
+          "index": 940,
+          "special": true
+        },
+        {
+          "code": "GHA-2",
+          "index": 941
+        },
+        {
+          "code": "GHA-3",
+          "index": 942
+        },
+        {
+          "code": "GHA-4",
+          "index": 943
+        },
+        {
+          "code": "GHA-5",
+          "index": 944
+        },
+        {
+          "code": "GHA-6",
+          "index": 945
+        },
+        {
+          "code": "GHA-7",
+          "index": 946
+        },
+        {
+          "code": "GHA-8",
+          "index": 947
+        },
+        {
+          "code": "GHA-9",
+          "index": 948
+        },
+        {
+          "code": "GHA-10",
+          "index": 949
+        },
+        {
+          "code": "GHA-11",
+          "index": 950
+        },
+        {
+          "code": "GHA-12",
+          "index": 951
+        },
+        {
+          "code": "GHA-13",
+          "index": 952
+        },
+        {
+          "code": "GHA-14",
+          "index": 953
+        },
+        {
+          "code": "GHA-15",
+          "index": 954
+        },
+        {
+          "code": "GHA-16",
+          "index": 955
+        },
+        {
+          "code": "GHA-17",
+          "index": 956
+        },
+        {
+          "code": "GHA-18",
+          "index": 957
+        },
+        {
+          "code": "GHA-19",
+          "index": 958
+        },
+        {
+          "code": "GHA-20",
+          "index": 959
+        }
+      ]
+    },
+    {
+      "id": "pan",
+      "name": "Panamá",
+      "group": "Grupo L",
+      "stickers": [
+        {
+          "code": "PAN-1",
+          "index": 960,
+          "special": true
+        },
+        {
+          "code": "PAN-2",
+          "index": 961
+        },
+        {
+          "code": "PAN-3",
+          "index": 962
+        },
+        {
+          "code": "PAN-4",
+          "index": 963
+        },
+        {
+          "code": "PAN-5",
+          "index": 964
+        },
+        {
+          "code": "PAN-6",
+          "index": 965
+        },
+        {
+          "code": "PAN-7",
+          "index": 966
+        },
+        {
+          "code": "PAN-8",
+          "index": 967
+        },
+        {
+          "code": "PAN-9",
+          "index": 968
+        },
+        {
+          "code": "PAN-10",
+          "index": 969
+        },
+        {
+          "code": "PAN-11",
+          "index": 970
+        },
+        {
+          "code": "PAN-12",
+          "index": 971
+        },
+        {
+          "code": "PAN-13",
+          "index": 972
+        },
+        {
+          "code": "PAN-14",
+          "index": 973
+        },
+        {
+          "code": "PAN-15",
+          "index": 974
+        },
+        {
+          "code": "PAN-16",
+          "index": 975
+        },
+        {
+          "code": "PAN-17",
+          "index": 976
+        },
+        {
+          "code": "PAN-18",
+          "index": 977
+        },
+        {
+          "code": "PAN-19",
+          "index": 978
+        },
+        {
+          "code": "PAN-20",
+          "index": 979
+        }
       ]
     }
   ]
