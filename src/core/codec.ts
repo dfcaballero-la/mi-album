@@ -73,12 +73,12 @@ export async function decodeCollection(
 
 // ---------- helpers ----------
 
-async function compress(data: Uint8Array): Promise<Uint8Array> {
+async function compress(data: Uint8Array<ArrayBuffer>): Promise<Uint8Array<ArrayBuffer>> {
   const stream = new Blob([data]).stream().pipeThrough(new CompressionStream('deflate-raw'));
   return new Uint8Array(await new Response(stream).arrayBuffer());
 }
 
-async function decompress(data: Uint8Array): Promise<Uint8Array> {
+async function decompress(data: Uint8Array<ArrayBuffer>): Promise<Uint8Array<ArrayBuffer>> {
   const stream = new Blob([data]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
   return new Uint8Array(await new Response(stream).arrayBuffer());
 }
@@ -89,7 +89,7 @@ function toBase64Url(bytes: Uint8Array): string {
   return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
-function fromBase64Url(encoded: string): Uint8Array {
+function fromBase64Url(encoded: string): Uint8Array<ArrayBuffer> {
   const base64 = encoded.replace(/-/g, '+').replace(/_/g, '/');
   const binary = atob(base64);
   return Uint8Array.from(binary, (c) => c.charCodeAt(0));

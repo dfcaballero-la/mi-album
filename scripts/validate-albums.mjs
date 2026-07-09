@@ -6,7 +6,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import Ajv from 'ajv';
+import Ajv from 'ajv/dist/2020.js';
 
 const albumsDir = join(dirname(fileURLToPath(import.meta.url)), '..', 'albums');
 const schema = JSON.parse(readFileSync(join(albumsDir, 'album.schema.json'), 'utf8'));
