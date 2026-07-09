@@ -1,0 +1,42 @@
+{
+  "id": "mundial-2026",
+  "name": "Mundial 2026",
+  "year": 2026,
+  "packSize": 5,
+  "version": "0.1.0",
+  "totalStickers": 12,
+  "sections": [
+    {
+      "id": "intro",
+      "name": "Introducción",
+      "stickers": [
+        { "code": "FWC-1", "index": 0, "name": "Trofeo", "special": true },
+        { "code": "FWC-2", "index": 1, "name": "Mascota oficial" },
+        { "code": "FWC-3", "index": 2, "name": "Balón oficial" }
+      ]
+    },
+    {
+      "id": "arg",
+      "name": "Argentina",
+      "group": "Grupo A",
+      "stickers": [
+        { "code": "ARG-1", "index": 3, "name": "Escudo", "special": true },
+        { "code": "ARG-2", "index": 4 },
+        { "code": "ARG-3", "index": 5 },
+        { "code": "ARG-4", "index": 6 },
+        { "code": "ARG-5", "index": 7 }
+      ]
+    },
+    {
+      "id": "chi",
+      "name": "Chile",
+      "group": "Grupo B",
+      "stickers": [
+        { "code": "CHI-1", "index": 8, "name": "Escudo", "special": true },
+        { "code": "CHI-2", "index": 9 },
+        { "code": "CHI-3", "index": 10 },
+        { "code": "CHI-4", "index": 11 }
+      ]
+    }
+  ]
+}
