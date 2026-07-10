@@ -13,6 +13,7 @@
 - [x] Persistencia Dexie + export/import de respaldo (JSON + importador figuritas.app)
 - [x] Estadísticas: % global, % por sección y estimador de sobres
 - [x] PWA: `vite-plugin-pwa` configurado (manifest + service worker autoUpdate), íconos reales generados sin assets externos (`scripts/generate-icons.mjs`); falta medir Lighthouse en producción
+- [x] Selector de álbum en la UI (`src/albums.ts` descubre `albums/*.json` automáticamente vía `import.meta.glob`; se oculta si solo hay uno cargado). Colección y elección de álbum activo persisten por separado en Dexie — listo para que la comunidad sume álbumes solo con un PR de datos
 - [ ] **Hito: Iñaki empieza a usarlo con su álbum real** 🎯
 
 ## Fase 2 — Intercambio (semana 4)

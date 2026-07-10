@@ -46,3 +46,14 @@ export async function setStickerCount(
   collection.updatedAt = new Date().toISOString();
   await db.collections.put(collection);
 }
+
+const ACTIVE_ALBUM_KEY = 'activeAlbumId';
+
+export async function getActiveAlbumId(): Promise<string | undefined> {
+  const row = await db.settings.get(ACTIVE_ALBUM_KEY);
+  return typeof row?.value === 'string' ? row.value : undefined;
+}
+
+export async function setActiveAlbumId(albumId: string): Promise<void> {
+  await db.settings.put({ key: ACTIVE_ALBUM_KEY, value: albumId });
+}

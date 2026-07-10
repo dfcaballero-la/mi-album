@@ -4,20 +4,21 @@
  */
 import { useEffect, useRef, useState } from 'react';
 import type { PointerEvent } from 'react';
-import type { AlbumDefinition, Collection, CollectionStats } from '@core/types';
+import type { Collection, CollectionStats } from '@core/types';
 import { computeStats } from '@core/stats';
 import { parseFiguritas } from '@core/importers/figuritas';
-import { getCollection, setStickerCount } from '@data/db';
+import { getActiveAlbumId, getCollection, setActiveAlbumId, setStickerCount } from '@data/db';
 import { createBackup, downloadBackup, parseBackup, restoreBackup } from '@data/backup';
 import { db } from '@data/db';
 import TradeScreen from './TradeScreen';
-import albumData from '../albums/mundial-2026.json';
+import { albums } from './albums';
 
-const album = albumData as AlbumDefinition;
+const DEFAULT_ALBUM_ID = albums.find((a) => a.id === 'mundial-2026')?.id ?? albums[0]?.id ?? '';
 
 type StickerFilter = 'all' | 'duplicates';
 
 export default function App() {
+  const [albumId, setAlbumId] = useState(DEFAULT_ALBUM_ID);
   const [collection, setCollection] = useState<Collection | null>(null);
   const [stats, setStats] = useState<CollectionStats | null>(null);
   const [filter, setFilter] = useState<StickerFilter>('all');
@@ -27,7 +28,10 @@ export default function App() {
   const longPressTimer = useRef<number | null>(null);
   const longPressTriggered = useRef(false);
 
+  const album = albums.find((a) => a.id === albumId) ?? albums[0];
+
   const refresh = async () => {
+    if (!album) return;
     const c = await getCollection(album.id);
     setCollection(c);
     setStats(computeStats(album, c));
@@ -35,7 +39,27 @@ export default function App() {
 
   useEffect(() => {
     void refresh();
+  }, [albumId]);
+
+  // Restaura el álbum elegido la última vez (si sigue existiendo en el catálogo).
+  useEffect(() => {
+    void (async () => {
+      const saved = await getActiveAlbumId();
+      if (saved && albums.some((a) => a.id === saved)) setAlbumId(saved);
+    })();
   }, []);
+
+  const switchAlbum = async (id: string) => {
+    setCollection(null);
+    setStats(null);
+    setFilter('all');
+    setSearch('');
+    setAlbumId(id);
+    await setActiveAlbumId(id);
+  };
+
+  if (!album) return <main className="p-8">No hay álbumes disponibles.</main>;
+  if (!collection || !stats) return <main className="p-8">Cargando…</main>;
 
   const handleExport = async () => {
     downloadBackup(await createBackup());
@@ -101,8 +125,6 @@ export default function App() {
     void changeSticker(index, e.ctrlKey || e.metaKey ? -1 : 1);
   };
 
-  if (!collection || !stats) return <main className="p-8">Cargando…</main>;
-
   if (showTrade) {
     return (
       <TradeScreen
@@ -147,7 +169,23 @@ export default function App() {
   return (
     <main className="mx-auto max-w-2xl p-4 pb-24">
       <header className="sticky top-0 z-10 -mx-4 bg-slate-50/95 px-4 pb-3 backdrop-blur dark:bg-slate-900/95">
-        <h1 className="pt-4 text-2xl font-bold">{album.name}</h1>
+        <div className="flex items-center gap-2 pt-4">
+          <h1 className="text-2xl font-bold">{album.name}</h1>
+          {albums.length > 1 ? (
+            <select
+              value={album.id}
+              onChange={(e) => void switchAlbum(e.target.value)}
+              aria-label="Elegir álbum"
+              className="rounded-lg border bg-transparent px-2 py-1 text-xs font-medium"
+            >
+              {albums.map((a) => (
+                <option key={a.id} value={a.id}>
+                  {a.name}
+                </option>
+              ))}
+            </select>
+          ) : null}
+        </div>
         <p className="text-sm opacity-70">
           {stats.owned}/{stats.total} · {Math.round(stats.progress * 100)}% ·{' '}
           {stats.duplicates} repetidas · faltan aprox. {stats.packsEstimate.min}–
