@@ -108,6 +108,7 @@ export default function App() {
       <TradeScreen
         album={album}
         collection={collection}
+        stats={stats}
         onClose={() => setShowTrade(false)}
         onTradeApplied={() => void refresh()}
       />

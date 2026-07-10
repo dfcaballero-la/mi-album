@@ -20,6 +20,7 @@
 - [x] Generación y lectura de QR local (`qrcode` + `jsqr`, npm, sin CDN)
 - [x] `trade-matcher` con priorización (especiales, secciones rezagadas)
 - [x] Pantalla de propuesta de trueque bilateral (`src/TradeScreen.tsx`): mostrar/escanear código, ver propuesta, confirmar — actualiza la colección local; requiere que ambos celulares se escaneen mutuamente (sin servidor)
+- [x] Compartir listas de texto (repetidas / faltantes) por WhatsApp/Instagram vía `navigator.share` con fallback a copiar — agrupadas por sección con emoji de bandera (`core/share.ts`, `core/flags.ts`), para gente sin la app instalada
 
 ## Fase 3 — Lanzamiento (semanas 5-6)
 - [ ] Deploy GitHub Pages + dominio

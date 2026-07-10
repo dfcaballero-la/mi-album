@@ -9,16 +9,18 @@
 import { useEffect, useRef, useState } from 'react';
 import QRCode from 'qrcode';
 import jsQR from 'jsqr';
-import type { AlbumDefinition, Collection, TradeProposal } from '@core/types';
+import type { AlbumDefinition, Collection, CollectionStats, TradeProposal } from '@core/types';
 import { decodeCollection, encodeCollection } from '@core/codec';
 import { matchTrade } from '@core/trade-matcher';
+import { formatShareList, type ShareListKind } from '@core/share';
 import { setStickerCount } from '@data/db';
 
-type Step = 'menu' | 'showCode' | 'scan' | 'proposal' | 'done';
+type Step = 'menu' | 'showCode' | 'scan' | 'proposal' | 'done' | 'shareText';
 
 interface Props {
   album: AlbumDefinition;
   collection: Collection;
+  stats: CollectionStats;
   onClose: () => void;
   onTradeApplied: () => void;
 }
@@ -26,12 +28,14 @@ interface Props {
 const buttonClass = 'rounded-lg border px-3 py-1.5 text-sm font-medium';
 const primaryButtonClass = 'rounded-lg border border-sky-500 bg-sky-500/15 px-3 py-1.5 text-sm font-medium';
 
-export default function TradeScreen({ album, collection, onClose, onTradeApplied }: Props) {
+export default function TradeScreen({ album, collection, stats, onClose, onTradeApplied }: Props) {
   const [step, setStep] = useState<Step>('menu');
   const [myCode, setMyCode] = useState('');
   const [pasteValue, setPasteValue] = useState('');
   const [scanError, setScanError] = useState<string | null>(null);
   const [proposal, setProposal] = useState<TradeProposal | null>(null);
+  const [shareText, setShareText] = useState('');
+  const [copied, setCopied] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
@@ -142,7 +146,35 @@ export default function TradeScreen({ album, collection, onClose, onTradeApplied
     setProposal(null);
     setPasteValue('');
     setScanError(null);
+    setShareText('');
+    setCopied(false);
     setStep('menu');
+  };
+
+  // Comparte la lista (repetidas o faltantes) con el share sheet nativo;
+  // si no está disponible o el usuario cancela, muestra el texto para copiar.
+  const startShare = async (kind: ShareListKind) => {
+    const text = formatShareList(album, collection, kind);
+    setShareText(text);
+    setCopied(false);
+    if (navigator.share) {
+      try {
+        await navigator.share({ text });
+        return;
+      } catch (error) {
+        if (error instanceof Error && error.name === 'AbortError') return;
+      }
+    }
+    setStep('shareText');
+  };
+
+  const copyShareText = async () => {
+    try {
+      await navigator.clipboard.writeText(shareText);
+      setCopied(true);
+    } catch {
+      // clipboard API no disponible: el texto ya queda seleccionado para copiar a mano
+    }
   };
 
   return (
@@ -165,6 +197,17 @@ export default function TradeScreen({ album, collection, onClose, onTradeApplied
           </button>
           <button onClick={() => setStep('scan')} className={buttonClass}>
             📷 Escanear código de un amigo
+          </button>
+          <hr className="my-1 border-t opacity-30" />
+          <p className="text-sm opacity-70">
+            O mandá una lista de texto por WhatsApp o Instagram para que la otra persona vea qué te
+            puede ofrecer, aunque no tenga la app:
+          </p>
+          <button onClick={() => void startShare('duplicates')} className={buttonClass}>
+            📋 Compartir repetidas ({stats.duplicates})
+          </button>
+          <button onClick={() => void startShare('missing')} className={buttonClass}>
+            📋 Compartir faltantes ({stats.missing})
           </button>
         </div>
       ) : null}
@@ -213,6 +256,26 @@ export default function TradeScreen({ album, collection, onClose, onTradeApplied
             className={[primaryButtonClass, !pasteValue.trim() && 'opacity-50'].filter(Boolean).join(' ')}
           >
             Usar este código
+          </button>
+          <button onClick={reset} className={buttonClass}>
+            Volver
+          </button>
+        </div>
+      ) : null}
+
+      {step === 'shareText' ? (
+        <div className="flex flex-col gap-3">
+          <p className="text-sm opacity-70">
+            Copiá este texto y pegalo en WhatsApp, Instagram o donde quieras.
+          </p>
+          <textarea
+            readOnly
+            value={shareText}
+            className="h-72 w-full rounded-lg border bg-transparent p-2 text-xs"
+            onFocus={(e) => e.currentTarget.select()}
+          />
+          <button onClick={() => void copyShareText()} className={primaryButtonClass}>
+            {copied ? '✅ Copiado' : '📋 Copiar'}
           </button>
           <button onClick={reset} className={buttonClass}>
             Volver
