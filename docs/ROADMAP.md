@@ -25,7 +25,7 @@
 
 ## Fase 3 — Lanzamiento (semanas 5-6)
 - [x] Deploy GitHub Pages — https://dfcaballero-la.github.io/mi-album/ (dominio propio, pendiente)
-- [ ] Lighthouse ≥ 95 en Performance/A11y/PWA
+- [x] Lighthouse en producción (mobile, simulado): Performance 97 · Accessibility 100 · Best Practices 100 · SEO 100 (medido 2026-07-10). La categoría "PWA" ya no existe en Lighthouse — Google la sacó; instalabilidad se verifica por manifest.webmanifest + sw.js, ya confirmados sirviendo bien
 - [x] i18n ES/EN: catálogo puro en `core/i18n.ts`, hook `useLocale` (detecta `navigator.language`, persiste en Dexie), toggle en el header — cubre grilla, intercambio y listas para compartir. README EN pendiente
 - [ ] Release v1.0.0 + post de lanzamiento (LinkedIn, X, dev.to, Show HN)
 - [ ] Issues `good first issue` para nuevos álbumes de la comunidad

@@ -40,11 +40,13 @@ Pendiente de validar con el álbum físico: sección FWC asumida como 00–19; e
 ## Backlog priorizado
 
 1. **README en inglés** — el resto de la doc de usuario sigue solo en español (contenido, no UI).
-2. **Lighthouse ≥95** en producción (Performance/A11y/PWA) — no medido todavía.
-3. **Hito Iñaki**: que empiece a usarlo con su álbum real — el gran pendiente de Fase 1 (no es código).
-4. **Sync opcional multi-dispositivo (v2)**: Supabase con cuentas anónimas; IndexedDB sigue siendo fuente de verdad local, sync como capa opcional (ver ADR-001). Diseñar resolución de conflictos (last-write-wins por lámina con updatedAt).
-5. **Salas de intercambio** (curso/familia): comparar colecciones de un grupo en tiempo real, matching multi-parte (círculos de 3+, problema de asignación — extensión de `trade-matcher`).
-6. **Virtualización real de la grilla** si el rendimiento lo llega a exigir (hoy CSS grid nativo con 980 ítems anda fluido).
+2. **Hito Iñaki**: que empiece a usarlo con su álbum real — el gran pendiente de Fase 1 (no es código; ver nota abajo sobre qué cuenta como "cumplido").
+3. **Sync opcional multi-dispositivo (v2)**: Supabase con cuentas anónimas; IndexedDB sigue siendo fuente de verdad local, sync como capa opcional (ver ADR-001). Diseñar resolución de conflictos (last-write-wins por lámina con updatedAt).
+4. **Salas de intercambio** (curso/familia): comparar colecciones de un grupo en tiempo real, matching multi-parte (círculos de 3+, problema de asignación — extensión de `trade-matcher`).
+5. **Virtualización real de la grilla** si el rendimiento lo llega a exigir (hoy CSS grid nativo con 980 ítems anda fluido).
+6. *(Opcional, no bloqueante)* `unused-javascript` en el audit de Lighthouse marca ~61 KiB sin usar (probablemente de `qrcode`/`jsqr`, cargados siempre aunque el usuario nunca abra Intercambiar) — candidato a lazy-load de `TradeScreen` con `React.lazy` si se quiere afinar el performance score más allá de 97.
+
+**Hito Iñaki — qué cuenta como cumplido:** el BRIEF lo define como "Iñaki gestiona su álbum real sin ayuda durante una semana" (criterio de éxito, no una carga puntual de datos). Cargar su colección real en la URL de producción es el punto de partida correcto, pero el hito en sí requiere uso sostenido e independiente en su propio dispositivo a lo largo de esos días.
 
 ## Trampas conocidas
 
