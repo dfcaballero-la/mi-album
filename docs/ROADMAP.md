@@ -3,7 +3,7 @@
 ## Fase 0 — Fundación (semana 1)
 - [x] Brief técnico, arquitectura y modelo de datos
 - [x] Scaffold del repo: Vite + React + TS strict + Tailwind + Dexie
-- [x] CI: lint, typecheck, tests, validación de schemas, build
+- [x] CI: lint, typecheck, tests (unitarios + e2e con Playwright), validación de schemas, build
 - [x] Definición JSON del Mundial 2026 completa (980 láminas, 49 secciones)
 
 ## Fase 1 — MVP core (semanas 2-3)
@@ -24,7 +24,7 @@
 - [x] Compartir listas de texto (repetidas / faltantes) por WhatsApp/Instagram vía `navigator.share` con fallback a copiar — agrupadas por sección con emoji de bandera (`core/share.ts`, `core/flags.ts`), para gente sin la app instalada
 
 ## Fase 3 — Lanzamiento (semanas 5-6)
-- [ ] Deploy GitHub Pages + dominio
+- [x] Deploy GitHub Pages — https://dfcaballero-la.github.io/mi-album/ (dominio propio, pendiente)
 - [ ] Lighthouse ≥ 95 en Performance/A11y/PWA
 - [ ] i18n EN, README EN
 - [ ] Release v1.0.0 + post de lanzamiento (LinkedIn, X, dev.to, Show HN)

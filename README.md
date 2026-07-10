@@ -24,7 +24,7 @@ Nació de un álbum real: el del Mundial 2026 que lleno junto a mi hijo Iñaki. 
 
 ## Stack
 
-TypeScript · React 18 · Vite · Tailwind CSS · Dexie (IndexedDB) · Vitest · GitHub Actions · GitHub Pages
+TypeScript · React 18 · Vite · Tailwind CSS · Dexie (IndexedDB) · Vitest · Playwright · GitHub Actions · GitHub Pages
 
 Arquitectura local-first: sin backend en el MVP. Sincronización y trading en tiempo real (Supabase) planificados para v2. Ver [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
@@ -42,13 +42,13 @@ Arquitectura local-first: sin backend en el MVP. Sincronización y trading en ti
 
 ```bash
 npm install
+npx playwright install --with-deps chromium  # una vez, para los tests e2e
 npm run dev              # servidor de desarrollo
 npm run test             # tests unitarios (Vitest)
+npm run test:e2e         # tests end-to-end (Playwright, hace su propio build+preview)
 npm run validate:albums  # valida albums/*.json contra el schema
 npm run build             # tsc + vite build
 ```
-
-(`npm run test:e2e` con Playwright está en el `package.json` pero todavía no tiene config ni tests — pendiente.)
 
 Requisitos: Node.js ≥ 20.
 

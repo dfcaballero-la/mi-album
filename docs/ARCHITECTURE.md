@@ -81,12 +81,15 @@ mi-album/
 │   ├── TradeScreen.tsx        # intercambio: QR, escaneo, propuesta, compartir
 │   ├── vite-env.d.ts
 │   └── main.tsx
-├── tests/unit/               # Vitest — core/ al 80%+ (hoy ~99%)
-├── .github/workflows/ci.yml  # lint + typecheck + test + validate + build + deploy
+├── tests/
+│   ├── unit/                 # Vitest — core/ al 80%+ (hoy ~99%)
+│   └── e2e/                  # Playwright — flujos críticos (grilla, trueque, respaldo)
+├── playwright.config.ts      # levanta build+preview en :4173 bajo /mi-album/
+├── .github/workflows/ci.yml  # lint + typecheck + test + validate + build + e2e + deploy
 └── package.json
 ```
 
-`i18n/` sigue planificado para cuando se implemente (ver ROADMAP). `tests/e2e/` con Playwright también está planificado pero no configurado todavía (el script `test:e2e` existe en `package.json` sin tests ni config detrás).
+`i18n/` sigue planificado para cuando se implemente (ver ROADMAP).
 
 ## Flujos críticos
 
