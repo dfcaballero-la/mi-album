@@ -2,22 +2,23 @@
 
 ## Fase 0 — Fundación (semana 1)
 - [x] Brief técnico, arquitectura y modelo de datos
-- [ ] Scaffold del repo: Vite + React + TS strict + Tailwind + Dexie
-- [ ] CI: lint, typecheck, tests, validación de schemas, build
-- [ ] Definición JSON del Mundial 2026 completa
+- [x] Scaffold del repo: Vite + React + TS strict + Tailwind + Dexie
+- [x] CI: lint, typecheck, tests, validación de schemas, build
+- [x] Definición JSON del Mundial 2026 completa (980 láminas, 49 secciones)
 
 ## Fase 1 — MVP core (semanas 2-3)
-- [ ] Grilla de láminas por sección con estados (falta / tengo / repetida ×n)
-- [ ] Persistencia Dexie + export/import de respaldo
-- [ ] Estadísticas: % global, % por sección, estimador de sobres
-- [ ] PWA: manifest, service worker, instalable, offline completo
+- [x] Grilla de láminas por sección con estados (falta / tengo / repetida ×n)
+- [x] Filtro de láminas: todas / solo repetidas
+- [x] Persistencia Dexie + export/import de respaldo (JSON + importador figuritas.app)
+- [x] Estadísticas: % global, % por sección y estimador de sobres
+- [x] PWA: `vite-plugin-pwa` configurado (manifest + service worker autoUpdate), íconos reales generados sin assets externos (`scripts/generate-icons.mjs`); falta medir Lighthouse en producción
 - [ ] **Hito: Iñaki empieza a usarlo con su álbum real** 🎯
 
 ## Fase 2 — Intercambio (semana 4)
-- [ ] Codec compacto (bitset + deflate + base64url) con tests de propiedad
-- [ ] Generación y lectura de QR local
-- [ ] `trade-matcher` con priorización (especiales, secciones rezagadas)
-- [ ] Pantalla de propuesta de trueque bilateral
+- [x] Codec compacto (bitset + deflate + base64url) con tests de propiedad
+- [ ] Generación y lectura de QR local (sin UI todavía)
+- [x] `trade-matcher` con priorización (especiales, secciones rezagadas)
+- [ ] Pantalla de propuesta de trueque bilateral (sin UI todavía)
 
 ## Fase 3 — Lanzamiento (semanas 5-6)
 - [ ] Deploy GitHub Pages + dominio

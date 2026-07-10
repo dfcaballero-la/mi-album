@@ -5,6 +5,7 @@ dev-dist/
 .env
 .env.*
 *.local
+.claude/settings.local.json
 .DS_Store
 playwright-report/
 test-results/

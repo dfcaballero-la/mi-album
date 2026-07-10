@@ -13,9 +13,12 @@ import albumData from '../albums/mundial-2026.json';
 
 const album = albumData as AlbumDefinition;
 
+type StickerFilter = 'all' | 'duplicates';
+
 export default function App() {
   const [collection, setCollection] = useState<Collection | null>(null);
   const [stats, setStats] = useState<CollectionStats | null>(null);
+  const [filter, setFilter] = useState<StickerFilter>('all');
   const fileInput = useRef<HTMLInputElement>(null);
 
   const refresh = async () => {
@@ -102,40 +105,83 @@ export default function App() {
             }}
           />
         </div>
+        <div className="mt-3 flex gap-2" role="group" aria-label="Filtrar láminas">
+          <button
+            onClick={() => setFilter('all')}
+            aria-pressed={filter === 'all'}
+            className={[
+              'rounded-lg border px-3 py-1.5 text-xs font-medium',
+              filter === 'all' && 'border-sky-500 bg-sky-500/15',
+            ]
+              .filter(Boolean)
+              .join(' ')}
+          >
+            Todas
+          </button>
+          <button
+            onClick={() => setFilter('duplicates')}
+            aria-pressed={filter === 'duplicates'}
+            className={[
+              'rounded-lg border px-3 py-1.5 text-xs font-medium',
+              filter === 'duplicates' && 'border-amber-500 bg-amber-500/15',
+            ]
+              .filter(Boolean)
+              .join(' ')}
+          >
+            Solo repetidas ({stats.duplicates})
+          </button>
+        </div>
       </header>
 
-      {album.sections.map((section) => (
-        <section key={section.id} className="mb-6">
-          <h2 className="mb-2 font-semibold">
-            {section.name}
-            {section.group ? <span className="ml-2 text-xs opacity-60">{section.group}</span> : null}
-          </h2>
-          <div className="grid grid-cols-5 gap-2 sm:grid-cols-8">
-            {section.stickers.map((sticker) => {
-              const count = collection.ownedCounts[sticker.index] ?? 0;
-              return (
-                <button
-                  key={sticker.index}
-                  onClick={() => void cycleSticker(sticker.index)}
-                  aria-label={`${sticker.code}: ${count === 0 ? 'no la tengo' : count === 1 ? 'la tengo' : `repetida ×${count - 1}`}`}
-                  className={[
-                    'min-h-11 rounded-lg border p-1 text-xs font-medium transition',
-                    count === 0 && 'border-dashed opacity-50',
-                    count === 1 && 'border-emerald-500 bg-emerald-500/15',
-                    count > 1 && 'border-amber-500 bg-amber-500/15',
-                    sticker.special && 'ring-1 ring-sky-400',
-                  ]
-                    .filter(Boolean)
-                    .join(' ')}
-                >
-                  {sticker.code}
-                  {count > 1 ? <span className="block text-[10px]">+{count - 1}</span> : null}
-                </button>
-              );
-            })}
-          </div>
-        </section>
-      ))}
+      {filter === 'duplicates' && stats.duplicates === 0 ? (
+        <p className="opacity-70">Todavía no tenés láminas repetidas.</p>
+      ) : null}
+
+      {album.sections.map((section, sectionIndex) => {
+        const stickers =
+          filter === 'duplicates'
+            ? section.stickers.filter((sticker) => (collection.ownedCounts[sticker.index] ?? 0) > 1)
+            : section.stickers;
+        if (stickers.length === 0) return null;
+        const sectionStats = stats.bySection[sectionIndex];
+        return (
+          <section key={section.id} className="mb-6">
+            <h2 className="mb-2 font-semibold">
+              {section.name}
+              {section.group ? <span className="ml-2 text-xs opacity-60">{section.group}</span> : null}
+              {sectionStats ? (
+                <span className="ml-2 text-xs font-normal opacity-60">
+                  {sectionStats.owned}/{sectionStats.total} · {Math.round(sectionStats.progress * 100)}%
+                </span>
+              ) : null}
+            </h2>
+            <div className="grid grid-cols-5 gap-2 sm:grid-cols-8">
+              {stickers.map((sticker) => {
+                const count = collection.ownedCounts[sticker.index] ?? 0;
+                return (
+                  <button
+                    key={sticker.index}
+                    onClick={() => void cycleSticker(sticker.index)}
+                    aria-label={`${sticker.code}: ${count === 0 ? 'no la tengo' : count === 1 ? 'la tengo' : `repetida ×${count - 1}`}`}
+                    className={[
+                      'min-h-11 rounded-lg border p-1 text-xs font-medium transition',
+                      count === 0 && 'border-dashed opacity-50',
+                      count === 1 && 'border-emerald-500 bg-emerald-500/15',
+                      count > 1 && 'border-amber-500 bg-amber-500/15',
+                      sticker.special && 'ring-1 ring-sky-400',
+                    ]
+                      .filter(Boolean)
+                      .join(' ')}
+                  >
+                    {sticker.code}
+                    {count > 1 ? <span className="block text-[10px]">+{count - 1}</span> : null}
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+        );
+      })}
     </main>
   );
 }
