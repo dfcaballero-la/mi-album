@@ -10,6 +10,7 @@ import { parseFiguritas } from '@core/importers/figuritas';
 import { getCollection, setStickerCount } from '@data/db';
 import { createBackup, downloadBackup, parseBackup, restoreBackup } from '@data/backup';
 import { db } from '@data/db';
+import TradeScreen from './TradeScreen';
 import albumData from '../albums/mundial-2026.json';
 
 const album = albumData as AlbumDefinition;
@@ -21,6 +22,7 @@ export default function App() {
   const [stats, setStats] = useState<CollectionStats | null>(null);
   const [filter, setFilter] = useState<StickerFilter>('all');
   const [search, setSearch] = useState('');
+  const [showTrade, setShowTrade] = useState(false);
   const fileInput = useRef<HTMLInputElement>(null);
   const longPressTimer = useRef<number | null>(null);
   const longPressTriggered = useRef(false);
@@ -101,6 +103,17 @@ export default function App() {
 
   if (!collection || !stats) return <main className="p-8">Cargando…</main>;
 
+  if (showTrade) {
+    return (
+      <TradeScreen
+        album={album}
+        collection={collection}
+        onClose={() => setShowTrade(false)}
+        onTradeApplied={() => void refresh()}
+      />
+    );
+  }
+
   const query = search.trim().toLowerCase();
   const visibleSections = album.sections
     .map((section, sectionIndex) => {
@@ -140,6 +153,12 @@ export default function App() {
           {stats.packsEstimate.max} sobres
         </p>
         <div className="mt-3 flex gap-2">
+          <button
+            onClick={() => setShowTrade(true)}
+            className="rounded-lg border border-sky-500 bg-sky-500/15 px-3 py-1.5 text-xs font-medium"
+          >
+            🔄 Intercambiar
+          </button>
           <button
             onClick={() => void handleExport()}
             className="rounded-lg border px-3 py-1.5 text-xs font-medium"
