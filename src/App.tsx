@@ -3,6 +3,7 @@
  * Fase 1 del roadmap: Home → grilla del álbum → stats → trade.
  */
 import { useEffect, useRef, useState } from 'react';
+import type { PointerEvent } from 'react';
 import type { AlbumDefinition, Collection, CollectionStats } from '@core/types';
 import { computeStats } from '@core/stats';
 import { parseFiguritas } from '@core/importers/figuritas';
@@ -19,7 +20,10 @@ export default function App() {
   const [collection, setCollection] = useState<Collection | null>(null);
   const [stats, setStats] = useState<CollectionStats | null>(null);
   const [filter, setFilter] = useState<StickerFilter>('all');
+  const [search, setSearch] = useState('');
   const fileInput = useRef<HTMLInputElement>(null);
+  const longPressTimer = useRef<number | null>(null);
+  const longPressTriggered = useRef(false);
 
   const refresh = async () => {
     const c = await getCollection(album.id);
@@ -58,23 +62,78 @@ export default function App() {
     }
   };
 
-  const cycleSticker = async (index: number) => {
+  const changeSticker = async (index: number, delta: 1 | -1) => {
     if (!collection) return;
-    // Ciclo de estados: no la tengo → la tengo → repetida (+1) → ... → reset
     const current = collection.ownedCounts[index] ?? 0;
-    const next = current >= 4 ? 0 : current + 1;
+    const next = Math.max(0, current + delta);
     await setStickerCount(album.id, index, next);
     const updated = await getCollection(album.id);
     setCollection(updated);
     setStats(computeStats(album, updated));
   };
 
+  const clearLongPress = () => {
+    if (longPressTimer.current !== null) {
+      window.clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+  };
+
+  // Mantener presionada una lámina (solo touch) resta una copia — atajo para
+  // corregir repetidas sin recorrer todo el ciclo hacia adelante.
+  const handleStickerPointerDown = (e: PointerEvent<HTMLButtonElement>, index: number) => {
+    if (e.pointerType !== 'touch') return;
+    longPressTriggered.current = false;
+    clearLongPress();
+    longPressTimer.current = window.setTimeout(() => {
+      longPressTriggered.current = true;
+      void changeSticker(index, -1);
+    }, 500);
+  };
+
+  const handleStickerClick = (e: { ctrlKey: boolean; metaKey: boolean }, index: number) => {
+    if (longPressTriggered.current) {
+      longPressTriggered.current = false;
+      return;
+    }
+    void changeSticker(index, e.ctrlKey || e.metaKey ? -1 : 1);
+  };
+
   if (!collection || !stats) return <main className="p-8">Cargando…</main>;
+
+  const query = search.trim().toLowerCase();
+  const visibleSections = album.sections
+    .map((section, sectionIndex) => {
+      const stickers = section.stickers.filter((sticker) => {
+        if (filter === 'duplicates' && (collection.ownedCounts[sticker.index] ?? 0) <= 1) return false;
+        if (query) {
+          const matchesCode = sticker.code.toLowerCase().includes(query);
+          const matchesName = sticker.name?.toLowerCase().includes(query) ?? false;
+          if (!matchesCode && !matchesName) return false;
+        }
+        return true;
+      });
+      return { section, stickers, sectionStats: stats.bySection[sectionIndex] };
+    })
+    .filter((entry) => entry.stickers.length > 0);
+
+  const jumpToSection = (sectionId: string) => {
+    document.getElementById(`section-${sectionId}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  let emptyMessage: string | null = null;
+  if (visibleSections.length === 0) {
+    if (filter === 'duplicates' && stats.duplicates === 0) {
+      emptyMessage = 'Todavía no tenés láminas repetidas.';
+    } else if (query) {
+      emptyMessage = `No encontramos láminas para «${search.trim()}».`;
+    }
+  }
 
   return (
     <main className="mx-auto max-w-2xl p-4 pb-24">
-      <header className="mb-6">
-        <h1 className="text-2xl font-bold">{album.name}</h1>
+      <header className="sticky top-0 z-10 -mx-4 bg-slate-50/95 px-4 pb-3 backdrop-blur dark:bg-slate-900/95">
+        <h1 className="pt-4 text-2xl font-bold">{album.name}</h1>
         <p className="text-sm opacity-70">
           {stats.owned}/{stats.total} · {Math.round(stats.progress * 100)}% ·{' '}
           {stats.duplicates} repetidas · faltan aprox. {stats.packsEstimate.min}–
@@ -131,21 +190,37 @@ export default function App() {
             Solo repetidas ({stats.duplicates})
           </button>
         </div>
+        <div className="mt-3">
+          <input
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Buscar por código o nombre…"
+            aria-label="Buscar lámina por código o nombre"
+            className="w-full rounded-lg border bg-transparent px-3 py-1.5 text-sm"
+          />
+        </div>
+        <nav
+          aria-label="Saltar a sección"
+          className="mt-3 flex gap-1.5 overflow-x-auto pb-1"
+        >
+          {visibleSections.map(({ section }) => (
+            <button
+              key={section.id}
+              onClick={() => jumpToSection(section.id)}
+              className="shrink-0 rounded-full border px-2.5 py-1 text-[11px] font-medium uppercase opacity-70"
+            >
+              {section.id}
+            </button>
+          ))}
+        </nav>
       </header>
 
-      {filter === 'duplicates' && stats.duplicates === 0 ? (
-        <p className="opacity-70">Todavía no tenés láminas repetidas.</p>
-      ) : null}
+      {emptyMessage ? <p className="mt-4 opacity-70">{emptyMessage}</p> : null}
 
-      {album.sections.map((section, sectionIndex) => {
-        const stickers =
-          filter === 'duplicates'
-            ? section.stickers.filter((sticker) => (collection.ownedCounts[sticker.index] ?? 0) > 1)
-            : section.stickers;
-        if (stickers.length === 0) return null;
-        const sectionStats = stats.bySection[sectionIndex];
+      {visibleSections.map(({ section, stickers, sectionStats }) => {
         return (
-          <section key={section.id} className="mb-6">
+          <section key={section.id} id={`section-${section.id}`} className="mb-6 scroll-mt-64">
             <h2 className="mb-2 font-semibold">
               {section.name}
               {section.group ? <span className="ml-2 text-xs opacity-60">{section.group}</span> : null}
@@ -161,7 +236,12 @@ export default function App() {
                 return (
                   <button
                     key={sticker.index}
-                    onClick={() => void cycleSticker(sticker.index)}
+                    onClick={(e) => handleStickerClick(e, sticker.index)}
+                    onPointerDown={(e) => handleStickerPointerDown(e, sticker.index)}
+                    onPointerUp={clearLongPress}
+                    onPointerLeave={clearLongPress}
+                    onContextMenu={(e) => e.preventDefault()}
+                    title="Clic: sumar · Ctrl/Cmd+clic o mantener presionada: restar"
                     aria-label={`${sticker.code}: ${count === 0 ? 'no la tengo' : count === 1 ? 'la tengo' : `repetida ×${count - 1}`}`}
                     className={[
                       'min-h-11 rounded-lg border p-1 text-xs font-medium transition',

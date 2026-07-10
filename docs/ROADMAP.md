@@ -9,6 +9,7 @@
 ## Fase 1 — MVP core (semanas 2-3)
 - [x] Grilla de láminas por sección con estados (falta / tengo / repetida ×n)
 - [x] Filtro de láminas: todas / solo repetidas
+- [x] UX de grilla grande: buscador por código/nombre, chips de salto rápido a sección, header sticky con progreso (virtualización real queda pendiente si el rendimiento lo exige)
 - [x] Persistencia Dexie + export/import de respaldo (JSON + importador figuritas.app)
 - [x] Estadísticas: % global, % por sección y estimador de sobres
 - [x] PWA: `vite-plugin-pwa` configurado (manifest + service worker autoUpdate), íconos reales generados sin assets externos (`scripts/generate-icons.mjs`); falta medir Lighthouse en producción
