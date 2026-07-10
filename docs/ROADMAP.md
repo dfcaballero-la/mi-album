@@ -26,7 +26,7 @@
 ## Fase 3 — Lanzamiento (semanas 5-6)
 - [x] Deploy GitHub Pages — https://dfcaballero-la.github.io/mi-album/ (dominio propio, pendiente)
 - [ ] Lighthouse ≥ 95 en Performance/A11y/PWA
-- [ ] i18n EN, README EN
+- [x] i18n ES/EN: catálogo puro en `core/i18n.ts`, hook `useLocale` (detecta `navigator.language`, persiste en Dexie), toggle en el header — cubre grilla, intercambio y listas para compartir. README EN pendiente
 - [ ] Release v1.0.0 + post de lanzamiento (LinkedIn, X, dev.to, Show HN)
 - [ ] Issues `good first issue` para nuevos álbumes de la comunidad
 

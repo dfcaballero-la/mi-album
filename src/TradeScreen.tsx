@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from 'react';
 import QRCode from 'qrcode';
 import jsQR from 'jsqr';
 import type { AlbumDefinition, Collection, CollectionStats, TradeProposal } from '@core/types';
+import type { Locale, Translations } from '@core/i18n';
 import { decodeCollection, encodeCollection } from '@core/codec';
 import { matchTrade } from '@core/trade-matcher';
 import { formatShareList, type ShareListKind } from '@core/share';
@@ -21,6 +22,8 @@ interface Props {
   album: AlbumDefinition;
   collection: Collection;
   stats: CollectionStats;
+  locale: Locale;
+  t: Translations;
   onClose: () => void;
   onTradeApplied: () => void;
 }
@@ -28,7 +31,7 @@ interface Props {
 const buttonClass = 'rounded-lg border px-3 py-1.5 text-sm font-medium';
 const primaryButtonClass = 'rounded-lg border border-sky-500 bg-sky-500/15 px-3 py-1.5 text-sm font-medium';
 
-export default function TradeScreen({ album, collection, stats, onClose, onTradeApplied }: Props) {
+export default function TradeScreen({ album, collection, stats, locale, t, onClose, onTradeApplied }: Props) {
   const [step, setStep] = useState<Step>('menu');
   const [myCode, setMyCode] = useState('');
   const [pasteValue, setPasteValue] = useState('');
@@ -66,7 +69,7 @@ export default function TradeScreen({ album, collection, stats, onClose, onTrade
       setProposal(matchTrade(album, collection, decoded));
       setStep('proposal');
     } catch (error) {
-      setScanError(error instanceof Error ? error.message : 'Código inválido.');
+      setScanError(error instanceof Error ? error.message : t.trade.invalidCode);
     }
   };
 
@@ -119,7 +122,7 @@ export default function TradeScreen({ album, collection, stats, onClose, onTrade
         }
         rafRef.current = requestAnimationFrame(tick);
       } catch {
-        if (active) setScanError('No se pudo acceder a la cámara. Pegá el código manualmente.');
+        if (active) setScanError(t.trade.cameraError);
       }
     })();
 
@@ -154,7 +157,7 @@ export default function TradeScreen({ album, collection, stats, onClose, onTrade
   // Comparte la lista (repetidas o faltantes) con el share sheet nativo;
   // si no está disponible o el usuario cancela, muestra el texto para copiar.
   const startShare = async (kind: ShareListKind) => {
-    const text = formatShareList(album, collection, kind);
+    const text = formatShareList(album, collection, kind, locale);
     setShareText(text);
     setCopied(false);
     if (navigator.share) {
@@ -180,49 +183,38 @@ export default function TradeScreen({ album, collection, stats, onClose, onTrade
   return (
     <div className="mx-auto max-w-2xl p-4 pb-24">
       <div className="mb-4 flex items-center justify-between">
-        <h1 className="text-xl font-bold">🔄 Intercambiar</h1>
+        <h1 className="text-xl font-bold">{t.trade.title}</h1>
         <button onClick={onClose} className={buttonClass}>
-          ✕ Cerrar
+          {t.trade.close}
         </button>
       </div>
 
       {step === 'menu' ? (
         <div className="flex flex-col gap-3">
-          <p className="text-sm opacity-70">
-            Sin cuentas ni internet: cada uno escanea el código del otro desde su celular. Para que
-            las dos colecciones queden al día, ambos tienen que escanearse mutuamente.
-          </p>
+          <p className="text-sm opacity-70">{t.trade.menuIntro}</p>
           <button onClick={() => setStep('showCode')} className={primaryButtonClass}>
-            📤 Mostrar mi código
+            {t.trade.showMyCode}
           </button>
           <button onClick={() => setStep('scan')} className={buttonClass}>
-            📷 Escanear código de un amigo
+            {t.trade.scanFriendCode}
           </button>
           <hr className="my-1 border-t opacity-30" />
-          <p className="text-sm opacity-70">
-            O mandá una lista de texto por WhatsApp o Instagram para que la otra persona vea qué te
-            puede ofrecer, aunque no tenga la app:
-          </p>
+          <p className="text-sm opacity-70">{t.trade.shareIntro}</p>
           <button onClick={() => void startShare('duplicates')} className={buttonClass}>
-            📋 Compartir repetidas ({stats.duplicates})
+            {t.trade.shareDuplicates(stats.duplicates)}
           </button>
           <button onClick={() => void startShare('missing')} className={buttonClass}>
-            📋 Compartir faltantes ({stats.missing})
+            {t.trade.shareMissing(stats.missing)}
           </button>
         </div>
       ) : null}
 
       {step === 'showCode' ? (
         <div className="flex flex-col items-center gap-3">
-          <p className="text-sm opacity-70">
-            Mostrale esta pantalla a tu amigo para que la escanee con la opción «Escanear código de
-            un amigo» de su celular.
-          </p>
+          <p className="text-sm opacity-70">{t.trade.showCodeInstructions}</p>
           <canvas ref={canvasRef} className="rounded-lg border" />
           <details className="w-full">
-            <summary className="cursor-pointer text-sm opacity-70">
-              No podés escanear: usar el código como texto
-            </summary>
+            <summary className="cursor-pointer text-sm opacity-70">{t.trade.textFallbackSummary}</summary>
             <textarea
               readOnly
               value={myCode}
@@ -231,7 +223,7 @@ export default function TradeScreen({ album, collection, stats, onClose, onTrade
             />
           </details>
           <button onClick={reset} className={buttonClass}>
-            Volver
+            {t.trade.back}
           </button>
         </div>
       ) : null}
@@ -241,33 +233,31 @@ export default function TradeScreen({ album, collection, stats, onClose, onTrade
           <video ref={videoRef} playsInline muted className="w-full rounded-lg border bg-black" />
           {scanError ? <p className="text-sm text-red-500">{scanError}</p> : null}
           <label className="text-sm opacity-70" htmlFor="trade-paste">
-            O pegá el código que te compartieron:
+            {t.trade.pasteLabel}
           </label>
           <textarea
             id="trade-paste"
             value={pasteValue}
             onChange={(e) => setPasteValue(e.target.value)}
             className="h-24 w-full rounded-lg border bg-transparent p-2 text-xs"
-            placeholder="Pegá acá el código…"
+            placeholder={t.trade.pastePlaceholder}
           />
           <button
             onClick={() => void applyScannedCode(pasteValue)}
             disabled={!pasteValue.trim()}
             className={[primaryButtonClass, !pasteValue.trim() && 'opacity-50'].filter(Boolean).join(' ')}
           >
-            Usar este código
+            {t.trade.useThisCode}
           </button>
           <button onClick={reset} className={buttonClass}>
-            Volver
+            {t.trade.back}
           </button>
         </div>
       ) : null}
 
       {step === 'shareText' ? (
         <div className="flex flex-col gap-3">
-          <p className="text-sm opacity-70">
-            Copiá este texto y pegalo en WhatsApp, Instagram o donde quieras.
-          </p>
+          <p className="text-sm opacity-70">{t.trade.shareTextInstructions}</p>
           <textarea
             readOnly
             value={shareText}
@@ -275,10 +265,10 @@ export default function TradeScreen({ album, collection, stats, onClose, onTrade
             onFocus={(e) => e.currentTarget.select()}
           />
           <button onClick={() => void copyShareText()} className={primaryButtonClass}>
-            {copied ? '✅ Copiado' : '📋 Copiar'}
+            {copied ? t.trade.copied : t.trade.copy}
           </button>
           <button onClick={reset} className={buttonClass}>
-            Volver
+            {t.trade.back}
           </button>
         </div>
       ) : null}
@@ -287,10 +277,10 @@ export default function TradeScreen({ album, collection, stats, onClose, onTrade
         <div className="flex flex-col gap-4">
           <div>
             <h2 className="mb-2 font-semibold text-amber-600 dark:text-amber-400">
-              Vos das ({proposal.aGives.length})
+              {t.trade.youGive(proposal.aGives.length)}
             </h2>
             {proposal.aGives.length === 0 ? (
-              <p className="text-sm opacity-70">No tenés repetidas que a tu amigo le falten.</p>
+              <p className="text-sm opacity-70">{t.trade.noDuplicatesTheyNeed}</p>
             ) : (
               <div className="flex flex-wrap gap-1.5">
                 {proposal.aGives.map((s) => (
@@ -303,10 +293,10 @@ export default function TradeScreen({ album, collection, stats, onClose, onTrade
           </div>
           <div>
             <h2 className="mb-2 font-semibold text-emerald-600 dark:text-emerald-400">
-              Vos recibís ({proposal.bGives.length})
+              {t.trade.youReceive(proposal.bGives.length)}
             </h2>
             {proposal.bGives.length === 0 ? (
-              <p className="text-sm opacity-70">Tu amigo no tiene repetidas que te falten.</p>
+              <p className="text-sm opacity-70">{t.trade.friendHasNothing}</p>
             ) : (
               <div className="flex flex-wrap gap-1.5">
                 {proposal.bGives.map((s) => (
@@ -318,30 +308,27 @@ export default function TradeScreen({ album, collection, stats, onClose, onTrade
             )}
           </div>
           {proposal.aGives.length === 0 ? (
-            <p className="text-sm opacity-70">No hay trueque posible por ahora.</p>
+            <p className="text-sm opacity-70">{t.trade.noTradePossible}</p>
           ) : (
             <button onClick={() => void confirmTrade()} className={primaryButtonClass}>
-              ✅ Confirmar intercambio
+              {t.trade.confirmTrade}
             </button>
           )}
           <button onClick={reset} className={buttonClass}>
-            Cancelar
+            {t.trade.cancel}
           </button>
         </div>
       ) : null}
 
       {step === 'done' ? (
         <div className="flex flex-col gap-3">
-          <p>¡Listo! Tu colección se actualizó.</p>
-          <p className="text-sm opacity-70">
-            Para que la colección de tu amigo también quede al día, ahora mostrale tu código (📤
-            Mostrar mi código) y que la escanee desde su celular.
-          </p>
+          <p>{t.trade.done}</p>
+          <p className="text-sm opacity-70">{t.trade.doneInstructions}</p>
           <button onClick={() => setStep('showCode')} className={primaryButtonClass}>
-            📤 Mostrar mi código
+            {t.trade.showMyCode}
           </button>
           <button onClick={onClose} className={buttonClass}>
-            Volver al álbum
+            {t.trade.backToAlbum}
           </button>
         </div>
       ) : null}

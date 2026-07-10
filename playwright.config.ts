@@ -12,6 +12,10 @@ export default defineConfig({
   use: {
     baseURL: BASE_URL,
     trace: 'on-first-retry',
+    // Los tests asumen el locale por defecto (ES); si no se fija acá, un
+    // Chromium con navigator.language en inglés haría que la app arranque
+    // en EN y rompa las aserciones de texto en español.
+    locale: 'es-AR',
   },
   webServer: {
     command: `npm run build && npm run preview -- --port ${PORT} --strictPort`,

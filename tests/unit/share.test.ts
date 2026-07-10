@@ -52,26 +52,32 @@ describe('flagForSection', () => {
 
 describe('formatShareList', () => {
   it('agrupa las repetidas por sección con su bandera y la cantidad extra', () => {
-    const text = formatShareList(album, collection({ 0: 3, 2: 1 }), 'duplicates');
+    const text = formatShareList(album, collection({ 0: 3, 2: 1 }), 'duplicates', 'es');
     expect(text).toContain('🇦🇷 Argentina: ARG-1 (x2)');
     expect(text).not.toContain('ZZZ');
   });
 
   it('agrupa las faltantes por sección', () => {
-    const text = formatShareList(album, collection({ 0: 1 }), 'missing');
+    const text = formatShareList(album, collection({ 0: 1 }), 'missing', 'es');
     expect(text).toContain('ARG-2');
     expect(text).toContain('ZZZ-1');
     expect(text).toContain('ZZZ-2');
   });
 
   it('avisa cuando no hay repetidas', () => {
-    const text = formatShareList(album, collection({}), 'duplicates');
+    const text = formatShareList(album, collection({}), 'duplicates', 'es');
     expect(text).toContain('Todavía no tengo repetidas');
   });
 
   it('avisa cuando el álbum está completo', () => {
     const full = collection({ 0: 1, 1: 1, 2: 1, 3: 1 });
-    const text = formatShareList(album, full, 'missing');
+    const text = formatShareList(album, full, 'missing', 'es');
     expect(text).toContain('¡Álbum completo!');
+  });
+
+  it('genera el texto en inglés cuando el locale es "en"', () => {
+    const text = formatShareList(album, collection({ 0: 3 }), 'duplicates', 'en');
+    expect(text).toContain('DUPLICATE stickers');
+    expect(text).toContain('Generated with Mi Álbum');
   });
 });

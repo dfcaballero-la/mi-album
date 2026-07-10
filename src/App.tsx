@@ -7,17 +7,20 @@ import type { PointerEvent } from 'react';
 import type { Collection, CollectionStats } from '@core/types';
 import { computeStats } from '@core/stats';
 import { parseFiguritas } from '@core/importers/figuritas';
+import { LOCALES } from '@core/i18n';
 import { getActiveAlbumId, getCollection, setActiveAlbumId, setStickerCount } from '@data/db';
 import { createBackup, downloadBackup, parseBackup, restoreBackup } from '@data/backup';
 import { db } from '@data/db';
 import TradeScreen from './TradeScreen';
 import { albums } from './albums';
+import { useLocale } from './useLocale';
 
 const DEFAULT_ALBUM_ID = albums.find((a) => a.id === 'mundial-2026')?.id ?? albums[0]?.id ?? '';
 
 type StickerFilter = 'all' | 'duplicates';
 
 export default function App() {
+  const { locale, t, setLocale } = useLocale();
   const [albumId, setAlbumId] = useState(DEFAULT_ALBUM_ID);
   const [collection, setCollection] = useState<Collection | null>(null);
   const [stats, setStats] = useState<CollectionStats | null>(null);
@@ -58,8 +61,8 @@ export default function App() {
     await setActiveAlbumId(id);
   };
 
-  if (!album) return <main className="p-8">No hay álbumes disponibles.</main>;
-  if (!collection || !stats) return <main className="p-8">Cargando…</main>;
+  if (!album) return <main className="p-8">{t.common.noAlbums}</main>;
+  if (!collection || !stats) return <main className="p-8">{t.common.loading}</main>;
 
   const handleExport = async () => {
     downloadBackup(await createBackup());
@@ -71,20 +74,26 @@ export default function App() {
       if (file.name.endsWith('.txt') || text.trimStart().startsWith('Figuritas')) {
         // Export de figuritas.app
         const { collection: imported, unmatched } = parseFiguritas(text, album);
-        if (!window.confirm('Esto reemplazará la colección actual con la importada. ¿Continuar?')) return;
+        if (!window.confirm(t.importFlow.confirmFiguritas)) return;
         await db.collections.put(imported);
         if (unmatched.length > 0) {
-          window.alert(`Importado con ${unmatched.length} códigos no reconocidos: ${unmatched.slice(0, 10).join(', ')}${unmatched.length > 10 ? '…' : ''}`);
+          window.alert(
+            t.importFlow.unmatched({
+              count: unmatched.length,
+              codes: unmatched.slice(0, 10).join(', '),
+              truncated: unmatched.length > 10,
+            }),
+          );
         }
       } else {
         // Respaldo JSON de Mi Álbum
         const backup = parseBackup(text);
-        if (!window.confirm('Esto restaurará el respaldo y sobrescribirá la colección actual. ¿Continuar?')) return;
+        if (!window.confirm(t.importFlow.confirmBackup)) return;
         await restoreBackup(backup);
       }
       await refresh();
     } catch (error) {
-      window.alert(`No se pudo importar: ${error instanceof Error ? error.message : 'formato desconocido'}`);
+      window.alert(t.importFlow.error(error instanceof Error ? error.message : t.importFlow.unknownFormat));
     }
   };
 
@@ -131,6 +140,8 @@ export default function App() {
         album={album}
         collection={collection}
         stats={stats}
+        locale={locale}
+        t={t}
         onClose={() => setShowTrade(false)}
         onTradeApplied={() => void refresh()}
       />
@@ -160,55 +171,79 @@ export default function App() {
   let emptyMessage: string | null = null;
   if (visibleSections.length === 0) {
     if (filter === 'duplicates' && stats.duplicates === 0) {
-      emptyMessage = 'Todavía no tenés láminas repetidas.';
+      emptyMessage = t.header.noDuplicatesYet;
     } else if (query) {
-      emptyMessage = `No encontramos láminas para «${search.trim()}».`;
+      emptyMessage = t.header.noResultsFor(search.trim());
     }
   }
 
   return (
     <main className="mx-auto max-w-2xl p-4 pb-24">
       <header className="sticky top-0 z-10 -mx-4 bg-slate-50/95 px-4 pb-3 backdrop-blur dark:bg-slate-900/95">
-        <div className="flex items-center gap-2 pt-4">
-          <h1 className="text-2xl font-bold">{album.name}</h1>
-          {albums.length > 1 ? (
-            <select
-              value={album.id}
-              onChange={(e) => void switchAlbum(e.target.value)}
-              aria-label="Elegir álbum"
-              className="rounded-lg border bg-transparent px-2 py-1 text-xs font-medium"
-            >
-              {albums.map((a) => (
-                <option key={a.id} value={a.id}>
-                  {a.name}
-                </option>
-              ))}
-            </select>
-          ) : null}
+        <div className="flex items-center justify-between gap-2 pt-4">
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-bold">{album.name}</h1>
+            {albums.length > 1 ? (
+              <select
+                value={album.id}
+                onChange={(e) => void switchAlbum(e.target.value)}
+                aria-label={t.header.chooseAlbumLabel}
+                className="rounded-lg border bg-transparent px-2 py-1 text-xs font-medium"
+              >
+                {albums.map((a) => (
+                  <option key={a.id} value={a.id}>
+                    {a.name}
+                  </option>
+                ))}
+              </select>
+            ) : null}
+          </div>
+          <div className="flex gap-1" role="group" aria-label="Idioma / Language">
+            {LOCALES.map((l) => (
+              <button
+                key={l}
+                onClick={() => setLocale(l)}
+                aria-pressed={locale === l}
+                className={[
+                  'rounded-lg border px-2 py-1 text-xs font-medium uppercase',
+                  locale === l && 'border-sky-500 bg-sky-500/15',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
+              >
+                {l}
+              </button>
+            ))}
+          </div>
         </div>
         <p className="text-sm opacity-70">
-          {stats.owned}/{stats.total} · {Math.round(stats.progress * 100)}% ·{' '}
-          {stats.duplicates} repetidas · faltan aprox. {stats.packsEstimate.min}–
-          {stats.packsEstimate.max} sobres
+          {t.header.stats({
+            owned: stats.owned,
+            total: stats.total,
+            progressPct: Math.round(stats.progress * 100),
+            duplicates: stats.duplicates,
+            packsMin: stats.packsEstimate.min,
+            packsMax: stats.packsEstimate.max,
+          })}
         </p>
         <div className="mt-3 flex gap-2">
           <button
             onClick={() => setShowTrade(true)}
             className="rounded-lg border border-sky-500 bg-sky-500/15 px-3 py-1.5 text-xs font-medium"
           >
-            🔄 Intercambiar
+            {t.header.trade}
           </button>
           <button
             onClick={() => void handleExport()}
             className="rounded-lg border px-3 py-1.5 text-xs font-medium"
           >
-            ⬇️ Guardar respaldo
+            {t.header.exportBackup}
           </button>
           <button
             onClick={() => fileInput.current?.click()}
             className="rounded-lg border px-3 py-1.5 text-xs font-medium"
           >
-            ⬆️ Importar (respaldo o figuritas.app)
+            {t.header.importBackup}
           </button>
           <input
             ref={fileInput}
@@ -222,7 +257,7 @@ export default function App() {
             }}
           />
         </div>
-        <div className="mt-3 flex gap-2" role="group" aria-label="Filtrar láminas">
+        <div className="mt-3 flex gap-2" role="group" aria-label={t.header.filterGroupLabel}>
           <button
             onClick={() => setFilter('all')}
             aria-pressed={filter === 'all'}
@@ -233,7 +268,7 @@ export default function App() {
               .filter(Boolean)
               .join(' ')}
           >
-            Todas
+            {t.header.filterAll}
           </button>
           <button
             onClick={() => setFilter('duplicates')}
@@ -245,7 +280,7 @@ export default function App() {
               .filter(Boolean)
               .join(' ')}
           >
-            Solo repetidas ({stats.duplicates})
+            {t.header.filterDuplicates(stats.duplicates)}
           </button>
         </div>
         <div className="mt-3">
@@ -253,15 +288,12 @@ export default function App() {
             type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Buscar por código o nombre…"
-            aria-label="Buscar lámina por código o nombre"
+            placeholder={t.header.searchPlaceholder}
+            aria-label={t.header.searchLabel}
             className="w-full rounded-lg border bg-transparent px-3 py-1.5 text-sm"
           />
         </div>
-        <nav
-          aria-label="Saltar a sección"
-          className="mt-3 flex gap-1.5 overflow-x-auto pb-1"
-        >
+        <nav aria-label={t.header.jumpNavLabel} className="mt-3 flex gap-1.5 overflow-x-auto pb-1">
           {visibleSections.map(({ section }) => (
             <button
               key={section.id}
@@ -284,7 +316,11 @@ export default function App() {
               {section.group ? <span className="ml-2 text-xs opacity-60">{section.group}</span> : null}
               {sectionStats ? (
                 <span className="ml-2 text-xs font-normal opacity-60">
-                  {sectionStats.owned}/{sectionStats.total} · {Math.round(sectionStats.progress * 100)}%
+                  {t.header.sectionStats({
+                    owned: sectionStats.owned,
+                    total: sectionStats.total,
+                    progressPct: Math.round(sectionStats.progress * 100),
+                  })}
                 </span>
               ) : null}
             </h2>
@@ -299,8 +335,8 @@ export default function App() {
                     onPointerUp={clearLongPress}
                     onPointerLeave={clearLongPress}
                     onContextMenu={(e) => e.preventDefault()}
-                    title="Clic: sumar · Ctrl/Cmd+clic o mantener presionada: restar"
-                    aria-label={`${sticker.code}: ${count === 0 ? 'no la tengo' : count === 1 ? 'la tengo' : `repetida ×${count - 1}`}`}
+                    title={t.sticker.tooltip}
+                    aria-label={t.sticker.ariaLabel(sticker.code, count)}
                     className={[
                       'min-h-11 rounded-lg border p-1 text-xs font-medium transition',
                       count === 0 && 'border-dashed opacity-50',

@@ -52,7 +52,7 @@ Aplicación **local-first**: el estado del usuario vive en su dispositivo (Index
 
 ## Estructura de carpetas
 
-Estado real (julio 2026) — `ui/`, `hooks/` e `i18n/` de la sección anterior eran aspiracionales y no se crearon: con el tamaño actual del proyecto, `App.tsx` + `TradeScreen.tsx` alcanzan sin una capa de componentes/hooks separada. Se revisará si el proyecto crece.
+Estado real (julio 2026) — `ui/`, `hooks/` e `i18n/` como carpetas separadas de la sección anterior eran aspiracionales y no se crearon: con el tamaño actual del proyecto, `App.tsx` + `TradeScreen.tsx` alcanzan sin una capa de componentes separada, y el i18n vive como un módulo puro (`core/i18n.ts`) + un hook (`useLocale.ts`) en vez de una carpeta propia. Se revisará si el proyecto crece.
 
 ```
 mi-album/
@@ -72,12 +72,14 @@ mi-album/
 │   │   ├── codec.ts          # serialización compacta para QR/string
 │   │   ├── share.ts          # listas de texto para compartir (WhatsApp, etc.)
 │   │   ├── flags.ts          # emoji de bandera por sección
+│   │   ├── i18n.ts           # catálogo de traducciones ES/EN (solo datos)
 │   │   └── importers/figuritas.ts
 │   ├── data/
 │   │   ├── db.ts             # Dexie: esquema, acceso a IndexedDB, settings
 │   │   └── backup.ts         # export/import JSON (todas las colecciones)
 │   ├── albums.ts             # catálogo: descubre albums/*.json vía import.meta.glob
-│   ├── App.tsx                # shell: grilla, filtros, buscador, selector de álbum
+│   ├── useLocale.ts          # hook: detecta/persiste el idioma activo
+│   ├── App.tsx                # shell: grilla, filtros, buscador, selector de álbum/idioma
 │   ├── TradeScreen.tsx        # intercambio: QR, escaneo, propuesta, compartir
 │   ├── vite-env.d.ts
 │   └── main.tsx
@@ -89,7 +91,7 @@ mi-album/
 └── package.json
 ```
 
-`i18n/` sigue planificado para cuando se implemente (ver ROADMAP).
+i18n implementado sin librería externa: `core/i18n.ts` exporta un catálogo `Record<Locale, Translations>` tipado (ES/EN, TypeScript obliga a que ambos objetos tengan las mismas claves) y `useLocale.ts` decide el idioma activo (persistido en Dexie, si no hay nada guardado detecta `navigator.language`) y expone `t` para consumir en JSX. Cubre toda la UI (`App.tsx`, `TradeScreen.tsx`, `core/share.ts`); las excepciones lanzadas por `core/codec.ts`, `data/backup.ts` y `core/importers/figuritas.ts` siguen en español (ver CLAUDE.md).
 
 ## Flujos críticos
 

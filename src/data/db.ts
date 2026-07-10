@@ -4,6 +4,7 @@
  */
 import Dexie, { type Table } from 'dexie';
 import type { Collection } from '@core/types';
+import { isLocale, type Locale } from '@core/i18n';
 
 export interface Setting {
   key: string;
@@ -56,4 +57,15 @@ export async function getActiveAlbumId(): Promise<string | undefined> {
 
 export async function setActiveAlbumId(albumId: string): Promise<void> {
   await db.settings.put({ key: ACTIVE_ALBUM_KEY, value: albumId });
+}
+
+const LOCALE_KEY = 'locale';
+
+export async function getLocale(): Promise<Locale | undefined> {
+  const row = await db.settings.get(LOCALE_KEY);
+  return typeof row?.value === 'string' && isLocale(row.value) ? row.value : undefined;
+}
+
+export async function setLocale(locale: Locale): Promise<void> {
+  await db.settings.put({ key: LOCALE_KEY, value: locale });
 }

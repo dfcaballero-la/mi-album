@@ -5,6 +5,7 @@
  */
 import type { AlbumDefinition, Collection } from './types';
 import { flagForSection } from './flags';
+import { translations, type Locale } from './i18n';
 
 export type ShareListKind = 'missing' | 'duplicates';
 
@@ -12,7 +13,9 @@ export function formatShareList(
   album: AlbumDefinition,
   collection: Collection,
   kind: ShareListKind,
+  locale: Locale,
 ): string {
+  const t = translations[locale].share;
   const lines: string[] = [];
   let total = 0;
 
@@ -31,14 +34,13 @@ export function formatShareList(
     lines.push(`${flagForSection(section.id)} ${section.name}: ${codes.join(', ')}`);
   }
 
-  const title = kind === 'missing' ? 'Me FALTAN estas láminas' : 'Tengo REPETIDAS estas láminas';
+  const title = kind === 'missing' ? t.missingTitle : t.duplicatesTitle;
   const header = `📋 ${title} — ${album.name} (${total})`;
-  const footer = 'Generado con Mi Álbum 📱 (offline, sin cuentas)';
 
   if (lines.length === 0) {
-    const emptyMessage = kind === 'missing' ? '¡Álbum completo! 🎉' : 'Todavía no tengo repetidas.';
-    return `${header}\n\n${emptyMessage}\n\n${footer}`;
+    const emptyMessage = kind === 'missing' ? t.albumComplete : t.noDuplicates;
+    return `${header}\n\n${emptyMessage}\n\n${t.footer}`;
   }
 
-  return `${header}\n\n${lines.join('\n')}\n\n${footer}`;
+  return `${header}\n\n${lines.join('\n')}\n\n${t.footer}`;
 }
