@@ -41,6 +41,7 @@ describe.each(LOCALES)('translations[%s]', (locale: Locale) => {
 
   it('interpola cantidades en los botones de filtro y compartir', () => {
     expect(t.header.filterDuplicates(4)).toContain('4');
+    expect(t.header.filterMissing(9)).toContain('9');
     expect(t.trade.youGive(2)).toContain('2');
     expect(t.trade.youReceive(0)).toContain('0');
     expect(t.trade.shareDuplicates(7)).toContain('7');

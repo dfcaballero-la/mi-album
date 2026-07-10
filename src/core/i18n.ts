@@ -29,10 +29,12 @@ export interface Translations {
     filterGroupLabel: string;
     filterAll: string;
     filterDuplicates: (count: number) => string;
+    filterMissing: (count: number) => string;
     searchPlaceholder: string;
     searchLabel: string;
     jumpNavLabel: string;
     noDuplicatesYet: string;
+    albumComplete: string;
     noResultsFor: (query: string) => string;
     sectionStats: (a: { owned: number; total: number; progressPct: number }) => string;
   };
@@ -104,10 +106,12 @@ const es: Translations = {
     filterGroupLabel: 'Filtrar láminas',
     filterAll: 'Todas',
     filterDuplicates: (count) => `Solo repetidas (${count})`,
-    searchPlaceholder: 'Buscar por código o nombre…',
-    searchLabel: 'Buscar lámina por código o nombre',
+    filterMissing: (count) => `Faltantes (${count})`,
+    searchPlaceholder: 'Buscar por país, código o nombre…',
+    searchLabel: 'Buscar lámina por país, código o nombre',
     jumpNavLabel: 'Saltar a sección',
     noDuplicatesYet: 'Todavía no tenés láminas repetidas.',
+    albumComplete: '¡Álbum completo! 🎉',
     noResultsFor: (query) => `No encontramos láminas para «${query}».`,
     sectionStats: ({ owned, total, progressPct }) => `${owned}/${total} · ${progressPct}%`,
   },
@@ -188,10 +192,12 @@ const en: Translations = {
     filterGroupLabel: 'Filter stickers',
     filterAll: 'All',
     filterDuplicates: (count) => `Duplicates only (${count})`,
-    searchPlaceholder: 'Search by code or name…',
-    searchLabel: 'Search sticker by code or name',
+    filterMissing: (count) => `Missing (${count})`,
+    searchPlaceholder: 'Search by country, code or name…',
+    searchLabel: 'Search sticker by country, code or name',
     jumpNavLabel: 'Jump to section',
     noDuplicatesYet: "You don't have any duplicates yet.",
+    albumComplete: 'Album complete! 🎉',
     noResultsFor: (query) => `No stickers found for "${query}".`,
     sectionStats: ({ owned, total, progressPct }) => `${owned}/${total} · ${progressPct}%`,
   },

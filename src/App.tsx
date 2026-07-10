@@ -8,6 +8,7 @@ import type { Collection, CollectionStats } from '@core/types';
 import { computeStats } from '@core/stats';
 import { parseFiguritas } from '@core/importers/figuritas';
 import { LOCALES } from '@core/i18n';
+import { localizedGroup, localizedSectionName, normalizeForSearch } from '@core/section-names';
 import { getActiveAlbumId, getCollection, setActiveAlbumId, setStickerCount } from '@data/db';
 import { createBackup, parseBackup, restoreBackup, shareOrDownloadBackup } from '@data/backup';
 import { db } from '@data/db';
@@ -17,7 +18,7 @@ import { useLocale } from './useLocale';
 
 const DEFAULT_ALBUM_ID = albums.find((a) => a.id === 'mundial-2026')?.id ?? albums[0]?.id ?? '';
 
-type StickerFilter = 'all' | 'duplicates';
+type StickerFilter = 'all' | 'duplicates' | 'missing';
 
 export default function App() {
   const { locale, t, setLocale } = useLocale();
@@ -148,19 +149,29 @@ export default function App() {
     );
   }
 
-  const query = search.trim().toLowerCase();
+  const query = normalizeForSearch(search.trim());
   const visibleSections = album.sections
     .map((section, sectionIndex) => {
+      const sectionName = localizedSectionName(section, locale);
+      // Buscar por país muestra la sección entera; matchea el nombre en el
+      // idioma activo, el original del JSON y el id, todo sin tildes.
+      const sectionMatches =
+        query !== '' &&
+        (normalizeForSearch(sectionName).includes(query) ||
+          normalizeForSearch(section.name).includes(query) ||
+          normalizeForSearch(section.id).includes(query));
       const stickers = section.stickers.filter((sticker) => {
-        if (filter === 'duplicates' && (collection.ownedCounts[sticker.index] ?? 0) <= 1) return false;
-        if (query) {
-          const matchesCode = sticker.code.toLowerCase().includes(query);
-          const matchesName = sticker.name?.toLowerCase().includes(query) ?? false;
+        const count = collection.ownedCounts[sticker.index] ?? 0;
+        if (filter === 'duplicates' && count <= 1) return false;
+        if (filter === 'missing' && count !== 0) return false;
+        if (query && !sectionMatches) {
+          const matchesCode = normalizeForSearch(sticker.code).includes(query);
+          const matchesName = sticker.name ? normalizeForSearch(sticker.name).includes(query) : false;
           if (!matchesCode && !matchesName) return false;
         }
         return true;
       });
-      return { section, stickers, sectionStats: stats.bySection[sectionIndex] };
+      return { section, sectionName, stickers, sectionStats: stats.bySection[sectionIndex] };
     })
     .filter((entry) => entry.stickers.length > 0);
 
@@ -172,6 +183,8 @@ export default function App() {
   if (visibleSections.length === 0) {
     if (filter === 'duplicates' && stats.duplicates === 0) {
       emptyMessage = t.header.noDuplicatesYet;
+    } else if (filter === 'missing' && stats.missing === 0) {
+      emptyMessage = t.header.albumComplete;
     } else if (query) {
       emptyMessage = t.header.noResultsFor(search.trim());
     }
@@ -282,6 +295,18 @@ export default function App() {
           >
             {t.header.filterDuplicates(stats.duplicates)}
           </button>
+          <button
+            onClick={() => setFilter('missing')}
+            aria-pressed={filter === 'missing'}
+            className={[
+              'rounded-lg border px-3 py-1.5 text-xs font-medium',
+              filter === 'missing' && 'border-slate-500 bg-slate-500/15',
+            ]
+              .filter(Boolean)
+              .join(' ')}
+          >
+            {t.header.filterMissing(stats.missing)}
+          </button>
         </div>
         <div className="mt-3">
           <input
@@ -308,12 +333,14 @@ export default function App() {
 
       {emptyMessage ? <p className="mt-4 opacity-70">{emptyMessage}</p> : null}
 
-      {visibleSections.map(({ section, stickers, sectionStats }) => {
+      {visibleSections.map(({ section, sectionName, stickers, sectionStats }) => {
         return (
           <section key={section.id} id={`section-${section.id}`} className="mb-6 scroll-mt-64">
             <h2 className="mb-2 font-semibold">
-              {section.name}
-              {section.group ? <span className="ml-2 text-xs opacity-60">{section.group}</span> : null}
+              {sectionName}
+              {section.group ? (
+                <span className="ml-2 text-xs opacity-60">{localizedGroup(section.group, locale)}</span>
+              ) : null}
               {sectionStats ? (
                 <span className="ml-2 text-xs font-normal opacity-60">
                   {t.header.sectionStats({

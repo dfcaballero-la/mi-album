@@ -37,7 +37,32 @@ test('el filtro "solo repetidas" y el buscador acotan la grilla', async ({ page 
   await expect(page.getByRole('button', { name: /^FWC-2:/ })).not.toBeVisible();
 
   await page.getByRole('button', { name: 'Todas' }).click();
-  await page.getByPlaceholder('Buscar por código o nombre…').fill('mex-3');
+  await page.getByPlaceholder('Buscar por país, código o nombre…').fill('mex-3');
   await expect(page.getByRole('button', { name: /^MEX-3:/ })).toBeVisible();
   await expect(page.getByRole('button', { name: /^MEX-1:/ })).not.toBeVisible();
+});
+
+test('el filtro "faltantes" muestra solo lo que falta', async ({ page }) => {
+  const fwc1 = page.getByRole('button', { name: /^FWC-1:/ });
+  await fwc1.click(); // la tengo
+
+  await page.getByRole('button', { name: /Faltantes/ }).click();
+  await expect(fwc1).not.toBeVisible();
+  await expect(page.getByRole('button', { name: /^FWC-2:/ })).toBeVisible();
+  await expect(page.getByText('979', { exact: false }).first()).toBeVisible();
+});
+
+test('la búsqueda encuentra por nombre de país, sin tildes', async ({ page }) => {
+  // "japon" sin tilde tiene que encontrar la sección "Japón" completa.
+  await page.getByPlaceholder('Buscar por país, código o nombre…').fill('japon');
+  await expect(page.getByRole('button', { name: /^JPN-1:/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: /^JPN-20:/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: /^MEX-1:/ })).not.toBeVisible();
+
+  // Y combinada con el filtro de faltantes, acota dentro del país.
+  const jpn1 = page.getByRole('button', { name: /^JPN-1:/ });
+  await jpn1.click(); // la tengo
+  await page.getByRole('button', { name: /Faltantes/ }).click();
+  await expect(jpn1).not.toBeVisible();
+  await expect(page.getByRole('button', { name: /^JPN-2:/ })).toBeVisible();
 });

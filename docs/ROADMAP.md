@@ -8,8 +8,8 @@
 
 ## Fase 1 — MVP core (semanas 2-3)
 - [x] Grilla de láminas por sección con estados (falta / tengo / repetida ×n)
-- [x] Filtro de láminas: todas / solo repetidas
-- [x] UX de grilla grande: buscador por código/nombre, chips de salto rápido a sección, header sticky con progreso (virtualización real queda pendiente si el rendimiento lo exige)
+- [x] Filtro de láminas: todas / solo repetidas / faltantes
+- [x] UX de grilla grande: buscador por país (con o sin tildes, en ambos idiomas), código o nombre; chips de salto rápido a sección; header sticky con progreso (virtualización real queda pendiente si el rendimiento lo exige)
 - [x] Persistencia Dexie + export/import de respaldo (JSON + importador figuritas.app)
 - [x] Traspaso entre dispositivos (compu→iPad): el botón de respaldo comparte el archivo por la hoja nativa del sistema (AirDrop, etc.) vía `navigator.share` con archivos, y cae a la descarga clásica en navegadores sin soporte. Se descartó hacerlo por QR: medido con la colección real, un álbum completo con repetidas no entra en un QR (la librería lo rechaza) — el QR queda para intercambios, donde el payload es chico
 - [x] Estadísticas: % global, % por sección y estimador de sobres
@@ -27,7 +27,7 @@
 ## Fase 3 — Lanzamiento (semanas 5-6)
 - [x] Deploy GitHub Pages — https://dfcaballero-la.github.io/mi-album/ (dominio propio, pendiente)
 - [x] Lighthouse en producción (mobile, simulado): Performance 97 · Accessibility 100 · Best Practices 100 · SEO 100 (medido 2026-07-10). La categoría "PWA" ya no existe en Lighthouse — Google la sacó; instalabilidad se verifica por manifest.webmanifest + sw.js, ya confirmados sirviendo bien
-- [x] i18n ES/EN: catálogo puro en `core/i18n.ts`, hook `useLocale` (detecta `navigator.language`, persiste en Dexie), toggle en el header — cubre grilla, intercambio y listas para compartir. README EN pendiente
+- [x] i18n ES/EN: catálogo puro en `core/i18n.ts`, hook `useLocale` (detecta `navigator.language`, persiste en Dexie), toggle en el header — cubre grilla, intercambio, listas para compartir y nombres de país/grupo (`core/section-names.ts`, con test de invariante que exige nombre EN para cada sección del álbum). README EN pendiente
 - [ ] Release v1.0.0 + post de lanzamiento (LinkedIn, X, dev.to, Show HN)
 - [ ] Issues `good first issue` para nuevos álbumes de la comunidad
 

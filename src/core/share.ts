@@ -5,6 +5,7 @@
  */
 import type { AlbumDefinition, Collection } from './types';
 import { flagForSection } from './flags';
+import { localizedSectionName } from './section-names';
 import { translations, type Locale } from './i18n';
 
 export type ShareListKind = 'missing' | 'duplicates';
@@ -31,7 +32,7 @@ export function formatShareList(
     }
     if (codes.length === 0) continue;
     total += codes.length;
-    lines.push(`${flagForSection(section.id)} ${section.name}: ${codes.join(', ')}`);
+    lines.push(`${flagForSection(section.id)} ${localizedSectionName(section, locale)}: ${codes.join(', ')}`);
   }
 
   const title = kind === 'missing' ? t.missingTitle : t.duplicatesTitle;
