@@ -9,7 +9,7 @@ import { computeStats } from '@core/stats';
 import { parseFiguritas } from '@core/importers/figuritas';
 import { LOCALES } from '@core/i18n';
 import { getActiveAlbumId, getCollection, setActiveAlbumId, setStickerCount } from '@data/db';
-import { createBackup, downloadBackup, parseBackup, restoreBackup } from '@data/backup';
+import { createBackup, parseBackup, restoreBackup, shareOrDownloadBackup } from '@data/backup';
 import { db } from '@data/db';
 import TradeScreen from './TradeScreen';
 import { albums } from './albums';
@@ -65,7 +65,7 @@ export default function App() {
   if (!collection || !stats) return <main className="p-8">{t.common.loading}</main>;
 
   const handleExport = async () => {
-    downloadBackup(await createBackup());
+    await shareOrDownloadBackup(await createBackup());
   };
 
   const handleImportFile = async (file: File) => {

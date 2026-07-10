@@ -25,14 +25,40 @@ export async function createBackup(): Promise<Backup> {
   };
 }
 
+function backupFilename(backup: Backup): string {
+  return `mi-album-respaldo-${backup.exportedAt.slice(0, 10)}.json`;
+}
+
 export function downloadBackup(backup: Backup): void {
   const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = `mi-album-respaldo-${backup.exportedAt.slice(0, 10)}.json`;
+  link.download = backupFilename(backup);
   link.click();
   URL.revokeObjectURL(url);
+}
+
+/**
+ * Comparte el respaldo como archivo por la hoja nativa del sistema
+ * (AirDrop, WhatsApp, Archivos…) donde el navegador lo soporte —
+ * el camino fácil compu→iPad. Si no hay soporte o el usuario cancela
+ * la hoja sin elegir destino, cae a la descarga clásica.
+ */
+export async function shareOrDownloadBackup(backup: Backup): Promise<void> {
+  const file = new File([JSON.stringify(backup, null, 2)], backupFilename(backup), {
+    type: 'application/json',
+  });
+  if (navigator.canShare?.({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file] });
+      return;
+    } catch (error) {
+      // AbortError = el usuario cerró la hoja a propósito; no forzar una descarga encima.
+      if (error instanceof Error && error.name === 'AbortError') return;
+    }
+  }
+  downloadBackup(backup);
 }
 
 export function parseBackup(json: string): Backup {

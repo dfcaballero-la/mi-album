@@ -11,6 +11,7 @@
 - [x] Filtro de láminas: todas / solo repetidas
 - [x] UX de grilla grande: buscador por código/nombre, chips de salto rápido a sección, header sticky con progreso (virtualización real queda pendiente si el rendimiento lo exige)
 - [x] Persistencia Dexie + export/import de respaldo (JSON + importador figuritas.app)
+- [x] Traspaso entre dispositivos (compu→iPad): el botón de respaldo comparte el archivo por la hoja nativa del sistema (AirDrop, etc.) vía `navigator.share` con archivos, y cae a la descarga clásica en navegadores sin soporte. Se descartó hacerlo por QR: medido con la colección real, un álbum completo con repetidas no entra en un QR (la librería lo rechaza) — el QR queda para intercambios, donde el payload es chico
 - [x] Estadísticas: % global, % por sección y estimador de sobres
 - [x] PWA: `vite-plugin-pwa` configurado (manifest + service worker autoUpdate), íconos reales generados sin assets externos (`scripts/generate-icons.mjs`); Lighthouse en producción ver Fase 3
 - [x] Selector de álbum en la UI (`src/albums.ts` descubre `albums/*.json` automáticamente vía `import.meta.glob`; se oculta si solo hay uno cargado). Colección y elección de álbum activo persisten por separado en Dexie — listo para que la comunidad sume álbumes solo con un PR de datos
