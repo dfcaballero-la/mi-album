@@ -12,9 +12,9 @@
 - [x] UX de grilla grande: buscador por código/nombre, chips de salto rápido a sección, header sticky con progreso (virtualización real queda pendiente si el rendimiento lo exige)
 - [x] Persistencia Dexie + export/import de respaldo (JSON + importador figuritas.app)
 - [x] Estadísticas: % global, % por sección y estimador de sobres
-- [x] PWA: `vite-plugin-pwa` configurado (manifest + service worker autoUpdate), íconos reales generados sin assets externos (`scripts/generate-icons.mjs`); falta medir Lighthouse en producción
+- [x] PWA: `vite-plugin-pwa` configurado (manifest + service worker autoUpdate), íconos reales generados sin assets externos (`scripts/generate-icons.mjs`); Lighthouse en producción ver Fase 3
 - [x] Selector de álbum en la UI (`src/albums.ts` descubre `albums/*.json` automáticamente vía `import.meta.glob`; se oculta si solo hay uno cargado). Colección y elección de álbum activo persisten por separado en Dexie — listo para que la comunidad sume álbumes solo con un PR de datos
-- [ ] **Hito: Iñaki empieza a usarlo con su álbum real** 🎯
+- [~] **Hito: Iñaki empieza a usarlo con su álbum real** 🎯 — su colección real ya está cargada en producción (verificado 2026-07-10: 564/980 láminas, 58%, 122 repetidas, progreso desparejo y orgánico entre las 49 secciones — consistente con un álbum físico real, no datos de prueba). Falta el criterio de éxito completo del BRIEF: una semana de uso sostenido e independiente por parte de Iñaki en su propio dispositivo
 
 ## Fase 2 — Intercambio (semana 4)
 - [x] Codec compacto (bitset + deflate + base64url) con tests de propiedad
