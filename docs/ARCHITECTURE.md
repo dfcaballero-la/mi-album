@@ -52,41 +52,48 @@ Aplicación **local-first**: el estado del usuario vive en su dispositivo (Index
 
 ## Estructura de carpetas
 
+Estado real (julio 2026) — `ui/`, `hooks/` e `i18n/` de la sección anterior eran aspiracionales y no se crearon: con el tamaño actual del proyecto, `App.tsx` + `TradeScreen.tsx` alcanzan sin una capa de componentes/hooks separada. Se revisará si el proyecto crece.
+
 ```
 mi-album/
 ├── docs/                    # BRIEF, ARCHITECTURE, DATA_MODEL, ROADMAP
-├── public/                  # estáticos, manifest PWA, iconos
+├── public/icons/            # íconos PWA generados por scripts/generate-icons.mjs
+├── scripts/
+│   ├── validate-albums.mjs  # valida albums/*.json contra el schema
+│   └── generate-icons.mjs   # genera los íconos PWA sin assets externos
 ├── albums/                  # definiciones JSON de álbumes + schema
 │   ├── album.schema.json
 │   └── mundial-2026.json
 ├── src/
-│   ├── core/                # dominio puro (sin React, sin browser APIs)
-│   │   ├── types.ts         # entidades del dominio
-│   │   ├── stats.ts         # progreso, estimador de sobres
-│   │   ├── trade-matcher.ts # algoritmo de intercambio óptimo
-│   │   └── codec.ts         # serialización compacta para QR/string
+│   ├── core/                 # dominio puro (sin React, sin browser APIs)
+│   │   ├── types.ts          # entidades del dominio
+│   │   ├── stats.ts          # progreso, estimador de sobres
+│   │   ├── trade-matcher.ts  # algoritmo de intercambio óptimo
+│   │   ├── codec.ts          # serialización compacta para QR/string
+│   │   ├── share.ts          # listas de texto para compartir (WhatsApp, etc.)
+│   │   ├── flags.ts          # emoji de bandera por sección
+│   │   └── importers/figuritas.ts
 │   ├── data/
-│   │   ├── db.ts            # Dexie: esquema y acceso a IndexedDB
-│   │   └── backup.ts        # export/import JSON
-│   ├── ui/
-│   │   ├── pages/           # Home, Album, Stats, Trade, Settings
-│   │   ├── components/      # StickerGrid, SectionHeader, ProgressRing...
-│   │   └── hooks/           # useAlbum, useCollection, useTrade
-│   ├── i18n/                # es.json, en.json
-│   ├── App.tsx
+│   │   ├── db.ts             # Dexie: esquema, acceso a IndexedDB, settings
+│   │   └── backup.ts         # export/import JSON (todas las colecciones)
+│   ├── albums.ts             # catálogo: descubre albums/*.json vía import.meta.glob
+│   ├── App.tsx                # shell: grilla, filtros, buscador, selector de álbum
+│   ├── TradeScreen.tsx        # intercambio: QR, escaneo, propuesta, compartir
+│   ├── vite-env.d.ts
 │   └── main.tsx
-├── tests/
-│   ├── unit/                # Vitest — core/ al 80%+
-│   └── e2e/                 # Playwright — flujos críticos
-├── .github/workflows/ci.yml # lint + typecheck + test + build + deploy
+├── tests/unit/               # Vitest — core/ al 80%+ (hoy ~99%)
+├── .github/workflows/ci.yml  # lint + typecheck + test + validate + build + deploy
 └── package.json
 ```
 
+`i18n/` sigue planificado para cuando se implemente (ver ROADMAP). `tests/e2e/` con Playwright también está planificado pero no configurado todavía (el script `test:e2e` existe en `package.json` sin tests ni config detrás).
+
 ## Flujos críticos
 
-1. **Marcar lámina:** tap en grilla → actualización optimista de UI → persistencia Dexie → recálculo de stats memoizado. Presupuesto: < 100 ms.
-2. **Intercambio:** Pantalla Trade → "Mi código" (genera QR/string desde codec) → amigo lo importa → `trade-matcher` produce lista bilateral: *"Tú le das: #45, #112… · Él te da: #7, #203…"*.
-3. **Respaldo:** Settings → Export JSON (descarga) / Import JSON (restaura, con confirmación).
+1. **Marcar lámina:** tap en grilla → suma una copia; Ctrl/Cmd+clic (desktop) o mantener presionada (mobile) resta una → persistencia Dexie → recálculo de stats. Presupuesto: < 100 ms.
+2. **Intercambio (QR):** pantalla Intercambiar → "Mostrar mi código" (QR desde `encodeCollection`) → el amigo lo escanea con su cámara (`jsqr`) o pega el string → `trade-matcher` produce la propuesta bilateral → confirmar aplica el trueque a la colección local. Sin servidor: para que ambas colecciones queden al día, los dos celulares se escanean mutuamente.
+3. **Compartir por texto:** misma pantalla → "Compartir repetidas/faltantes" → `formatShareList` arma un texto agrupado por sección con bandera emoji → `navigator.share` (o copiar como fallback) para WhatsApp/Instagram, sin que el destinatario necesite la app.
+4. **Respaldo:** botones en el header → Exportar JSON (descarga todas las colecciones) / Importar (respaldo JSON o export de figuritas.app, con confirmación antes de sobrescribir).
 
 ## Calidad y CI
 

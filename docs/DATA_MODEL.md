@@ -80,19 +80,19 @@ Migraciones versionadas con `db.version(n).stores(...)`. El export de respaldo s
 
 ## 4. Codec de intercambio
 
-Objetivo: representar (faltantes, repetidas) en un string apto para QR (< 2 KB para álbumes de ~1000 láminas).
+Objetivo: representar (poseídas, repetidas) en un string apto para QR (< 2 KB para álbumes de ~1000 láminas). Implementado en `core/codec.ts`.
 
 ```
 payload = {
   a: albumId,
-  v: 1,                      // versión del codec
-  m: bitset(missing),        // 1 bit por lámina
-  d: rle([index, extras])    // repetidas: pares comprimidos
+  v: 1,                        // versión del codec
+  o: bitset(owned),            // 1 bit por lámina, empaquetado en bytes
+  d: [[index, copiasExtra]]    // repetidas: pares [índice, count - 1]
 }
-encoded = base64url( deflate( cbor(payload) ) )
+encoded = base64url( deflate-raw( JSON.stringify(payload) ) )
 ```
 
-Propiedades: sin datos personales (no hay nombre ni ID de usuario), unidireccional, importable offline. El QR se genera y lee localmente.
+`deflate-raw`/`inflate-raw` vía `CompressionStream`/`DecompressionStream` (Node ≥18 y navegadores modernos — es la única excepción documentada a "`core/` sin browser APIs"). Propiedades: sin datos personales (no hay nombre ni ID de usuario), unidireccional, importable offline. El QR se genera con `qrcode` y se lee con `jsqr` (cámara) o pegando el string manualmente — ambas librerías corren localmente, sin CDN.
 
 ## 5. Algoritmo de intercambio (`trade-matcher`)
 

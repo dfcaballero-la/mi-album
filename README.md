@@ -2,7 +2,7 @@
 
 > Gestor open source de colecciones de láminas: registra tu álbum, controla faltantes y repetidas, e intercambia inteligentemente con amigos.
 
-**Estado:** 🏗️ En desarrollo activo · **Licencia:** MIT · **Demo:** _próximamente_
+**Estado:** 🏗️ En desarrollo activo · **Licencia:** MIT · **Demo:** [dfcaballero-la.github.io/mi-album](https://dfcaballero-la.github.io/mi-album/)
 
 ---
 
@@ -14,15 +14,17 @@ Nació de un álbum real: el del Mundial 2026 que lleno junto a mi hijo Iñaki. 
 
 ## Características (MVP)
 
-- ✅ **Tracking completo**: marca láminas obtenidas, faltantes y repetidas con contador.
+- ✅ **Tracking completo**: marca láminas obtenidas, faltantes y repetidas con contador (clic suma, Ctrl/Cmd+clic o mantener presionada resta).
+- 🔍 **Grilla usable con 980+ láminas**: buscador por código/nombre, salto rápido a sección, header con progreso siempre visible, filtro "solo repetidas".
 - 📊 **Estadísticas**: % de avance global y por sección, estimación de sobres restantes.
-- 🔁 **Intercambio inteligente**: compara tu colección con la de un amigo (vía código/QR) y calcula el trueque óptimo.
+- 🔁 **Intercambio con QR**: generá tu código, escaneá el de un amigo con la cámara (o pegalo a mano) y confirmá el trueque óptimo que calcula `trade-matcher` — sin servidor ni cuentas.
+- 💬 **Compartir por WhatsApp/Instagram**: exportá tus repetidas o faltantes como texto (con banderas de país) para gente que no tiene la app instalada.
 - 📱 **PWA offline-first**: funciona sin conexión, instalable en el teléfono, tus datos viven en tu dispositivo.
-- 🗂️ **Álbumes definidos por datos**: cualquier colección se describe en un JSON declarativo — la comunidad puede aportar nuevos álbumes.
+- 🗂️ **Álbumes definidos por datos**: cualquier colección se describe en un JSON declarativo; el selector de álbum aparece solo con sumar un `albums/*.json` — la comunidad puede aportar nuevos álbumes sin tocar código.
 
 ## Stack
 
-TypeScript · React 18 · Vite · Tailwind CSS · Dexie (IndexedDB) · Vitest · Playwright · GitHub Actions · GitHub Pages
+TypeScript · React 18 · Vite · Tailwind CSS · Dexie (IndexedDB) · Vitest · GitHub Actions · GitHub Pages
 
 Arquitectura local-first: sin backend en el MVP. Sincronización y trading en tiempo real (Supabase) planificados para v2. Ver [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
@@ -40,11 +42,13 @@ Arquitectura local-first: sin backend en el MVP. Sincronización y trading en ti
 
 ```bash
 npm install
-npm run dev        # servidor de desarrollo
-npm run test       # tests unitarios (Vitest)
-npm run test:e2e   # tests end-to-end (Playwright)
-npm run build      # build de producción
+npm run dev              # servidor de desarrollo
+npm run test             # tests unitarios (Vitest)
+npm run validate:albums  # valida albums/*.json contra el schema
+npm run build             # tsc + vite build
 ```
+
+(`npm run test:e2e` con Playwright está en el `package.json` pero todavía no tiene config ni tests — pendiente.)
 
 Requisitos: Node.js ≥ 20.
 
