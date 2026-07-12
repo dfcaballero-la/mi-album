@@ -1,6 +1,6 @@
 {
   "name": "mi-album",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Gestor open source de colecciones de láminas: tracking, estadísticas e intercambios inteligentes. Offline-first, sin cuentas, sin trackers.",
   "author": "David Caballero <dfcaballero@gmail.com>",
   "license": "MIT",

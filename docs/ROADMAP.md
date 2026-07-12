@@ -15,7 +15,7 @@
 - [x] Estadísticas: % global, % por sección y estimador de sobres
 - [x] PWA: `vite-plugin-pwa` configurado (manifest + service worker autoUpdate), íconos reales generados sin assets externos (`scripts/generate-icons.mjs`); Lighthouse en producción ver Fase 3
 - [x] Selector de álbum en la UI (`src/albums.ts` descubre `albums/*.json` automáticamente vía `import.meta.glob`; se oculta si solo hay uno cargado). Colección y elección de álbum activo persisten por separado en Dexie — listo para que la comunidad sume álbumes solo con un PR de datos
-- [~] **Hito: Iñaki empieza a usarlo con su álbum real** 🎯 — su colección real ya está cargada en producción (verificado 2026-07-10: 564/980 láminas, 58%, 122 repetidas, progreso desparejo y orgánico entre las 49 secciones — consistente con un álbum físico real, no datos de prueba). Falta el criterio de éxito completo del BRIEF: una semana de uso sostenido e independiente por parte de Iñaki en su propio dispositivo
+- [~] **Hito: Iñaki empieza a usarlo con su álbum real** 🎯 — su colección real está en producción (564/980 al 2026-07-10) y **ya empezó a usarla en su dispositivo** (confirmado 2026-07-12). Corre la semana de uso sostenido e independiente que pide el BRIEF como criterio de éxito
 
 ## Fase 2 — Intercambio (semana 4)
 - [x] Codec compacto (bitset + deflate + base64url) con tests de propiedad
@@ -27,16 +27,30 @@
 ## Fase 3 — Lanzamiento (semanas 5-6)
 - [x] Deploy GitHub Pages — https://dfcaballero-la.github.io/mi-album/ (dominio propio, pendiente)
 - [x] Lighthouse en producción (mobile, simulado): Performance 97 · Accessibility 100 · Best Practices 100 · SEO 100 (medido 2026-07-10). La categoría "PWA" ya no existe en Lighthouse — Google la sacó; instalabilidad se verifica por manifest.webmanifest + sw.js, ya confirmados sirviendo bien
-- [x] i18n ES/EN: catálogo puro en `core/i18n.ts`, hook `useLocale` (detecta `navigator.language`, persiste en Dexie), toggle en el header — cubre grilla, intercambio, listas para compartir y nombres de país/grupo (`core/section-names.ts`, con test de invariante que exige nombre EN para cada sección del álbum). README EN pendiente
-- [ ] Release v1.0.0 + post de lanzamiento (LinkedIn, X, dev.to, Show HN)
+- [x] i18n ES/EN: catálogo puro en `core/i18n.ts`, hook `useLocale` (detecta `navigator.language`, persiste en Dexie), toggle en el header — cubre grilla, intercambio, listas para compartir y nombres de país/grupo (`core/section-names.ts`, con test de invariante que exige nombre EN para cada sección del álbum)
+- [x] README en inglés como default del repo (`README.md`), español preservado en `README.es.md`, con links cruzados
+- [x] Release v1.0.0 (tag + GitHub Release + `CHANGELOG.md`)
+- [ ] Post de lanzamiento (LinkedIn, X, dev.to, Show HN) — lo escribe David
 - [ ] Issues `good first issue` para nuevos álbumes de la comunidad
 
-## v2 — Visión (post-MVP)
-- Sync opcional multi-dispositivo (Supabase, cuentas anónimas)
-- Salas de intercambio en tiempo real (curso, familia)
-- Matching multi-parte (círculos de 3+ coleccionistas)
-- Catálogo comunitario de álbumes con CI de validación
-- Modo "carrera" entre amigos
+## v2 — Plan (post-MVP)
+
+Orden propuesto; cada ítem es una fase entregable por sí sola, manteniendo las reglas de siempre (offline-first, IndexedDB como fuente de verdad, cero fricción para menores):
+
+1. **Sync opcional multi-dispositivo** — Supabase con cuentas anónimas (sin email ni datos personales). IndexedDB sigue siendo la fuente de verdad; el sync es una capa opcional que se activa explícitamente. Conflictos: last-write-wins por lámina usando `updatedAt`. Reemplaza el traspaso manual por AirDrop entre la compu y el iPad.
+2. **Salas de intercambio** (curso, familia) — comparar colecciones de un grupo en tiempo real (Supabase Realtime sobre la misma infra del punto 1) y proponer trueques dentro del grupo.
+3. **Matching multi-parte** — círculos de 3+ coleccionistas (A da a B, B da a C, C da a A) como extensión de `trade-matcher`; es un problema de asignación clásico.
+4. **Catálogo comunitario de álbumes** — la infraestructura ya existe (JSON + schema + CI + selector); falta la comunidad: issues `good first issue`, guía con ejemplos y difusión.
+5. **Modo "carrera"** entre amigos — quién completa primero, respetando privacidad (solo % de avance, nunca la colección detallada).
+
+### App móvil nativa — evaluación (estilo figuritas.app)
+
+**Decisión: no por ahora; reevaluar tras la v2.1 (sync).** Fundamento:
+
+- Lo que una app nativa daría y hoy ya tenemos: instalable con ícono propio (PWA), offline total, cámara para QR (`getUserMedia` funciona en Safari/Chrome), compartir nativo (`navigator.share`). Lighthouse 97/100/100/100 en un CSS grid de 980 ítems — el rendimiento no lo justifica.
+- Lo que sí justificaría el salto: presencia en App Store/Play Store (descubribilidad — el diferenciador real de figuritas.app), notificaciones push (para las salas de intercambio de v2.2), y menos fricción de instalación en iOS (la PWA requiere "Agregar a pantalla de inicio" manual desde Safari).
+- Camino si se decide: **Capacitor** envolviendo esta misma base (cero reescritura, el core puro y la UI React se reutilizan al 100%), nunca una app paralela. Costo real: cuentas de desarrollador (USD 99/año Apple, USD 25 Google), proceso de review, y mantener releases de tienda además del deploy web.
+- Gatillo para reevaluar: si las salas de intercambio (v2.2) necesitan push para ser útiles, o si la fricción de instalación iOS resulta ser una barrera real con usuarios que no son de la familia.
 
 ## Principios de priorización
 1. Lo que Iñaki necesita para su álbum real gana siempre.

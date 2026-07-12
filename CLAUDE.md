@@ -39,14 +39,16 @@ Pendiente de validar con el álbum físico: sección FWC asumida como 00–19; e
 
 ## Backlog priorizado
 
-1. **README en inglés** — el resto de la doc de usuario sigue solo en español (contenido, no UI).
-2. **Hito Iñaki**: que empiece a usarlo con su álbum real — el gran pendiente de Fase 1 (no es código; ver nota abajo sobre qué cuenta como "cumplido").
-3. **Sync opcional multi-dispositivo (v2)**: Supabase con cuentas anónimas; IndexedDB sigue siendo fuente de verdad local, sync como capa opcional (ver ADR-001). Diseñar resolución de conflictos (last-write-wins por lámina con updatedAt).
-4. **Salas de intercambio** (curso/familia): comparar colecciones de un grupo en tiempo real, matching multi-parte (círculos de 3+, problema de asignación — extensión de `trade-matcher`).
+v1.0.0 liberada (2026-07-12, tag + GitHub Release + CHANGELOG.md; README.md en inglés, README.es.md en español). Lo que sigue es la v2 — plan detallado en `docs/ROADMAP.md`:
+
+1. **Sync opcional multi-dispositivo (v2.1)**: Supabase con cuentas anónimas; IndexedDB sigue siendo fuente de verdad local, sync como capa opcional (ver ADR-001). Conflictos: last-write-wins por lámina con updatedAt.
+2. **Salas de intercambio (v2.2)** (curso/familia): comparar colecciones de un grupo en tiempo real, matching multi-parte (círculos de 3+, problema de asignación — extensión de `trade-matcher`).
+3. **Issues `good first issue`** para álbumes de la comunidad + post de lanzamiento (los escribe David).
+4. **App móvil nativa**: evaluada y pospuesta — si se retoma, es Capacitor sobre esta misma base, nunca una app paralela; gatillos de reevaluación documentados en el ROADMAP.
 5. **Virtualización real de la grilla** si el rendimiento lo llega a exigir (hoy CSS grid nativo con 980 ítems anda fluido).
 6. *(Opcional, no bloqueante)* `unused-javascript` en el audit de Lighthouse marca ~61 KiB sin usar (probablemente de `qrcode`/`jsqr`, cargados siempre aunque el usuario nunca abra Intercambiar) — candidato a lazy-load de `TradeScreen` con `React.lazy` si se quiere afinar el performance score más allá de 97.
 
-**Hito Iñaki — qué cuenta como cumplido:** el BRIEF lo define como "Iñaki gestiona su álbum real sin ayuda durante una semana" (criterio de éxito, no una carga puntual de datos). Cargar su colección real en la URL de producción es el punto de partida correcto, pero el hito en sí requiere uso sostenido e independiente en su propio dispositivo a lo largo de esos días.
+**Hito Iñaki:** en curso — ya usa la app con su colección real en su dispositivo (desde 2026-07-12). El BRIEF pide "una semana de uso sostenido e independiente" para darlo por cumplido.
 
 ## Trampas conocidas
 
