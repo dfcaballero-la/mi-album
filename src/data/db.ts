@@ -39,12 +39,18 @@ export async function setStickerCount(
   count: number,
 ): Promise<void> {
   const collection = await getCollection(albumId);
+  const now = new Date().toISOString();
   if (count <= 0) {
     delete collection.ownedCounts[index];
   } else {
     collection.ownedCounts[index] = count;
   }
-  collection.updatedAt = new Date().toISOString();
+  // Timestamp por lámina para el merge de sync (v2). Se registra también al
+  // borrar (count 0): la entrada sin cuenta es un tombstone. Ver core/sync.ts.
+  const stamps = collection.stickerUpdatedAt ?? {};
+  stamps[index] = now;
+  collection.stickerUpdatedAt = stamps;
+  collection.updatedAt = now;
   await db.collections.put(collection);
 }
 

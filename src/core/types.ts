@@ -42,8 +42,17 @@ export interface Collection {
   albumId: string;
   /** index -> número de copias (ausente o 0 = no la tengo). */
   ownedCounts: Record<number, number>;
-  /** ISO-8601. */
+  /** ISO-8601 del último cambio a la colección (nivel colección). */
   updatedAt: string;
+  /**
+   * index -> ISO-8601 del último cambio de ESA lámina. Solo lo usa el merge
+   * de sync (`core/sync.ts`) para last-write-wins por lámina; el resto de la
+   * app lee `ownedCounts`. Una entrada acá cuya lámina NO está en
+   * `ownedCounts` es un "tombstone" (se borró en ese momento), lo que permite
+   * que un borrado se propague al sincronizar. Opcional: las colecciones
+   * creadas antes de v2 no lo tienen y el merge cae a `updatedAt`.
+   */
+  stickerUpdatedAt?: Record<number, string>;
 }
 
 /** Vista derivada de una colección (nunca se persiste). */

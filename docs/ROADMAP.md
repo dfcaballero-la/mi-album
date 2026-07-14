@@ -35,13 +35,28 @@
 
 ## v2 — Plan (post-MVP)
 
-Orden propuesto; cada ítem es una fase entregable por sí sola, manteniendo las reglas de siempre (offline-first, IndexedDB como fuente de verdad, cero fricción para menores):
+Orden propuesto; cada ítem es una fase entregable por sí sola, manteniendo las reglas de siempre (offline-first, IndexedDB como fuente de verdad, cero fricción para menores).
 
-1. **Sync opcional multi-dispositivo** — Supabase con cuentas anónimas (sin email ni datos personales). IndexedDB sigue siendo la fuente de verdad; el sync es una capa opcional que se activa explícitamente. Conflictos: last-write-wins por lámina usando `updatedAt`. Reemplaza el traspaso manual por AirDrop entre la compu y el iPad.
-2. **Salas de intercambio** (curso, familia) — comparar colecciones de un grupo en tiempo real (Supabase Realtime sobre la misma infra del punto 1) y proponer trueques dentro del grupo.
-3. **Matching multi-parte** — círculos de 3+ coleccionistas (A da a B, B da a C, C da a A) como extensión de `trade-matcher`; es un problema de asignación clásico.
-4. **Catálogo comunitario de álbumes** — la infraestructura ya existe (JSON + schema + CI + selector); falta la comunidad: issues `good first issue`, guía con ejemplos y difusión.
-5. **Modo "carrera"** entre amigos — quién completa primero, respetando privacidad (solo % de avance, nunca la colección detallada).
+### v2.1 — Sync opcional multi-dispositivo
+
+Supabase con cuentas anónimas (sin email ni datos personales). IndexedDB sigue siendo la fuente de verdad; el sync es una capa opcional que se activa explícitamente. Reemplaza el traspaso manual por AirDrop entre la compu y el iPad. Sub-pasos:
+
+1. [x] **Merge por lámina (base, sin backend)** — `core/sync.ts` `mergeCollections()`, last-write-wins por lámina con tombstones para propagar borrados; `Collection.stickerUpdatedAt` y `setStickerCount` lo alimentan. Puro y testeado (`tests/unit/sync.test.ts`); sirve para cualquier backend. Ver DATA_MODEL §8.
+2. [ ] **Cliente Supabase + auth anónima** — proyecto Supabase, tabla `collections` (RLS por `auth.uid()`), `signInAnonymously`. Gate: requiere la cuenta/proyecto de David.
+3. [ ] **Pull/push manual** — botón "Sincronizar": baja la copia remota, `mergeCollections` con la local, sube el resultado. Vincular dispositivos por un código corto (el `uid` anónimo compartido por QR, reusando la infra de QR existente).
+4. [ ] **Sync en background** — auto-sync al abrir y tras cada cambio (con debounce); indicador de estado.
+
+### v2.2 — Salas de intercambio (curso, familia)
+
+Comparar colecciones de un grupo en tiempo real (Supabase Realtime sobre la infra de v2.1) y proponer trueques dentro del grupo. Aquí es donde las **notificaciones push** empiezan a tener sentido (ver evaluación de app móvil).
+
+### v2.3 — Matching multi-parte
+
+Círculos de 3+ coleccionistas (A da a B, B da a C, C da a A) como extensión de `trade-matcher`; es un problema de asignación clásico.
+
+### Continuas (sin bloqueo de versión)
+- **Catálogo comunitario de álbumes** — la infraestructura ya existe (JSON + schema + CI + selector); falta la comunidad: issues `good first issue`, guía con ejemplos y difusión.
+- **Modo "carrera"** entre amigos — quién completa primero, respetando privacidad (solo % de avance, nunca la colección detallada).
 
 ### App móvil nativa — evaluación (estilo figuritas.app)
 

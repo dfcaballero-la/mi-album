@@ -32,8 +32,9 @@ interface StickerDef {
 /** Estado del usuario sobre un álbum (mutable, vive en IndexedDB) */
 interface Collection {
   albumId: string;
-  ownedCounts: Record<number, number>; // index -> nº de copias (0 = no la tengo)
-  updatedAt: string;                   // ISO-8601
+  ownedCounts: Record<number, number>;       // index -> nº de copias (0 = no la tengo)
+  updatedAt: string;                          // ISO-8601 (nivel colección)
+  stickerUpdatedAt?: Record<number, string>;  // index -> ISO-8601 por lámina; solo lo usa el merge de sync (v2)
 }
 ```
 
@@ -130,3 +131,15 @@ Se presenta como rango (±20%) con lenguaje honesto: "aprox. 34–50 sobres". Do
 - `totalStickers === Σ |section.stickers|` (validado en CI).
 - `index` es único y contiguo 0..N-1 dentro del álbum (validado en CI).
 - Import de respaldo o payload nunca destruye datos sin confirmación explícita del usuario.
+
+## 8. Merge de sync (`core/sync.ts`, v2)
+
+Base del sync opcional multi-dispositivo. IndexedDB sigue siendo la fuente de verdad local (ADR-001); la capa de sync trae la copia remota y llama a `mergeCollections(local, remote)`, función pura y conmutativa.
+
+**Estrategia — last-write-wins por lámina.** `ownedCounts` es el estado que lee toda la app; `stickerUpdatedAt` (paralelo, solo para el merge) guarda el ISO-8601 del último cambio de cada lámina. Para cada índice presente en cualquiera de las dos copias, gana la que tiene el timestamp más reciente. Esto preserva ediciones concurrentes de láminas distintas — que un LWW por colección perdería.
+
+**Tombstones.** `setStickerCount` registra el timestamp también al borrar (count 0). Una entrada en `stickerUpdatedAt` cuya lámina no está en `ownedCounts` es un tombstone: marca *cuándo* se borró, de modo que el borrado gane a marcas más viejas al sincronizar en vez de "revivir" la lámina.
+
+**Compatibilidad hacia atrás.** Las colecciones creadas antes de v2 no tienen `stickerUpdatedAt`; el merge les atribuye el `updatedAt` de la colección a cada lámina que poseen (y `null`, que pierde, a las que no). Empates exactos de timestamp conservan la cuenta mayor (no perder láminas). El `updatedAt` resultante es el máximo de ambos.
+
+Extensible a v2.2 (salas): un merge multi-colección es aplicar `mergeCollections` en cadena.
