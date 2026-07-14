@@ -125,7 +125,7 @@ const es: Translations = {
   },
   importFlow: {
     confirmFiguritas: 'Esto reemplazará la colección actual con la importada. ¿Continuar?',
-    confirmBackup: 'Esto restaurará el respaldo y sobrescribirá la colección actual. ¿Continuar?',
+    confirmBackup: 'Esto combinará el respaldo con tu colección actual (no se pierde nada; gana lo más reciente por lámina). ¿Continuar?',
     unmatched: ({ count, codes, truncated }) =>
       `Importado con ${count} códigos no reconocidos: ${codes}${truncated ? '…' : ''}`,
     error: (message) => `No se pudo importar: ${message}`,
@@ -211,7 +211,7 @@ const en: Translations = {
   },
   importFlow: {
     confirmFiguritas: 'This will replace your current collection with the imported one. Continue?',
-    confirmBackup: 'This will restore the backup and overwrite your current collection. Continue?',
+    confirmBackup: 'This will merge the backup into your current collection (nothing is lost; newest per sticker wins). Continue?',
     unmatched: ({ count, codes, truncated }) =>
       `Imported with ${count} unrecognized codes: ${codes}${truncated ? '…' : ''}`,
     error: (message) => `Couldn't import: ${message}`,

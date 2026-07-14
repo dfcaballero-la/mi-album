@@ -10,7 +10,7 @@ import { parseFiguritas } from '@core/importers/figuritas';
 import { LOCALES } from '@core/i18n';
 import { localizedGroup, localizedSectionName, normalizeForSearch } from '@core/section-names';
 import { getActiveAlbumId, getCollection, setActiveAlbumId, setStickerCount } from '@data/db';
-import { createBackup, parseBackup, restoreBackup, shareOrDownloadBackup } from '@data/backup';
+import { createBackup, mergeBackup, parseBackup, shareOrDownloadBackup } from '@data/backup';
 import { db } from '@data/db';
 import TradeScreen from './TradeScreen';
 import { albums } from './albums';
@@ -87,10 +87,11 @@ export default function App() {
           );
         }
       } else {
-        // Respaldo JSON de Mi Álbum
+        // Respaldo JSON de Mi Álbum: se FUSIONA con lo local (no sobrescribe),
+        // el camino no destructivo para poner al día dos dispositivos.
         const backup = parseBackup(text);
         if (!window.confirm(t.importFlow.confirmBackup)) return;
-        await restoreBackup(backup);
+        await mergeBackup(backup);
       }
       await refresh();
     } catch (error) {

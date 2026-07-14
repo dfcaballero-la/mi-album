@@ -4,6 +4,7 @@
  * de datos locales (borrado de caché del navegador).
  */
 import type { Collection } from '@core/types';
+import { mergeCollections } from '@core/sync';
 import { db } from './db';
 
 const BACKUP_VERSION = 1;
@@ -72,4 +73,17 @@ export function parseBackup(json: string): Backup {
 /** Restaura las colecciones del respaldo (sobrescribe las existentes). */
 export async function restoreBackup(backup: Backup): Promise<void> {
   await db.collections.bulkPut(backup.collections);
+}
+
+/**
+ * Importa un respaldo fusionándolo con las colecciones locales por álbum
+ * (last-write-wins por lámina, ver `core/sync.ts`) en vez de sobrescribir.
+ * Es el camino no destructivo para poner al día dos dispositivos del mismo
+ * dueño: nunca se pierde lo que ya tenías localmente.
+ */
+export async function mergeBackup(backup: Backup): Promise<void> {
+  for (const incoming of backup.collections) {
+    const local = await db.collections.get(incoming.albumId);
+    await db.collections.put(local ? mergeCollections(local, incoming) : incoming);
+  }
 }

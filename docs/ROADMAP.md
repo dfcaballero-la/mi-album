@@ -42,9 +42,10 @@ Orden propuesto; cada ítem es una fase entregable por sí sola, manteniendo las
 Supabase con cuentas anónimas (sin email ni datos personales). IndexedDB sigue siendo la fuente de verdad; el sync es una capa opcional que se activa explícitamente. Reemplaza el traspaso manual por AirDrop entre la compu y el iPad. Sub-pasos:
 
 1. [x] **Merge por lámina (base, sin backend)** — `core/sync.ts` `mergeCollections()`, last-write-wins por lámina con tombstones para propagar borrados; `Collection.stickerUpdatedAt` y `setStickerCount` lo alimentan. Puro y testeado (`tests/unit/sync.test.ts`); sirve para cualquier backend. Ver DATA_MODEL §8.
-2. [ ] **Cliente Supabase + auth anónima** — proyecto Supabase, tabla `collections` (RLS por `auth.uid()`), `signInAnonymously`. Gate: requiere la cuenta/proyecto de David.
-3. [ ] **Pull/push manual** — botón "Sincronizar": baja la copia remota, `mergeCollections` con la local, sube el resultado. Vincular dispositivos por un código corto (el `uid` anónimo compartido por QR, reusando la infra de QR existente).
-4. [ ] **Sync en background** — auto-sync al abrir y tras cada cambio (con debounce); indicador de estado.
+2. [x] **Importar y fusionar (usa el merge, sin backend)** — importar un respaldo JSON ahora FUSIONA con lo local (`mergeBackup` en `data/backup.ts`) en vez de sobrescribir: pone al día dos dispositivos del mismo dueño sin perder datos. Camino no destructivo compu↔iPad disponible hoy, sin cuentas. Estrena el merge en la app real.
+3. [ ] **Cliente Supabase + auth anónima** — proyecto Supabase, tabla `collections` (RLS por `auth.uid()`), `signInAnonymously`. Gate: requiere la cuenta/proyecto de David.
+4. [ ] **Pull/push manual** — botón "Sincronizar": baja la copia remota, `mergeCollections` con la local, sube el resultado. Vincular dispositivos por un código corto (el `uid` anónimo compartido por QR, reusando la infra de QR existente).
+5. [ ] **Sync en background** — auto-sync al abrir y tras cada cambio (con debounce); indicador de estado.
 
 ### v2.2 — Salas de intercambio (curso, familia)
 

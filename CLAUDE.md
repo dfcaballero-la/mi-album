@@ -41,7 +41,7 @@ Pendiente de validar con el álbum físico: sección FWC asumida como 00–19; e
 
 v1.0.0 liberada (2026-07-12, tag + GitHub Release + CHANGELOG.md; README.md en inglés, README.es.md en español). Lo que sigue es la v2 — plan detallado en `docs/ROADMAP.md`:
 
-1. **Sync opcional multi-dispositivo (v2.1)** — EN CURSO. Base lista: `core/sync.ts` `mergeCollections()` (last-write-wins por lámina + tombstones, puro y testeado; ver DATA_MODEL §8). Falta: cliente Supabase + auth anónima (necesita el proyecto de David), pull/push, y sync en background. Sub-pasos detallados en `docs/ROADMAP.md`.
+1. **Sync opcional multi-dispositivo (v2.1)** — EN CURSO. Listo: `core/sync.ts` `mergeCollections()` (LWW por lámina + tombstones; DATA_MODEL §8) y "importar y fusionar" (`mergeBackup` en `data/backup.ts`: importar respaldo ahora fusiona, no sobrescribe — camino no destructivo compu↔iPad sin cuentas). Falta: cliente Supabase + auth anónima (necesita el proyecto de David), pull/push, y sync en background. Sub-pasos en `docs/ROADMAP.md`.
 2. **Salas de intercambio (v2.2)** (curso/familia): comparar colecciones de un grupo en tiempo real, matching multi-parte (círculos de 3+, problema de asignación — extensión de `trade-matcher`).
 3. **Issues `good first issue`** para álbumes de la comunidad + post de lanzamiento (los escribe David).
 4. **App móvil nativa**: evaluada y pospuesta — si se retoma, es Capacitor sobre esta misma base, nunca una app paralela; gatillos de reevaluación documentados en el ROADMAP.
