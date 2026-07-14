@@ -39,13 +39,18 @@ Orden propuesto; cada ítem es una fase entregable por sí sola, manteniendo las
 
 ### v2.1 — Sync opcional multi-dispositivo
 
-Supabase con cuentas anónimas (sin email ni datos personales). IndexedDB sigue siendo la fuente de verdad; el sync es una capa opcional que se activa explícitamente. Reemplaza el traspaso manual por AirDrop entre la compu y el iPad. Sub-pasos:
+IndexedDB sigue siendo la fuente de verdad; el sync es una capa opcional. Sub-pasos:
 
 1. [x] **Merge por lámina (base, sin backend)** — `core/sync.ts` `mergeCollections()`, last-write-wins por lámina con tombstones para propagar borrados; `Collection.stickerUpdatedAt` y `setStickerCount` lo alimentan. Puro y testeado (`tests/unit/sync.test.ts`); sirve para cualquier backend. Ver DATA_MODEL §8.
 2. [x] **Importar y fusionar (usa el merge, sin backend)** — importar un respaldo JSON ahora FUSIONA con lo local (`mergeBackup` en `data/backup.ts`) en vez de sobrescribir: pone al día dos dispositivos del mismo dueño sin perder datos. Camino no destructivo compu↔iPad disponible hoy, sin cuentas. Estrena el merge en la app real.
-3. [ ] **Cliente Supabase + auth anónima** — proyecto Supabase, tabla `collections` (RLS por `auth.uid()`), `signInAnonymously`. Gate: requiere la cuenta/proyecto de David.
+
+**Sync remoto (Supabase) — POSPUESTO (decidido 2026-07, ver abajo).** Los pasos 3-5 quedan en espera:
+
+3. [ ] **Cliente Supabase + auth anónima** — proyecto Supabase, tabla `collections` (RLS por `auth.uid()`), `signInAnonymously`.
 4. [ ] **Pull/push manual** — botón "Sincronizar": baja la copia remota, `mergeCollections` con la local, sube el resultado. Vincular dispositivos por un código corto (el `uid` anónimo compartido por QR, reusando la infra de QR existente).
 5. [ ] **Sync en background** — auto-sync al abrir y tras cada cambio (con debounce); indicador de estado.
+
+> **Por qué se pospuso el sync remoto:** la organización Supabase de David (TotalBeautyLA) está en plan free, que permite 2 proyectos activos y ya tiene los 2 en uso (`davidcaballerocl`, `Total Beauty LA`). Un proyecto dedicado para mi-album requeriría subir a Pro (~USD 25/mes), y reusar un proyecto existente obligaría a habilitar auth anónima ahí con riesgo para sus otras tablas. Como "importar y fusionar" (paso 2) ya cubre el caso real compu↔iPad sin costo, se decidió no gastar todavía. **Gatillo de reevaluación:** cuando v2.2 (salas de intercambio) haga inevitable un backend — ahí se toma la decisión de Pro una sola vez y se hacen los pasos 3-5 y las salas juntos.
 
 ### v2.2 — Salas de intercambio (curso, familia)
 
