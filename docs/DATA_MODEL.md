@@ -110,7 +110,7 @@ encoded = base64url( deflate-raw( JSON.stringify(payload) ) )
 5. Resultado: n láminas por lado + excedente listado como "extra disponible"
 ```
 
-Complejidad O(N) con sets sobre índices. Extensible en v2 a matching multi-parte (círculos de 3+ coleccionistas → problema de asignación).
+Complejidad O(N) con sets sobre índices. La extensión multi-parte vive en `trade-circles.ts` (ver §9).
 
 ## 6. Estimador de sobres restantes
 
@@ -143,3 +143,23 @@ Base del sync opcional multi-dispositivo. IndexedDB sigue siendo la fuente de ve
 **Compatibilidad hacia atrás.** Las colecciones creadas antes de v2 no tienen `stickerUpdatedAt`; el merge les atribuye el `updatedAt` de la colección a cada lámina que poseen (y `null`, que pierde, a las que no). Empates exactos de timestamp conservan la cuenta mayor (no perder láminas). El `updatedAt` resultante es el máximo de ambos.
 
 Extensible a v2.2 (salas): un merge multi-colección es aplicar `mergeCollections` en cadena.
+
+## 9. Intercambios en círculo (`core/trade-circles.ts`, v2.3)
+
+Extiende el trueque bilateral a **círculos de 3+ personas**: A le da a B, B a C, …, Z le cierra a A. Cada participante entrega una repetida y recibe una que le falta — destraba trueques imposibles de a dos (A tiene lo que B necesita, pero B no tiene nada para A; C cierra el círculo). Emparentado con el *kidney exchange problem*.
+
+**Entrada:** `Participant[]` = `{ id, collection }[]` (todas del mismo álbum). **Salida:** `TradeCircle[]`, cada uno con `steps: { from, to, sticker }[]` en orden cíclico.
+
+```
+1. Grafo dirigido: arista i→j si repetidas(i) ∩ faltantes(j) ≠ ∅.
+   Por arista se elige la MEJOR lámina para j (misma priorización que §5:
+   especiales, luego secciones rezagadas del receptor).
+2. Enumerar ciclos dirigidos simples de largo [minLength..maxLength]
+   (default 3..4) por DFS. Forma canónica: el nodo de menor índice inicia
+   el ciclo → cada círculo se emite una sola vez (sin rotaciones repetidas).
+3. Rankear: primero los más cortos (más fáciles de coordinar cara a cara),
+   luego los que entregan láminas de mayor prioridad. Devolver los mejores
+   `maxResults` (default 20).
+```
+
+Pensado para grupos chicos (curso, familia): la búsqueda es acotada por `maxLength` y una cota dura de candidatos (`CANDIDATE_CAP`). El resultado son *opciones* rankeadas para que las personas elijan y coordinen el intercambio offline (no una asignación auto-ejecutada). Largo 2 se excluye por defecto: eso ya es el trueque bilateral de §5.

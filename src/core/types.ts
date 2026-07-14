@@ -82,3 +82,22 @@ export interface TradeProposal {
   aExtras: StickerDef[];
   bExtras: StickerDef[];
 }
+
+/** Un paso de un círculo de intercambio: `from` le da `sticker` a `to`. */
+export interface TradeCircleStep {
+  /** Id del participante que entrega (tiene la lámina repetida). */
+  from: string;
+  /** Id del participante que recibe (le faltaba esa lámina). */
+  to: string;
+  sticker: StickerDef;
+}
+
+/**
+ * Círculo de intercambio multi-parte (3+ personas): cada uno da una repetida
+ * al siguiente y recibe una que le falta del anterior; el último cierra con
+ * el primero. `steps[i].to === steps[i+1].from` y el último `to` es el primer
+ * `from`. Ver `trade-circles.ts`.
+ */
+export interface TradeCircle {
+  steps: TradeCircleStep[];
+}

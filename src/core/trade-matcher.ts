@@ -7,12 +7,12 @@
  */
 import type { AlbumDefinition, Collection, StickerDef, TradeProposal } from './types';
 
-interface IndexedAlbum {
+export interface IndexedAlbum {
   byIndex: Map<number, StickerDef>;
   sectionOf: Map<number, string>;
 }
 
-function indexAlbum(album: AlbumDefinition): IndexedAlbum {
+export function indexAlbum(album: AlbumDefinition): IndexedAlbum {
   const byIndex = new Map<number, StickerDef>();
   const sectionOf = new Map<number, string>();
   for (const section of album.sections) {
@@ -24,7 +24,7 @@ function indexAlbum(album: AlbumDefinition): IndexedAlbum {
   return { byIndex, sectionOf };
 }
 
-function missingSet(album: AlbumDefinition, c: Collection): Set<number> {
+export function missingSet(album: AlbumDefinition, c: Collection): Set<number> {
   const missing = new Set<number>();
   for (let i = 0; i < album.totalStickers; i++) {
     if ((c.ownedCounts[i] ?? 0) === 0) missing.add(i);
@@ -32,7 +32,7 @@ function missingSet(album: AlbumDefinition, c: Collection): Set<number> {
   return missing;
 }
 
-function duplicateIndices(c: Collection): number[] {
+export function duplicateIndices(c: Collection): number[] {
   return Object.entries(c.ownedCounts)
     .filter(([, count]) => count > 1)
     .map(([index]) => Number(index));
@@ -48,31 +48,42 @@ function sectionProgress(album: AlbumDefinition, c: Collection): Map<string, num
   return progress;
 }
 
+/**
+ * Prioridad (menor = mejor) de darle la lámina `index` al `receiver`:
+ * especiales primero, luego secciones donde el receptor va más atrasado.
+ * Compartida por el matcher bilateral y el de círculos.
+ */
+export function makeStickerRanker(
+  album: AlbumDefinition,
+  indexed: IndexedAlbum,
+  receiver: Collection,
+): (index: number) => number {
+  const progress = sectionProgress(album, receiver);
+  return (index: number): number => {
+    const def = indexed.byIndex.get(index);
+    const sectionScore = progress.get(indexed.sectionOf.get(index) ?? '') ?? 1;
+    return (def?.special ? 0 : 1) * 10 + sectionScore;
+  };
+}
+
 export function matchTrade(
   album: AlbumDefinition,
   a: Collection,
   b: Collection,
 ): TradeProposal {
-  const { byIndex, sectionOf } = indexAlbum(album);
+  const indexed = indexAlbum(album);
+  const { byIndex } = indexed;
   const missingA = missingSet(album, a);
   const missingB = missingSet(album, b);
-
-  const rank = (receiver: Collection) => {
-    const progress = sectionProgress(album, receiver);
-    return (index: number): number => {
-      const def = byIndex.get(index);
-      const sectionScore = progress.get(sectionOf.get(index) ?? '') ?? 1;
-      // Menor score = mayor prioridad: especiales primero, luego secciones rezagadas.
-      return (def?.special ? 0 : 1) * 10 + sectionScore;
-    };
-  };
+  const rankForA = makeStickerRanker(album, indexed, a);
+  const rankForB = makeStickerRanker(album, indexed, b);
 
   const offerA = duplicateIndices(a)
     .filter((i) => missingB.has(i))
-    .sort((x, y) => rank(b)(x) - rank(b)(y));
+    .sort((x, y) => rankForB(x) - rankForB(y));
   const offerB = duplicateIndices(b)
     .filter((i) => missingA.has(i))
-    .sort((x, y) => rank(a)(x) - rank(a)(y));
+    .sort((x, y) => rankForA(x) - rankForA(y));
 
   const n = Math.min(offerA.length, offerB.length);
   const toDefs = (indices: number[]): StickerDef[] =>

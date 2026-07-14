@@ -42,11 +42,12 @@ Pendiente de validar con el álbum físico: sección FWC asumida como 00–19; e
 v1.0.0 liberada (2026-07-12, tag + GitHub Release + CHANGELOG.md; README.md en inglés, README.es.md en español). Lo que sigue es la v2 — plan detallado en `docs/ROADMAP.md`:
 
 1. **Sync opcional multi-dispositivo (v2.1)** — la parte SIN backend está lista y en producción: `core/sync.ts` `mergeCollections()` (LWW por lámina + tombstones; DATA_MODEL §8) y "importar y fusionar" (`mergeBackup` en `data/backup.ts`). El **sync remoto por Supabase está POSPUESTO** (decidido 2026-07): la org free de David ya usa sus 2 proyectos, un dedicado necesitaría Pro (~USD 25/mes), y "importar y fusionar" ya cubre el caso compu↔iPad. Reevaluar cuando v2.2 (salas) haga inevitable el backend. No re-proponer crear el proyecto Supabase sin que David lo pida.
-2. **Salas de intercambio (v2.2)** (curso/familia): comparar colecciones de un grupo en tiempo real, matching multi-parte (círculos de 3+, problema de asignación — extensión de `trade-matcher`).
-3. **Issues `good first issue`** para álbumes de la comunidad + post de lanzamiento (los escribe David).
-4. **App móvil nativa**: evaluada y pospuesta — si se retoma, es Capacitor sobre esta misma base, nunca una app paralela; gatillos de reevaluación documentados en el ROADMAP.
-5. **Virtualización real de la grilla** si el rendimiento lo llega a exigir (hoy CSS grid nativo con 980 ítems anda fluido).
-6. *(Opcional, no bloqueante)* `unused-javascript` en el audit de Lighthouse marca ~61 KiB sin usar (probablemente de `qrcode`/`jsqr`, cargados siempre aunque el usuario nunca abra Intercambiar) — candidato a lazy-load de `TradeScreen` con `React.lazy` si se quiere afinar el performance score más allá de 97.
+2. **Matching multi-parte (v2.3)** — motor listo: `core/trade-circles.ts` `findTradeCircles()` (círculos de 3+, ciclos dirigidos, reusa la priorización del bilateral; DATA_MODEL §9, testeado). Falta la UI de "ronda de intercambio" offline: juntar los códigos del grupo y mostrar los círculos. Diferenciador que figuritas.app no tiene.
+3. **Salas de intercambio (v2.2)** (curso/familia): comparar colecciones de un grupo en tiempo real — necesita backend (gate de Supabase, ver punto 1).
+4. **Issues `good first issue`** para álbumes de la comunidad + post de lanzamiento (los escribe David).
+5. **App móvil nativa**: evaluada y pospuesta — si se retoma, es Capacitor sobre esta misma base, nunca una app paralela; gatillos de reevaluación documentados en el ROADMAP.
+6. **Virtualización real de la grilla** si el rendimiento lo llega a exigir (hoy CSS grid nativo con 980 ítems anda fluido).
+7. *(Opcional, no bloqueante)* `unused-javascript` en el audit de Lighthouse marca ~61 KiB sin usar (probablemente de `qrcode`/`jsqr`, cargados siempre aunque el usuario nunca abra Intercambiar) — candidato a lazy-load de `TradeScreen` con `React.lazy` si se quiere afinar el performance score más allá de 97.
 
 **Hito Iñaki:** en curso — ya usa la app con su colección real en su dispositivo (desde 2026-07-12). El BRIEF pide "una semana de uso sostenido e independiente" para darlo por cumplido.
 

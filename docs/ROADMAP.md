@@ -56,9 +56,13 @@ IndexedDB sigue siendo la fuente de verdad; el sync es una capa opcional. Sub-pa
 
 Comparar colecciones de un grupo en tiempo real (Supabase Realtime sobre la infra de v2.1) y proponer trueques dentro del grupo. Aquí es donde las **notificaciones push** empiezan a tener sentido (ver evaluación de app móvil).
 
-### v2.3 — Matching multi-parte
+### v2.3 — Matching multi-parte (círculos de intercambio)
 
-Círculos de 3+ coleccionistas (A da a B, B da a C, C da a A) como extensión de `trade-matcher`; es un problema de asignación clásico.
+Diferenciador propio (figuritas.app no lo tiene): destraba trueques imposibles de a dos.
+
+1. [x] **Motor de círculos (core, sin UI)** — `core/trade-circles.ts` `findTradeCircles()`: halla ciclos dirigidos de 3+ personas donde cada uno da una repetida y recibe una faltante. Reusa la priorización del bilateral (helpers extraídos y exportados de `trade-matcher.ts`). Puro y testeado (`tests/unit/trade-circles.test.ts`, incluye el caso "bilateralmente imposible pero el círculo cierra"). Ver DATA_MODEL §9.
+2. [ ] **UI "ronda de intercambio" (offline, sin servidor)** — una persona junta los códigos del grupo (escanea/pega varios, reusando la infra de QR/texto existente), la app corre `findTradeCircles` y muestra los círculos rankeados con quién le da qué a quién. Cada uno confirma su parte localmente. No necesita backend: se hace con el grupo presente.
+3. [ ] *(con backend, v2.2)* Círculos en salas en tiempo real.
 
 ### Continuas (sin bloqueo de versión)
 - **Catálogo comunitario de álbumes** — la infraestructura ya existe (JSON + schema + CI + selector); falta la comunidad: issues `good first issue`, guía con ejemplos y difusión.
