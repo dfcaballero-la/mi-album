@@ -8,13 +8,13 @@
  */
 import { useEffect, useRef, useState } from 'react';
 import QRCode from 'qrcode';
-import jsQR from 'jsqr';
 import type { AlbumDefinition, Collection, CollectionStats, TradeProposal } from '@core/types';
 import type { Locale, Translations } from '@core/i18n';
 import { decodeCollection, encodeCollection } from '@core/codec';
 import { matchTrade } from '@core/trade-matcher';
 import { formatShareList, type ShareListKind } from '@core/share';
 import { setStickerCount } from '@data/db';
+import CodeScanner from './CodeScanner';
 
 type Step = 'menu' | 'showCode' | 'scan' | 'proposal' | 'done' | 'shareText';
 
@@ -26,23 +26,28 @@ interface Props {
   t: Translations;
   onClose: () => void;
   onTradeApplied: () => void;
+  onOpenRonda: () => void;
 }
 
 const buttonClass = 'rounded-lg border px-3 py-1.5 text-sm font-medium';
 const primaryButtonClass = 'rounded-lg border border-sky-500 bg-sky-500/15 px-3 py-1.5 text-sm font-medium';
 
-export default function TradeScreen({ album, collection, stats, locale, t, onClose, onTradeApplied }: Props) {
+export default function TradeScreen({
+  album,
+  collection,
+  stats,
+  locale,
+  t,
+  onClose,
+  onTradeApplied,
+  onOpenRonda,
+}: Props) {
   const [step, setStep] = useState<Step>('menu');
   const [myCode, setMyCode] = useState('');
-  const [pasteValue, setPasteValue] = useState('');
-  const [scanError, setScanError] = useState<string | null>(null);
   const [proposal, setProposal] = useState<TradeProposal | null>(null);
   const [shareText, setShareText] = useState('');
   const [copied, setCopied] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const streamRef = useRef<MediaStream | null>(null);
-  const rafRef = useRef<number | null>(null);
 
   // Genera mi código al entrar a "Mostrar mi código".
   useEffect(() => {
@@ -62,75 +67,17 @@ export default function TradeScreen({ album, collection, stats, locale, t, onClo
     void QRCode.toCanvas(canvasRef.current, myCode, { width: 240, margin: 1 });
   }, [step, myCode]);
 
-  const applyScannedCode = async (code: string) => {
-    setScanError(null);
+  // Devuelve un mensaje de error para el escáner, o null si el código sirvió.
+  const applyScannedCode = async (code: string): Promise<string | null> => {
     try {
       const decoded = await decodeCollection(code.trim(), album);
       setProposal(matchTrade(album, collection, decoded));
       setStep('proposal');
+      return null;
     } catch (error) {
-      setScanError(error instanceof Error ? error.message : t.trade.invalidCode);
+      return error instanceof Error ? error.message : t.trade.invalidCode;
     }
   };
-
-  const stopCamera = () => {
-    if (rafRef.current !== null) {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
-    }
-    streamRef.current?.getTracks().forEach((track) => track.stop());
-    streamRef.current = null;
-  };
-
-  // Cámara + loop de escaneo mientras estamos en el paso "scan".
-  useEffect(() => {
-    if (step !== 'scan') return;
-    let active = true;
-    setScanError(null);
-    const scanCanvas = document.createElement('canvas');
-
-    const tick = () => {
-      if (!active) return;
-      const video = videoRef.current;
-      const ctx = scanCanvas.getContext('2d');
-      if (video && ctx && video.readyState === video.HAVE_ENOUGH_DATA) {
-        scanCanvas.width = video.videoWidth;
-        scanCanvas.height = video.videoHeight;
-        ctx.drawImage(video, 0, 0, scanCanvas.width, scanCanvas.height);
-        const imageData = ctx.getImageData(0, 0, scanCanvas.width, scanCanvas.height);
-        const result = jsQR(imageData.data, imageData.width, imageData.height);
-        if (result?.data) {
-          stopCamera();
-          void applyScannedCode(result.data);
-          return;
-        }
-      }
-      rafRef.current = requestAnimationFrame(tick);
-    };
-
-    void (async () => {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
-        if (!active) {
-          stream.getTracks().forEach((track) => track.stop());
-          return;
-        }
-        streamRef.current = stream;
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-          await videoRef.current.play();
-        }
-        rafRef.current = requestAnimationFrame(tick);
-      } catch {
-        if (active) setScanError(t.trade.cameraError);
-      }
-    })();
-
-    return () => {
-      active = false;
-      stopCamera();
-    };
-  }, [step]);
 
   const confirmTrade = async () => {
     if (!proposal) return;
@@ -147,8 +94,6 @@ export default function TradeScreen({ album, collection, stats, locale, t, onClo
 
   const reset = () => {
     setProposal(null);
-    setPasteValue('');
-    setScanError(null);
     setShareText('');
     setCopied(false);
     setStep('menu');
@@ -198,6 +143,9 @@ export default function TradeScreen({ album, collection, stats, locale, t, onClo
           <button onClick={() => setStep('scan')} className={buttonClass}>
             {t.trade.scanFriendCode}
           </button>
+          <button onClick={onOpenRonda} className={buttonClass}>
+            {t.ronda.menuButton}
+          </button>
           <hr className="my-1 border-t opacity-30" />
           <p className="text-sm opacity-70">{t.trade.shareIntro}</p>
           <button onClick={() => void startShare('duplicates')} className={buttonClass}>
@@ -230,25 +178,7 @@ export default function TradeScreen({ album, collection, stats, locale, t, onClo
 
       {step === 'scan' ? (
         <div className="flex flex-col gap-3">
-          <video ref={videoRef} playsInline muted className="w-full rounded-lg border bg-black" />
-          {scanError ? <p className="text-sm text-red-500">{scanError}</p> : null}
-          <label className="text-sm opacity-70" htmlFor="trade-paste">
-            {t.trade.pasteLabel}
-          </label>
-          <textarea
-            id="trade-paste"
-            value={pasteValue}
-            onChange={(e) => setPasteValue(e.target.value)}
-            className="h-24 w-full rounded-lg border bg-transparent p-2 text-xs"
-            placeholder={t.trade.pastePlaceholder}
-          />
-          <button
-            onClick={() => void applyScannedCode(pasteValue)}
-            disabled={!pasteValue.trim()}
-            className={[primaryButtonClass, !pasteValue.trim() && 'opacity-50'].filter(Boolean).join(' ')}
-          >
-            {t.trade.useThisCode}
-          </button>
+          <CodeScanner t={t} onDetected={applyScannedCode} />
           <button onClick={reset} className={buttonClass}>
             {t.trade.back}
           </button>

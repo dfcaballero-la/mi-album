@@ -80,7 +80,9 @@ mi-album/
 │   ├── albums.ts             # catálogo: descubre albums/*.json vía import.meta.glob
 │   ├── useLocale.ts          # hook: detecta/persiste el idioma activo
 │   ├── App.tsx                # shell: grilla, filtros, buscador, selector de álbum/idioma
-│   ├── TradeScreen.tsx        # intercambio: QR, escaneo, propuesta, compartir
+│   ├── TradeScreen.tsx        # intercambio bilateral: QR, escaneo, propuesta, compartir
+│   ├── RondaScreen.tsx        # ronda multi-parte: juntar códigos → círculos de trueque
+│   ├── CodeScanner.tsx        # captura de código (cámara jsQR + pegar), reusado por ambos
 │   ├── vite-env.d.ts
 │   └── main.tsx
 ├── tests/

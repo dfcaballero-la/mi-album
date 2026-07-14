@@ -87,6 +87,26 @@ export interface Translations {
     albumComplete: string;
     noDuplicates: string;
   };
+  ronda: {
+    menuButton: string;
+    title: string;
+    intro: string;
+    you: string;
+    addFriend: string;
+    friendDefaultName: (n: number) => string;
+    namePlaceholder: string;
+    remove: string;
+    participants: (n: number) => string;
+    needMore: string;
+    circles: (n: number) => string;
+    noCircles: string;
+    gives: string;
+    to: string;
+    youSummary: (give: string, get: string) => string;
+    confirmMyPart: string;
+    confirmedMyPart: string;
+    coordinate: string;
+  };
 }
 
 const es: Translations = {
@@ -173,6 +193,27 @@ const es: Translations = {
     albumComplete: '¡Álbum completo! 🎉',
     noDuplicates: 'Todavía no tengo repetidas.',
   },
+  ronda: {
+    menuButton: '👥 Ronda de intercambio (3+)',
+    title: '👥 Ronda de intercambio',
+    intro:
+      'Cuando están varios juntos, sumá a cada uno y la app encuentra círculos de intercambio: vos le das una repetida a uno, ese a otro, y el último te cierra a vos. Destraba trueques imposibles de a dos.',
+    you: 'Vos',
+    addFriend: '➕ Sumar a alguien',
+    friendDefaultName: (n) => `Amigo ${n}`,
+    namePlaceholder: 'Nombre',
+    remove: 'Quitar',
+    participants: (n) => `En la ronda (${n})`,
+    needMore: 'Sumá al menos 3 personas (vos y 2 más) para buscar círculos.',
+    circles: (n) => `Círculos posibles (${n})`,
+    noCircles: 'Todavía no hay círculos con este grupo. Probá sumando más gente.',
+    gives: 'da',
+    to: 'a',
+    youSummary: (give, get) => `Vos: das ${give}, recibís ${get}`,
+    confirmMyPart: 'Confirmar mi parte',
+    confirmedMyPart: '✅ Hecho',
+    coordinate: 'Coordiná el intercambio en persona con tu grupo.',
+  },
 };
 
 const en: Translations = {
@@ -258,6 +299,27 @@ const en: Translations = {
     footer: 'Generated with Mi Álbum 📱 (offline, no accounts)',
     albumComplete: 'Album complete! 🎉',
     noDuplicates: "I don't have any duplicates yet.",
+  },
+  ronda: {
+    menuButton: '👥 Trade round (3+)',
+    title: '👥 Trade round',
+    intro:
+      'When several of you are together, add everyone and the app finds trade circles: you give a duplicate to one, they give to another, and the last one closes the loop back to you. Unlocks trades that are impossible one-on-one.',
+    you: 'You',
+    addFriend: '➕ Add someone',
+    friendDefaultName: (n) => `Friend ${n}`,
+    namePlaceholder: 'Name',
+    remove: 'Remove',
+    participants: (n) => `In the round (${n})`,
+    needMore: 'Add at least 3 people (you and 2 more) to find circles.',
+    circles: (n) => `Possible circles (${n})`,
+    noCircles: 'No circles with this group yet. Try adding more people.',
+    gives: 'gives',
+    to: 'to',
+    youSummary: (give, get) => `You: give ${give}, get ${get}`,
+    confirmMyPart: 'Confirm my part',
+    confirmedMyPart: '✅ Done',
+    coordinate: 'Coordinate the swap in person with your group.',
   },
 };
 

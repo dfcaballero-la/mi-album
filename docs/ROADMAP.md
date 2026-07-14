@@ -61,7 +61,7 @@ Comparar colecciones de un grupo en tiempo real (Supabase Realtime sobre la infr
 Diferenciador propio (figuritas.app no lo tiene): destraba trueques imposibles de a dos.
 
 1. [x] **Motor de círculos (core, sin UI)** — `core/trade-circles.ts` `findTradeCircles()`: halla ciclos dirigidos de 3+ personas donde cada uno da una repetida y recibe una faltante. Reusa la priorización del bilateral (helpers extraídos y exportados de `trade-matcher.ts`). Puro y testeado (`tests/unit/trade-circles.test.ts`, incluye el caso "bilateralmente imposible pero el círculo cierra"). Ver DATA_MODEL §9.
-2. [ ] **UI "ronda de intercambio" (offline, sin servidor)** — una persona junta los códigos del grupo (escanea/pega varios, reusando la infra de QR/texto existente), la app corre `findTradeCircles` y muestra los círculos rankeados con quién le da qué a quién. Cada uno confirma su parte localmente. No necesita backend: se hace con el grupo presente.
+2. [x] **UI "ronda de intercambio" (offline, sin servidor)** — `src/RondaScreen.tsx` (desde el menú de Intercambiar): sumás a cada persona escaneando/pegando su código (escáner extraído a `src/CodeScanner.tsx`, reutilizado por el trueque bilateral), la app corre `findTradeCircles` en vivo y muestra los círculos rankeados con quién le da qué a quién. "Confirmar mi parte" aplica tu entrega/recepción a tu colección local. Todo offline con el grupo presente. e2e: `tests/e2e/ronda.spec.ts`.
 3. [ ] *(con backend, v2.2)* Círculos en salas en tiempo real.
 
 ### Continuas (sin bloqueo de versión)

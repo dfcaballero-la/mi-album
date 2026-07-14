@@ -13,6 +13,7 @@ import { getActiveAlbumId, getCollection, setActiveAlbumId, setStickerCount } fr
 import { createBackup, mergeBackup, parseBackup, shareOrDownloadBackup } from '@data/backup';
 import { db } from '@data/db';
 import TradeScreen from './TradeScreen';
+import RondaScreen from './RondaScreen';
 import { albums } from './albums';
 import { useLocale } from './useLocale';
 
@@ -28,6 +29,7 @@ export default function App() {
   const [filter, setFilter] = useState<StickerFilter>('all');
   const [search, setSearch] = useState('');
   const [showTrade, setShowTrade] = useState(false);
+  const [showRonda, setShowRonda] = useState(false);
   const fileInput = useRef<HTMLInputElement>(null);
   const longPressTimer = useRef<number | null>(null);
   const longPressTriggered = useRef(false);
@@ -136,6 +138,18 @@ export default function App() {
     void changeSticker(index, e.ctrlKey || e.metaKey ? -1 : 1);
   };
 
+  if (showRonda) {
+    return (
+      <RondaScreen
+        album={album}
+        collection={collection}
+        t={t}
+        onClose={() => setShowRonda(false)}
+        onCollectionChanged={() => void refresh()}
+      />
+    );
+  }
+
   if (showTrade) {
     return (
       <TradeScreen
@@ -146,6 +160,10 @@ export default function App() {
         t={t}
         onClose={() => setShowTrade(false)}
         onTradeApplied={() => void refresh()}
+        onOpenRonda={() => {
+          setShowTrade(false);
+          setShowRonda(true);
+        }}
       />
     );
   }
