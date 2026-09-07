@@ -182,4 +182,4 @@ Formato de QR de figuritas.app, deducido por ingeniería inversa de un export re
 
 **Métricas** (para no confundir): "Repetidas" que muestra figuritas = suma de copias de más (`Σ (count-1)`, = nuestro `stats.duplicates`), distinto de "cuántas láminas distintas tenés repetidas" (= `|P1|`).
 
-Interoperar con una app cerrada es frágil (puede cambiar su formato); el import del otro lado solo se confirma escaneando de verdad.
+Confirmado (2026-09-07): figuritas.app acepta e importa correctamente el QR generado. Aun así, interoperar con una app cerrada es frágil — si en una actualización cambian el formato, el export puede dejar de funcionar y habría que re-descifrarlo con una muestra nueva.

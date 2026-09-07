@@ -66,7 +66,7 @@ Diferenciador propio (figuritas.app no lo tiene): destraba trueques imposibles d
 
 ### Interop con figuritas.app
 - [x] **Importar** el texto compartido de figuritas (`core/importers/figuritas.ts`).
-- [x] **Exportar por QR** a figuritas (`core/exporters/figuritas.ts`): formato descifrado por ingeniería inversa (DATA_MODEL §10), verificado byte-a-byte contra un export real; botón "Exportar a figuritas" en `TradeScreen`. Requirió agregar la sección Coca-Cola al álbum (994 láminas). Falta confirmar el import escaneándolo en figuritas de verdad.
+- [x] **Exportar por QR** a figuritas (`core/exporters/figuritas.ts`): formato descifrado por ingeniería inversa (DATA_MODEL §10), verificado byte-a-byte contra un export real; botón "Exportar a figuritas" en `TradeScreen`. Requirió agregar la sección Coca-Cola al álbum (994 láminas). **CONFIRMADO 2026-09-07: figuritas acepta el QR y lo importa bien.**
 
 ### Continuas (sin bloqueo de versión)
 - **Catálogo comunitario de álbumes** — la infraestructura ya existe (JSON + schema + CI + selector); falta la comunidad: issues `good first issue`, guía con ejemplos y difusión.
