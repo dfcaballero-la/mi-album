@@ -23,7 +23,7 @@ test('exportar respaldo descarga un JSON válido con la colección actual', asyn
 });
 
 test('importar un respaldo en una colección vacía trae sus láminas', async ({ page }) => {
-  await expect(page.getByText('0/980', { exact: false })).toBeVisible();
+  await expect(page.getByText('0/994', { exact: false })).toBeVisible();
 
   page.once('dialog', (dialog) => void dialog.accept());
 
@@ -46,14 +46,14 @@ test('importar un respaldo en una colección vacía trae sus láminas', async ({
     buffer: Buffer.from(JSON.stringify(backup)),
   });
 
-  await expect(page.getByText('2/980', { exact: false })).toBeVisible();
+  await expect(page.getByText('2/994', { exact: false })).toBeVisible();
   await expect(page.getByText('1 repetidas', { exact: false })).toBeVisible();
 });
 
 test('importar un respaldo se fusiona con lo local (no lo sobrescribe)', async ({ page }) => {
   // Marco FWC-1 (índice 1) en este dispositivo.
   await page.getByRole('button', { name: /^FWC-1:/ }).click();
-  await expect(page.getByText('1/980', { exact: false })).toBeVisible();
+  await expect(page.getByText('1/994', { exact: false })).toBeVisible();
 
   page.once('dialog', (dialog) => void dialog.accept());
 
@@ -83,6 +83,6 @@ test('importar un respaldo se fusiona con lo local (no lo sobrescribe)', async (
   // FWC-1 local sigue estando Y FWC-2 del respaldo se sumó.
   await expect(page.getByRole('button', { name: 'FWC-1: la tengo' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'FWC-2: repetida ×1' })).toBeVisible();
-  await expect(page.getByText('2/980', { exact: false })).toBeVisible();
+  await expect(page.getByText('2/994', { exact: false })).toBeVisible();
   await expect(page.getByText('1 repetidas', { exact: false })).toBeVisible();
 });

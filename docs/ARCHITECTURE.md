@@ -73,7 +73,9 @@ mi-album/
 │   │   ├── share.ts          # listas de texto para compartir (WhatsApp, etc.)
 │   │   ├── flags.ts          # emoji de bandera por sección
 │   │   ├── i18n.ts           # catálogo de traducciones ES/EN (solo datos)
-│   │   └── importers/figuritas.ts
+│   │   ├── importers/figuritas.ts  # lee el texto compartido de figuritas.app
+│   │   ├── exporters/figuritas.ts  # genera el QR importable por figuritas.app
+│   │   ├── sync.ts / trade-circles.ts
 │   ├── data/
 │   │   ├── db.ts             # Dexie: esquema, acceso a IndexedDB, settings
 │   │   └── backup.ts         # export/import JSON (todas las colecciones)

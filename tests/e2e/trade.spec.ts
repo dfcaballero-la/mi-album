@@ -15,6 +15,20 @@ test('mostrar mi código genera un QR', async ({ page }) => {
   await expect(page.locator('canvas')).toBeVisible();
 });
 
+test('exportar a figuritas renderiza un QR (modo byte)', async ({ page }) => {
+  // Marco algo para que el payload no sea trivial.
+  await page.getByRole('button', { name: /^FWC-1:/ }).click();
+
+  await page.getByRole('button', { name: '🔄 Intercambiar' }).click();
+  await page.getByRole('button', { name: /Exportar a figuritas/ }).click();
+
+  const canvas = page.locator('canvas');
+  await expect(canvas).toBeVisible();
+  // El QR de la colección completa es grande: el canvas debe tener tamaño real.
+  const size = await canvas.evaluate((c: HTMLCanvasElement) => c.width);
+  expect(size).toBeGreaterThan(100);
+});
+
 test('pegar el código de un amigo propone y confirma el trueque', async ({ page }) => {
   // Marco mi FWC-1 como repetida — es lo que le voy a dar al amigo.
   const fwc1 = page.getByRole('button', { name: /^FWC-1:/ });
@@ -42,6 +56,6 @@ test('pegar el código de un amigo propone y confirma el trueque', async ({ page
   await expect(page.getByText('¡Listo! Tu colección se actualizó.')).toBeVisible();
 
   await page.getByRole('button', { name: 'Volver al álbum' }).click();
-  await expect(page.getByText('2/980', { exact: false })).toBeVisible();
+  await expect(page.getByText('2/994', { exact: false })).toBeVisible();
   await expect(page.getByText('0 repetidas', { exact: false })).toBeVisible();
 });

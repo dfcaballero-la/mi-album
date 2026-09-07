@@ -20,6 +20,7 @@ const LITERAL_FLAGS: Record<string, string> = {
   eng: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
   sco: '🏴󠁧󠁢󠁳󠁣󠁴󠁿',
   fwc: '🏆',
+  cc: '🥤',
 };
 
 const FALLBACK_FLAG = '🏳️';

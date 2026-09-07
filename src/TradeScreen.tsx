@@ -13,10 +13,11 @@ import type { Locale, Translations } from '@core/i18n';
 import { decodeCollection, encodeCollection } from '@core/codec';
 import { matchTrade } from '@core/trade-matcher';
 import { formatShareList, type ShareListKind } from '@core/share';
+import { encodeFiguritasQR } from '@core/exporters/figuritas';
 import { setStickerCount } from '@data/db';
 import CodeScanner from './CodeScanner';
 
-type Step = 'menu' | 'showCode' | 'scan' | 'proposal' | 'done' | 'shareText';
+type Step = 'menu' | 'showCode' | 'scan' | 'proposal' | 'done' | 'shareText' | 'figuritas';
 
 interface Props {
   album: AlbumDefinition;
@@ -48,6 +49,7 @@ export default function TradeScreen({
   const [shareText, setShareText] = useState('');
   const [copied, setCopied] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const figuCanvasRef = useRef<HTMLCanvasElement>(null);
 
   // Genera mi código al entrar a "Mostrar mi código".
   useEffect(() => {
@@ -66,6 +68,19 @@ export default function TradeScreen({
     if (step !== 'showCode' || !myCode || !canvasRef.current) return;
     void QRCode.toCanvas(canvasRef.current, myCode, { width: 240, margin: 1 });
   }, [step, myCode]);
+
+  // QR compatible con figuritas.app (contenido binario en modo byte).
+  useEffect(() => {
+    if (step !== 'figuritas') return;
+    let cancelled = false;
+    void encodeFiguritasQR(album, collection).then((bytes) => {
+      if (cancelled || !figuCanvasRef.current) return;
+      void QRCode.toCanvas(figuCanvasRef.current, [{ data: bytes, mode: 'byte' }], { width: 320, margin: 2 });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [step, album, collection]);
 
   // Devuelve un mensaje de error para el escáner, o null si el código sirvió.
   const applyScannedCode = async (code: string): Promise<string | null> => {
@@ -154,6 +169,10 @@ export default function TradeScreen({
           <button onClick={() => void startShare('missing')} className={buttonClass}>
             {t.trade.shareMissing(stats.missing)}
           </button>
+          <hr className="my-1 border-t opacity-30" />
+          <button onClick={() => setStep('figuritas')} className={buttonClass}>
+            {t.trade.exportFiguritas}
+          </button>
         </div>
       ) : null}
 
@@ -197,6 +216,17 @@ export default function TradeScreen({
           <button onClick={() => void copyShareText()} className={primaryButtonClass}>
             {copied ? t.trade.copied : t.trade.copy}
           </button>
+          <button onClick={reset} className={buttonClass}>
+            {t.trade.back}
+          </button>
+        </div>
+      ) : null}
+
+      {step === 'figuritas' ? (
+        <div className="flex flex-col items-center gap-3">
+          <p className="text-sm opacity-70">{t.trade.figuritasInstructions}</p>
+          <canvas ref={figuCanvasRef} className="rounded-lg border bg-white p-2" />
+          <p className="text-center text-xs text-amber-600 dark:text-amber-400">{t.trade.figuritasWarning}</p>
           <button onClick={reset} className={buttonClass}>
             {t.trade.back}
           </button>

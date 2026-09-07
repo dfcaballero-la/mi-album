@@ -64,6 +64,10 @@ Diferenciador propio (figuritas.app no lo tiene): destraba trueques imposibles d
 2. [x] **UI "ronda de intercambio" (offline, sin servidor)** — `src/RondaScreen.tsx` (desde el menú de Intercambiar): sumás a cada persona escaneando/pegando su código (escáner extraído a `src/CodeScanner.tsx`, reutilizado por el trueque bilateral), la app corre `findTradeCircles` en vivo y muestra los círculos rankeados con quién le da qué a quién. "Confirmar mi parte" aplica tu entrega/recepción a tu colección local. Todo offline con el grupo presente. e2e: `tests/e2e/ronda.spec.ts`.
 3. [ ] *(con backend, v2.2)* Círculos en salas en tiempo real.
 
+### Interop con figuritas.app
+- [x] **Importar** el texto compartido de figuritas (`core/importers/figuritas.ts`).
+- [x] **Exportar por QR** a figuritas (`core/exporters/figuritas.ts`): formato descifrado por ingeniería inversa (DATA_MODEL §10), verificado byte-a-byte contra un export real; botón "Exportar a figuritas" en `TradeScreen`. Requirió agregar la sección Coca-Cola al álbum (994 láminas). Falta confirmar el import escaneándolo en figuritas de verdad.
+
 ### Continuas (sin bloqueo de versión)
 - **Catálogo comunitario de álbumes** — la infraestructura ya existe (JSON + schema + CI + selector); falta la comunidad: issues `good first issue`, guía con ejemplos y difusión.
 - **Modo "carrera"** entre amigos — quién completa primero, respetando privacidad (solo % de avance, nunca la colección detallada).

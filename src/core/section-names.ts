@@ -26,6 +26,7 @@ const EN_NAMES: Record<string, string> = {
   arg: 'Argentina', alg: 'Algeria', aut: 'Austria', jor: 'Jordan',
   por: 'Portugal', cod: 'DR Congo', uzb: 'Uzbekistan', col: 'Colombia',
   eng: 'England', cro: 'Croatia', gha: 'Ghana', pan: 'Panama',
+  cc: 'Coca-Cola',
 };
 
 export function localizedSectionName(section: NamedSection, locale: Locale): string {

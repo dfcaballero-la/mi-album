@@ -163,3 +163,23 @@ Extiende el trueque bilateral a **círculos de 3+ personas**: A le da a B, B a C
 ```
 
 Pensado para grupos chicos (curso, familia): la búsqueda es acotada por `maxLength` y una cota dura de candidatos (`CANDIDATE_CAP`). El resultado son *opciones* rankeadas para que las personas elijan y coordinen el intercambio offline (no una asignación auto-ejecutada). Largo 2 se excluye por defecto: eso ya es el trueque bilateral de §5.
+
+## 10. Export a figuritas.app (`core/exporters/figuritas.ts`)
+
+Formato de QR de figuritas.app, deducido por ingeniería inversa de un export real (QR + texto) y verificado byte-a-byte. Permite exportar la colección para que la importe esa app.
+
+**Payload (contenido crudo del QR, modo byte):**
+```
+«encabezado» + base64(gzip(P0)) ";" base64(gzip(P1)) ";" base64(gzip(P2))
+```
+- **Encabezado:** 4 bytes fijos `e2 8b 8b 5e`, solo antes del primer bloque.
+- **P0 — faltantes:** bitset LSB-first (`bit i = 1` si `count(i) == 0`), empaquetado a `ceil(N/8)` bytes.
+- **P1 — repetidas:** bitset LSB-first (`bit i = 1` si `count(i) ≥ 2`).
+- **P2 — copias:** 1 byte por repetida, en orden de índice, valor = nº total de copias (`count`).
+- Compresión **gzip** (no deflate-raw), **base64 estándar** con padding (no base64url), **orden de láminas = el del álbum**.
+
+**Requisito de alineación:** es una foto COMPLETA del álbum, así que el orden e índice de las láminas deben coincidir con figuritas. Por eso el álbum Mundial 2026 incluye la sección `cc` (Coca-Cola, 14 láminas, índices 980–993): sin ella el total (994) y el alineamiento no cerrarían. "Lo pegado" no se guarda: se deduce como *no faltante*.
+
+**Métricas** (para no confundir): "Repetidas" que muestra figuritas = suma de copias de más (`Σ (count-1)`, = nuestro `stats.duplicates`), distinto de "cuántas láminas distintas tenés repetidas" (= `|P1|`).
+
+Interoperar con una app cerrada es frágil (puede cambiar su formato); el import del otro lado solo se confirma escaneando de verdad.

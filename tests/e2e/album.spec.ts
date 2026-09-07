@@ -8,11 +8,11 @@ test.beforeEach(async ({ page }) => {
 test('marcar una lámina cicla los estados y actualiza las stats', async ({ page }) => {
   const sticker = page.getByRole('button', { name: /^FWC-1:/ });
 
-  await expect(page.getByText('0/980', { exact: false })).toBeVisible();
+  await expect(page.getByText('0/994', { exact: false })).toBeVisible();
 
   await sticker.click();
   await expect(sticker).toHaveAttribute('aria-label', 'FWC-1: la tengo');
-  await expect(page.getByText('1/980', { exact: false })).toBeVisible();
+  await expect(page.getByText('1/994', { exact: false })).toBeVisible();
 
   await sticker.click();
   await expect(sticker).toHaveAttribute('aria-label', 'FWC-1: repetida ×1');
@@ -49,7 +49,7 @@ test('el filtro "faltantes" muestra solo lo que falta', async ({ page }) => {
   await page.getByRole('button', { name: /Faltantes/ }).click();
   await expect(fwc1).not.toBeVisible();
   await expect(page.getByRole('button', { name: /^FWC-2:/ })).toBeVisible();
-  await expect(page.getByText('979', { exact: false }).first()).toBeVisible();
+  await expect(page.getByText('993', { exact: false }).first()).toBeVisible();
 });
 
 test('la búsqueda encuentra por nombre de país, sin tildes', async ({ page }) => {

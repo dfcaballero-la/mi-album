@@ -3,8 +3,8 @@
   "name": "USA México Canadá 26",
   "year": 2026,
   "packSize": 5,
-  "version": "1.0.0",
-  "totalStickers": 980,
+  "version": "1.1.0",
+  "totalStickers": 994,
   "sections": [
     {
       "id": "fwc",
@@ -4314,6 +4314,68 @@
         {
           "code": "PAN-20",
           "index": 979
+        }
+      ]
+    },
+    {
+      "id": "cc",
+      "name": "Coca-Cola",
+      "stickers": [
+        {
+          "code": "CC-1",
+          "index": 980
+        },
+        {
+          "code": "CC-2",
+          "index": 981
+        },
+        {
+          "code": "CC-3",
+          "index": 982
+        },
+        {
+          "code": "CC-4",
+          "index": 983
+        },
+        {
+          "code": "CC-5",
+          "index": 984
+        },
+        {
+          "code": "CC-6",
+          "index": 985
+        },
+        {
+          "code": "CC-7",
+          "index": 986
+        },
+        {
+          "code": "CC-8",
+          "index": 987
+        },
+        {
+          "code": "CC-9",
+          "index": 988
+        },
+        {
+          "code": "CC-10",
+          "index": 989
+        },
+        {
+          "code": "CC-11",
+          "index": 990
+        },
+        {
+          "code": "CC-12",
+          "index": 991
+        },
+        {
+          "code": "CC-13",
+          "index": 992
+        },
+        {
+          "code": "CC-14",
+          "index": 993
         }
       ]
     }

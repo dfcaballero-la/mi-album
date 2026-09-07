@@ -79,6 +79,9 @@ export interface Translations {
     done: string;
     doneInstructions: string;
     backToAlbum: string;
+    exportFiguritas: string;
+    figuritasInstructions: string;
+    figuritasWarning: string;
   };
   share: {
     missingTitle: string;
@@ -185,6 +188,11 @@ const es: Translations = {
     doneInstructions:
       'Para que la colección de tu amigo también quede al día, ahora mostrale tu código (📤 Mostrar mi código) y que la escanee desde su celular.',
     backToAlbum: 'Volver al álbum',
+    exportFiguritas: '📲 Exportar a figuritas.app',
+    figuritasInstructions:
+      'Escaneá este QR desde figuritas.app (opción Importar) para pasar tu colección a esa app.',
+    figuritasWarning:
+      'Ojo: esto reemplaza toda tu colección en figuritas por la de acá. Incluye las 14 de Coca-Cola.',
   },
   share: {
     missingTitle: 'Me FALTAN estas láminas',
@@ -292,6 +300,11 @@ const en: Translations = {
     doneInstructions:
       "For your friend's collection to stay up to date too, now show them your code (📤 Show my code) so they can scan it from their phone.",
     backToAlbum: 'Back to album',
+    exportFiguritas: '📲 Export to figuritas.app',
+    figuritasInstructions:
+      'Scan this QR from figuritas.app (Import option) to move your collection into that app.',
+    figuritasWarning:
+      'Heads up: this replaces your whole figuritas collection with this one. Includes the 14 Coca-Cola stickers.',
   },
   share: {
     missingTitle: "I'm MISSING these stickers",
