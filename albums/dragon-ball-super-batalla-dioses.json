@@ -1,0 +1,843 @@
+{
+  "id": "dragon-ball-super-batalla-dioses",
+  "name": "Dragon Ball Super: La Batalla de los Dioses",
+  "publisher": "Big Bang",
+  "year": 2018,
+  "packSize": 5,
+  "version": "1.0.0",
+  "totalStickers": 200,
+  "sections": [
+    {
+      "id": "laminas",
+      "name": "Láminas",
+      "stickers": [
+        {
+          "code": "1",
+          "index": 0
+        },
+        {
+          "code": "2",
+          "index": 1
+        },
+        {
+          "code": "3",
+          "index": 2
+        },
+        {
+          "code": "4",
+          "index": 3
+        },
+        {
+          "code": "5",
+          "index": 4
+        },
+        {
+          "code": "6",
+          "index": 5
+        },
+        {
+          "code": "7",
+          "index": 6
+        },
+        {
+          "code": "8",
+          "index": 7
+        },
+        {
+          "code": "9",
+          "index": 8
+        },
+        {
+          "code": "10",
+          "index": 9
+        },
+        {
+          "code": "11",
+          "index": 10
+        },
+        {
+          "code": "12",
+          "index": 11
+        },
+        {
+          "code": "13",
+          "index": 12
+        },
+        {
+          "code": "14",
+          "index": 13
+        },
+        {
+          "code": "15",
+          "index": 14
+        },
+        {
+          "code": "16",
+          "index": 15
+        },
+        {
+          "code": "17",
+          "index": 16
+        },
+        {
+          "code": "18",
+          "index": 17
+        },
+        {
+          "code": "19",
+          "index": 18
+        },
+        {
+          "code": "20",
+          "index": 19
+        },
+        {
+          "code": "21",
+          "index": 20
+        },
+        {
+          "code": "22",
+          "index": 21
+        },
+        {
+          "code": "23",
+          "index": 22
+        },
+        {
+          "code": "24",
+          "index": 23
+        },
+        {
+          "code": "25",
+          "index": 24
+        },
+        {
+          "code": "26",
+          "index": 25
+        },
+        {
+          "code": "27",
+          "index": 26
+        },
+        {
+          "code": "28",
+          "index": 27
+        },
+        {
+          "code": "29",
+          "index": 28
+        },
+        {
+          "code": "30",
+          "index": 29
+        },
+        {
+          "code": "31",
+          "index": 30
+        },
+        {
+          "code": "32",
+          "index": 31
+        },
+        {
+          "code": "33",
+          "index": 32
+        },
+        {
+          "code": "34",
+          "index": 33
+        },
+        {
+          "code": "35",
+          "index": 34
+        },
+        {
+          "code": "36",
+          "index": 35
+        },
+        {
+          "code": "37",
+          "index": 36
+        },
+        {
+          "code": "38",
+          "index": 37
+        },
+        {
+          "code": "39",
+          "index": 38
+        },
+        {
+          "code": "40",
+          "index": 39
+        },
+        {
+          "code": "41",
+          "index": 40
+        },
+        {
+          "code": "42",
+          "index": 41
+        },
+        {
+          "code": "43",
+          "index": 42
+        },
+        {
+          "code": "44",
+          "index": 43
+        },
+        {
+          "code": "45",
+          "index": 44
+        },
+        {
+          "code": "46",
+          "index": 45
+        },
+        {
+          "code": "47",
+          "index": 46
+        },
+        {
+          "code": "48",
+          "index": 47
+        },
+        {
+          "code": "49",
+          "index": 48
+        },
+        {
+          "code": "50",
+          "index": 49
+        },
+        {
+          "code": "51",
+          "index": 50
+        },
+        {
+          "code": "52",
+          "index": 51
+        },
+        {
+          "code": "53",
+          "index": 52
+        },
+        {
+          "code": "54",
+          "index": 53
+        },
+        {
+          "code": "55",
+          "index": 54
+        },
+        {
+          "code": "56",
+          "index": 55
+        },
+        {
+          "code": "57",
+          "index": 56
+        },
+        {
+          "code": "58",
+          "index": 57
+        },
+        {
+          "code": "59",
+          "index": 58
+        },
+        {
+          "code": "60",
+          "index": 59
+        },
+        {
+          "code": "61",
+          "index": 60
+        },
+        {
+          "code": "62",
+          "index": 61
+        },
+        {
+          "code": "63",
+          "index": 62
+        },
+        {
+          "code": "64",
+          "index": 63
+        },
+        {
+          "code": "65",
+          "index": 64
+        },
+        {
+          "code": "66",
+          "index": 65
+        },
+        {
+          "code": "67",
+          "index": 66
+        },
+        {
+          "code": "68",
+          "index": 67
+        },
+        {
+          "code": "69",
+          "index": 68
+        },
+        {
+          "code": "70",
+          "index": 69
+        },
+        {
+          "code": "71",
+          "index": 70
+        },
+        {
+          "code": "72",
+          "index": 71
+        },
+        {
+          "code": "73",
+          "index": 72
+        },
+        {
+          "code": "74",
+          "index": 73
+        },
+        {
+          "code": "75",
+          "index": 74
+        },
+        {
+          "code": "76",
+          "index": 75
+        },
+        {
+          "code": "77",
+          "index": 76
+        },
+        {
+          "code": "78",
+          "index": 77
+        },
+        {
+          "code": "79",
+          "index": 78
+        },
+        {
+          "code": "80",
+          "index": 79
+        },
+        {
+          "code": "81",
+          "index": 80
+        },
+        {
+          "code": "82",
+          "index": 81
+        },
+        {
+          "code": "83",
+          "index": 82
+        },
+        {
+          "code": "84",
+          "index": 83
+        },
+        {
+          "code": "85",
+          "index": 84
+        },
+        {
+          "code": "86",
+          "index": 85
+        },
+        {
+          "code": "87",
+          "index": 86
+        },
+        {
+          "code": "88",
+          "index": 87
+        },
+        {
+          "code": "89",
+          "index": 88
+        },
+        {
+          "code": "90",
+          "index": 89
+        },
+        {
+          "code": "91",
+          "index": 90
+        },
+        {
+          "code": "92",
+          "index": 91
+        },
+        {
+          "code": "93",
+          "index": 92
+        },
+        {
+          "code": "94",
+          "index": 93
+        },
+        {
+          "code": "95",
+          "index": 94
+        },
+        {
+          "code": "96",
+          "index": 95
+        },
+        {
+          "code": "97",
+          "index": 96
+        },
+        {
+          "code": "98",
+          "index": 97
+        },
+        {
+          "code": "99",
+          "index": 98
+        },
+        {
+          "code": "100",
+          "index": 99
+        },
+        {
+          "code": "101",
+          "index": 100
+        },
+        {
+          "code": "102",
+          "index": 101
+        },
+        {
+          "code": "103",
+          "index": 102
+        },
+        {
+          "code": "104",
+          "index": 103
+        },
+        {
+          "code": "105",
+          "index": 104
+        },
+        {
+          "code": "106",
+          "index": 105
+        },
+        {
+          "code": "107",
+          "index": 106
+        },
+        {
+          "code": "108",
+          "index": 107
+        },
+        {
+          "code": "109",
+          "index": 108
+        },
+        {
+          "code": "110",
+          "index": 109
+        },
+        {
+          "code": "111",
+          "index": 110
+        },
+        {
+          "code": "112",
+          "index": 111
+        },
+        {
+          "code": "113",
+          "index": 112
+        },
+        {
+          "code": "114",
+          "index": 113
+        },
+        {
+          "code": "115",
+          "index": 114
+        },
+        {
+          "code": "116",
+          "index": 115
+        },
+        {
+          "code": "117",
+          "index": 116
+        },
+        {
+          "code": "118",
+          "index": 117
+        },
+        {
+          "code": "119",
+          "index": 118
+        },
+        {
+          "code": "120",
+          "index": 119
+        },
+        {
+          "code": "121",
+          "index": 120
+        },
+        {
+          "code": "122",
+          "index": 121
+        },
+        {
+          "code": "123",
+          "index": 122
+        },
+        {
+          "code": "124",
+          "index": 123
+        },
+        {
+          "code": "125",
+          "index": 124
+        },
+        {
+          "code": "126",
+          "index": 125
+        },
+        {
+          "code": "127",
+          "index": 126
+        },
+        {
+          "code": "128",
+          "index": 127
+        },
+        {
+          "code": "129",
+          "index": 128
+        },
+        {
+          "code": "130",
+          "index": 129
+        },
+        {
+          "code": "131",
+          "index": 130
+        },
+        {
+          "code": "132",
+          "index": 131
+        },
+        {
+          "code": "133",
+          "index": 132
+        },
+        {
+          "code": "134",
+          "index": 133
+        },
+        {
+          "code": "135",
+          "index": 134
+        },
+        {
+          "code": "136",
+          "index": 135
+        },
+        {
+          "code": "137",
+          "index": 136
+        },
+        {
+          "code": "138",
+          "index": 137
+        },
+        {
+          "code": "139",
+          "index": 138
+        },
+        {
+          "code": "140",
+          "index": 139
+        },
+        {
+          "code": "141",
+          "index": 140
+        },
+        {
+          "code": "142",
+          "index": 141
+        },
+        {
+          "code": "143",
+          "index": 142
+        },
+        {
+          "code": "144",
+          "index": 143
+        },
+        {
+          "code": "145",
+          "index": 144
+        },
+        {
+          "code": "146",
+          "index": 145
+        },
+        {
+          "code": "147",
+          "index": 146
+        },
+        {
+          "code": "148",
+          "index": 147
+        },
+        {
+          "code": "149",
+          "index": 148
+        },
+        {
+          "code": "150",
+          "index": 149
+        },
+        {
+          "code": "151",
+          "index": 150
+        },
+        {
+          "code": "152",
+          "index": 151
+        },
+        {
+          "code": "153",
+          "index": 152
+        },
+        {
+          "code": "154",
+          "index": 153
+        },
+        {
+          "code": "155",
+          "index": 154
+        },
+        {
+          "code": "156",
+          "index": 155
+        },
+        {
+          "code": "157",
+          "index": 156
+        },
+        {
+          "code": "158",
+          "index": 157
+        },
+        {
+          "code": "159",
+          "index": 158
+        },
+        {
+          "code": "160",
+          "index": 159
+        },
+        {
+          "code": "161",
+          "index": 160
+        },
+        {
+          "code": "162",
+          "index": 161
+        },
+        {
+          "code": "163",
+          "index": 162
+        },
+        {
+          "code": "164",
+          "index": 163
+        },
+        {
+          "code": "165",
+          "index": 164
+        },
+        {
+          "code": "166",
+          "index": 165
+        },
+        {
+          "code": "167",
+          "index": 166
+        },
+        {
+          "code": "168",
+          "index": 167
+        },
+        {
+          "code": "169",
+          "index": 168
+        },
+        {
+          "code": "170",
+          "index": 169
+        },
+        {
+          "code": "171",
+          "index": 170
+        },
+        {
+          "code": "172",
+          "index": 171
+        },
+        {
+          "code": "173",
+          "index": 172
+        },
+        {
+          "code": "174",
+          "index": 173
+        },
+        {
+          "code": "175",
+          "index": 174
+        },
+        {
+          "code": "176",
+          "index": 175
+        },
+        {
+          "code": "177",
+          "index": 176
+        },
+        {
+          "code": "178",
+          "index": 177
+        },
+        {
+          "code": "179",
+          "index": 178
+        },
+        {
+          "code": "180",
+          "index": 179
+        }
+      ]
+    },
+    {
+      "id": "especiales",
+      "name": "Láminas especiales",
+      "stickers": [
+        {
+          "code": "A",
+          "index": 180,
+          "special": true
+        },
+        {
+          "code": "B",
+          "index": 181,
+          "special": true
+        },
+        {
+          "code": "C",
+          "index": 182,
+          "special": true
+        },
+        {
+          "code": "D",
+          "index": 183,
+          "special": true
+        },
+        {
+          "code": "E",
+          "index": 184,
+          "special": true
+        },
+        {
+          "code": "F",
+          "index": 185,
+          "special": true
+        },
+        {
+          "code": "G",
+          "index": 186,
+          "special": true
+        },
+        {
+          "code": "H",
+          "index": 187,
+          "special": true
+        },
+        {
+          "code": "I",
+          "index": 188,
+          "special": true
+        },
+        {
+          "code": "J",
+          "index": 189,
+          "special": true
+        },
+        {
+          "code": "K",
+          "index": 190,
+          "special": true
+        },
+        {
+          "code": "L",
+          "index": 191,
+          "special": true
+        },
+        {
+          "code": "M",
+          "index": 192,
+          "special": true
+        },
+        {
+          "code": "N",
+          "index": 193,
+          "special": true
+        },
+        {
+          "code": "O",
+          "index": 194,
+          "special": true
+        },
+        {
+          "code": "P",
+          "index": 195,
+          "special": true
+        },
+        {
+          "code": "Q",
+          "index": 196,
+          "special": true
+        },
+        {
+          "code": "R",
+          "index": 197,
+          "special": true
+        },
+        {
+          "code": "S",
+          "index": 198,
+          "special": true
+        },
+        {
+          "code": "T",
+          "index": 199,
+          "special": true
+        }
+      ]
+    }
+  ]
+}

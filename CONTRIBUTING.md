@@ -4,11 +4,15 @@
 
 ## 1. Añadir un nuevo álbum (sin tocar código)
 
+**Guía completa con ejemplo trabajado: [`docs/ADD_ALBUM.md`](docs/ADD_ALBUM.md).** En resumen:
+
 1. Crea `albums/<id-del-album>.json` siguiendo el esquema de `albums/album.schema.json`.
 2. Reglas de contenido: **solo datos fácticos** (códigos, números, nombres). Nunca imágenes, logos ni arte con copyright.
 3. Invariantes: `index` contiguos 0..N-1 y únicos, `code` únicos, `totalStickers` = suma real.
 4. Valida localmente: `npm run validate:albums`.
 5. Abre un PR con título `album: <nombre>`.
+
+¿No sabés programar pero tenés un álbum y su checklist? Abrí un issue con la plantilla **"Proponer un álbum"** y alguien lo arma.
 
 ## 2. Contribuir código
 

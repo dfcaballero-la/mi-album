@@ -69,7 +69,11 @@ Diferenciador propio (figuritas.app no lo tiene): destraba trueques imposibles d
 - [x] **Exportar por QR** a figuritas (`core/exporters/figuritas.ts`): formato descifrado por ingeniería inversa (DATA_MODEL §10), verificado byte-a-byte contra un export real; botón "Exportar a figuritas" en `TradeScreen`. Requirió agregar la sección Coca-Cola al álbum (994 láminas). **CONFIRMADO 2026-09-07: figuritas acepta el QR y lo importa bien.**
 
 ### Continuas (sin bloqueo de versión)
-- **Catálogo comunitario de álbumes** — la infraestructura ya existe (JSON + schema + CI + selector); falta la comunidad: issues `good first issue`, guía con ejemplos y difusión.
+- **Catálogo comunitario de álbumes** — en marcha. La infraestructura ya existía (JSON + schema + CI + selector). Agregado (2026-09-08):
+  - **Segundo álbum real: Dragon Ball Super — La Batalla de los Dioses** (Big Bang, 2018): `albums/dragon-ball-super-batalla-dioses.json`, 200 láminas (180 normales `1..180` + 20 especiales `A..T`). Se sumó con **cero cambios de código** — prueba viva de que el motor es genérico. Pendiente: confirmar total/numeración contra el álbum físico cuando David lo tenga; enriquecer con nombres de personajes (buen `good first issue`).
+  - **Guía de contribución** [`docs/ADD_ALBUM.md`](ADD_ALBUM.md): paso a paso con ejemplo trabajado, tabla de campos, la trampa `code` vs `index`, y los enriquecimientos opcionales (EN names, flags).
+  - **Plantilla de issue** "Proponer un álbum" (`.github/ISSUE_TEMPLATE/nuevo-album.yml`, labels `nuevo álbum` + `good first issue`) para gente sin conocimiento técnico.
+  - Falta: que David abra las issues `good first issue` concretas y el post de difusión.
 - **Modo "carrera"** entre amigos — quién completa primero, respetando privacidad (solo % de avance, nunca la colección detallada).
 
 ### App móvil nativa — evaluación (estilo figuritas.app)

@@ -37,6 +37,8 @@ Hecho: grilla por secciones con ciclo de estados (falta→tengo→repetida×n, c
 
 Pendiente de validar con el álbum físico: sección FWC asumida como 00–19; equipos asumidos 1–20 c/u.
 
+**Catálogo comunitario (en marcha, 2026-09-08):** segundo álbum real `albums/dragon-ball-super-batalla-dioses.json` (Dragon Ball Super — La Batalla de los Dioses, Big Bang 2018): 200 láminas = 180 normales (`code` `"1"`..`"180"`, sección `laminas`) + 20 especiales (`code` `"A"`..`"T"`, sección `especiales`, `special:true`). Sin nombres de lámina (checklist no los da; enriquecer es `good first issue`). **Se agregó con cero cambios de código** — confirma que el motor es genérico. Datos de fuentes secundarias (dragonball.center + búsquedas), pendiente de confirmar contra el álbum físico. Guía de contribución en `docs/ADD_ALBUM.md` y plantilla de issue en `.github/ISSUE_TEMPLATE/nuevo-album.yml`. Al haber 2 álbumes, el selector del header ya se muestra; `DEFAULT_ALBUM_ID` en `App.tsx` prefiere `mundial-2026`, así que Iñaki no se ve afectado. Los e2e siguen aterrizando en el Mundial (el `<h1>` con `album.name` sigue existiendo). Nota: `section-names.ts` y `flags.ts` NO cubren las secciones de DBS (caen a fallback: nombre del JSON en ambos idiomas, bandera 🏳️ en share); el test de invariante de `section-names` solo recorre el Mundial, así que no exige mapear DBS.
+
 ## Backlog priorizado
 
 v1.0.0 liberada (2026-07-12, tag + GitHub Release + CHANGELOG.md; README.md en inglés, README.es.md en español). Lo que sigue es la v2 — plan detallado en `docs/ROADMAP.md`:

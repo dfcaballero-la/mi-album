@@ -1,0 +1,61 @@
+name: "📕 Proponer un álbum"
+description: "Sugerí un álbum de láminas para sumar al catálogo (con o sin saber programar)."
+title: "album: <nombre del álbum>"
+labels: ["nuevo álbum", "good first issue"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ¡Gracias por sumar un álbum! La app es un motor genérico: un álbum es solo un
+        archivo JSON de datos fácticos. Ver la guía: [docs/ADD_ALBUM.md](../blob/main/docs/ADD_ALBUM.md).
+
+        **Regla de oro:** solo códigos, números y nombres. Nunca imágenes, logos ni arte con copyright.
+  - type: input
+    id: nombre
+    attributes:
+      label: Nombre del álbum
+      placeholder: "Dragon Ball Super: La Batalla de los Dioses"
+    validations:
+      required: true
+  - type: input
+    id: editorial
+    attributes:
+      label: Editorial y año
+      placeholder: "Big Bang, 2018"
+    validations:
+      required: false
+  - type: input
+    id: total
+    attributes:
+      label: Total de láminas
+      placeholder: "200 (180 normales + 20 especiales)"
+    validations:
+      required: true
+  - type: textarea
+    id: estructura
+    attributes:
+      label: Numeración y secciones
+      description: "¿Cómo se numeran las láminas? ¿En qué secciones se divide el álbum?"
+      placeholder: |
+        - Normales: 1..180 (enteros corridos)
+        - Especiales: A..T (20 letras)
+        - Secciones: no tiene subdivisiones temáticas
+    validations:
+      required: true
+  - type: input
+    id: checklist
+    attributes:
+      label: Fuente del checklist
+      description: "Link o descripción de dónde salen los datos (sitio de la editorial, contratapa, catálogo)."
+      placeholder: "https://..."
+    validations:
+      required: false
+  - type: checkboxes
+    id: confirmaciones
+    attributes:
+      label: Confirmaciones
+      options:
+        - label: "No voy a subir imágenes, logos ni arte de las láminas (solo datos fácticos)."
+          required: true
+        - label: "Verifiqué el total y la numeración contra una fuente confiable (o aclaro abajo que falta confirmar con el álbum físico)."
+          required: false
